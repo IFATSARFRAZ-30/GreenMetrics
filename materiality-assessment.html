@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Materiality Assessment Worksheet — GreenMetrics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1B2A41; --ink-soft:#3A4A63; --paper:#EFE6D8; --paper-deep:#E4D8C4;
+    --stamp:#B5482B; --sage:#5F7156; --line:#C9BBA1; --white:#FBF8F2;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:var(--paper-deep);color:var(--ink);font-family:'Source Serif 4', Georgia, serif;}
+  a{color:inherit;}
+  .sheet{max-width:1080px;margin:40px auto;background:var(--paper);border:1px solid var(--line);position:relative;box-shadow:0 2px 0 var(--line), 0 24px 60px -30px rgba(27,42,65,0.45);}
+  .sheet::before{content:"";position:absolute;inset:10px;border:1px solid var(--ink);opacity:0.15;pointer-events:none;}
+
+  nav.tabs{display:flex;flex-wrap:wrap;border-top:2px solid var(--ink);border-bottom:1px solid var(--line);background:var(--white);}
+  nav.tabs a{flex:1 1 auto;text-align:center;padding:14px 10px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;color:var(--ink-soft);border-right:1px solid var(--line);}
+  nav.tabs a:last-child{border-right:none;}
+  nav.tabs a.active{background:var(--ink);color:var(--white);}
+  nav.tabs a:hover:not(.active){background:var(--paper);color:var(--ink);}
+
+  header{padding:44px 56px 26px;border-bottom:2px solid var(--ink);}
+  .doc-ref{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:22px;}
+  h1{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(28px,4vw,38px);line-height:1.1;margin:0 0 10px;}
+  .subtitle{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--stamp);margin:0 0 16px;}
+  header p{font-size:15.5px;line-height:1.65;color:var(--ink-soft);max-width:70ch;margin:0 0 22px;}
+  .dl{display:inline-flex;gap:14px;flex-wrap:wrap;}
+  .btn{font-family:'IBM Plex Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:.06em;padding:11px 20px;border:1px solid var(--ink);text-decoration:none;display:inline-block;background:none;cursor:pointer;}
+  .btn.primary{background:var(--ink);color:var(--white);}
+
+  section{padding:32px 56px;border-bottom:1px dashed var(--line);}
+  section:last-of-type{border-bottom:none;}
+  .box-label{display:flex;align-items:baseline;gap:14px;margin-bottom:6px;}
+  .box-num{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;color:var(--white);background:var(--ink);padding:3px 8px;letter-spacing:.05em;}
+  .box-title{font-family:'Fraunces',serif;font-weight:600;font-size:21px;margin:0;}
+  .box-help{font-size:14px;color:var(--ink-soft);line-height:1.6;margin:10px 0 22px;max-width:80ch;}
+
+  .field-row{display:grid;grid-template-columns:repeat(3,1fr);gap:0 28px;margin-bottom:26px;}
+  @media (max-width:760px){.field-row{grid-template-columns:1fr;}}
+  .field-row label{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);}
+  .fill-line{border:none;border-bottom:1px solid var(--ink-soft);background:transparent;font-family:'IBM Plex Mono',monospace;font-size:13.5px;color:var(--ink);padding:6px 2px;width:100%;margin-top:4px;}
+  .fill-line:focus{outline:none;border-bottom:1px solid var(--stamp);}
+
+  table{width:100%;border-collapse:collapse;background:var(--white);}
+  th{font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.04em;color:var(--white);background:var(--ink);padding:9px 8px;text-align:left;}
+  td{border-bottom:1px solid var(--line);padding:8px;vertical-align:top;}
+  td input[type="text"], td textarea{width:100%;border:1px solid transparent;background:transparent;font-family:'Source Serif 4',serif;font-size:13.5px;padding:4px;resize:vertical;}
+  td input[type="text"]:focus, td textarea:focus{outline:none;border:1px solid var(--line);background:var(--paper);}
+  td textarea{min-height:36px;}
+  .yn{display:flex;gap:10px;justify-content:center;}
+  .yn label{font-family:'IBM Plex Mono',monospace;font-size:11px;display:flex;align-items:center;gap:4px;cursor:pointer;}
+  .rownum{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink-soft);text-align:center;}
+  .del{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--stamp);background:none;border:none;cursor:pointer;text-transform:uppercase;}
+
+  .table-actions{margin-top:14px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
+
+  .reading{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:6px;}
+  @media (max-width:760px){.reading{grid-template-columns:1fr 1fr;}}
+  .rcard{background:var(--white);padding:18px;}
+  .rcard h4{font-family:'IBM Plex Mono',monospace;font-size:11.5px;text-transform:uppercase;letter-spacing:.04em;color:var(--stamp);margin:0 0 8px;}
+  .rcard p{font-size:13px;line-height:1.55;color:var(--ink-soft);margin:0;}
+
+  footer{padding:34px 56px 44px;background:var(--ink);color:var(--white);}
+  footer .brand{font-family:'Fraunces',serif;font-weight:600;font-size:20px;}
+  footer p{font-family:'IBM Plex Mono',monospace;font-size:11.5px;line-height:1.7;color:#C9BBA1;max-width:70ch;margin:10px 0 0;}
+
+  @media print{
+    .sheet{box-shadow:none;margin:0;border:none;} nav.tabs{display:none;} .del,.table-actions{display:none;}
+  }
+
+  @media (max-width:640px){
+    header{padding:32px 22px 22px;} section{padding:26px 22px;} footer{padding:28px 22px 34px;}
+    nav.tabs a{padding:12px 6px;font-size:10.5px;}
+    table{font-size:12px;}
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <nav class="tabs">
+    <a href="../index.html">Home</a>
+    <a href="../articles.html">Articles</a>
+    <a class="active" href="index.html">Free tools</a>
+    <a href="../paid.html">Paid guides</a>
+    <a href="../portfolio.html">Portfolio</a>
+    <a href="../contact.html">Contact</a>
+  </nav>
+
+  <header>
+    <div class="doc-ref">
+      <div>DOSSIER NO. GM/MATERIALITY/2026<br>ISSUED BY GREENMETRICS</div>
+      <div>FREE WORKSHEET</div>
+    </div>
+    <h1>Materiality Assessment Worksheet</h1>
+    <p class="subtitle">SORT YOUR IMPACTS AND RISKS INTO GRI-MATERIAL, IFRS-MATERIAL, OR BOTH</p>
+    <p>List every impact, risk, or issue your company can identify — across operations and the value chain. For each one, ask two separate questions. GRI test: is this a significant impact on people, the environment, or the economy? IFRS S1/S2 test: could this reasonably affect cash flow, financing, or the company's prospects? An issue can be material under one lens, both, or neither — mark each column honestly rather than assuming the same answer applies to both.</p>
+    <div class="dl">
+      <a class="btn primary" href="../downloads/Materiality_Assessment_Worksheet.pdf" download>Download PDF</a>
+      <button class="btn" onclick="window.print()">Print this page</button>
+    </div>
+  </header>
+
+  <section>
+    <div class="box-label"><span class="box-num">BOX A</span><h3 class="box-title">Company details</h3></div>
+    <div class="field-row">
+      <div><label>Company / business unit</label><input class="fill-line" type="text"></div>
+      <div><label>Prepared by</label><input class="fill-line" type="text"></div>
+      <div><label>Date</label><input class="fill-line" type="text"></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="box-label"><span class="box-num">BOX B</span><h3 class="box-title">Issue register</h3></div>
+    <p class="box-help">Value chain prompts: raw materials &amp; suppliers &rarr; own operations &rarr; distribution &amp; logistics &rarr; customers &amp; product use &rarr; end of product life. Impacts and risks can originate at any stage.</p>
+    <table id="issueTable">
+      <thead>
+        <tr>
+          <th style="width:24px;">#</th>
+          <th>Issue / impact identified</th>
+          <th>Where in the value chain</th>
+          <th style="width:90px;">GRI material?</th>
+          <th>Why (impact on people / planet)</th>
+          <th style="width:90px;">IFRS material?</th>
+          <th>Why (effect on cash flow / financing)</th>
+          <th>Notes / next step</th>
+          <th style="width:30px;"></th>
+        </tr>
+      </thead>
+      <tbody id="issueBody"></tbody>
+    </table>
+    <div class="table-actions">
+      <button class="btn" id="addRow">+ Add row</button>
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink-soft);">Entries are local to this browser session — download the PDF or print to keep a copy.</span>
+    </div>
+  </section>
+
+  <section>
+    <div class="box-label"><span class="box-num">BOX C</span><h3 class="box-title">Reading your results</h3></div>
+    <div class="reading">
+      <div class="rcard"><h4>Y / Y — Material under both</h4><p>Your strongest disclosure candidates. Real-world impact and could plausibly move cash flow, financing, or valuation. Prioritize these first.</p></div>
+      <div class="rcard"><h4>Y / N — GRI-only</h4><p>A genuine impact on people, environment, or economy, but no clear financial link today. Still worth disclosing under GRI.</p></div>
+      <div class="rcard"><h4>N / Y — IFRS-only</h4><p>Financially relevant but not a standout impact issue on its own. Easy to miss from a purely impact-driven mindset — review carefully.</p></div>
+      <div class="rcard"><h4>N / N — Likely not material</h4><p>Neither test is triggered. Keep a short note of why it was screened out, in case circumstances change.</p></div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="brand">GreenMetrics</div>
+    <p>Ifat Sarfraz, ACMA, APFA | Sustainability Reporting &amp; Assurance (ISAE 3000/3410) | GreenMetrics. This worksheet is a readiness aid, not legal or regulatory advice.</p>
+  </footer>
+
+</div>
+
+<script>
+  const body = document.getElementById('issueBody');
+  let rowCount = 0;
+
+  function ynCell(name){
+    return `<td><div class="yn">
+      <label><input type="radio" name="${name}"> Y</label>
+      <label><input type="radio" name="${name}"> N</label>
+    </div></td>`;
+  }
+
+  function addRow(prefill){
+    rowCount++;
+    const id = 'row' + rowCount;
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td class="rownum">${rowCount}</td>
+      <td><input type="text" value="${prefill && prefill.issue ? prefill.issue : ''}"></td>
+      <td><input type="text" value="${prefill && prefill.chain ? prefill.chain : ''}"></td>
+      ${ynCell(id + '-gri')}
+      <td><textarea>${prefill && prefill.griWhy ? prefill.griWhy : ''}</textarea></td>
+      ${ynCell(id + '-ifrs')}
+      <td><textarea>${prefill && prefill.ifrsWhy ? prefill.ifrsWhy : ''}</textarea></td>
+      <td><textarea>${prefill && prefill.notes ? prefill.notes : ''}</textarea></td>
+      <td><button class="del" onclick="this.closest('tr').remove()">✕</button></td>
+    `;
+    body.appendChild(tr);
+  }
+
+  document.getElementById('addRow').addEventListener('click', () => addRow());
+
+  addRow({issue:'Example: Wastewater discharge', chain:'Own operations', griWhy:"Affects river ecosystem and nearby farmers' water access", ifrsWhy:'No fines or regulatory pressure at present', notes:'GRI-only for now — monitor for regulatory change'});
+  for(let i=0;i<8;i++) addRow();
+</script>
+
+</body>
+</html>
