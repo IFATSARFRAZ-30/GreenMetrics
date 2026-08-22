@@ -23,8 +23,9 @@
   .sheet{max-width:1040px;margin:40px auto;background:var(--paper);border:1px solid var(--line);position:relative;box-shadow:0 2px 0 var(--line), 0 24px 60px -30px rgba(27,42,65,0.45);}
   .sheet::before{content:"";position:absolute;inset:10px;border:1px solid var(--ink);opacity:0.15;pointer-events:none;}
 
-  header.top{padding:26px 56px 0;}
-  .doc-ref{display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);padding-bottom:20px;}
+  header.top{padding:30px 56px 0;text-align:center;}
+  .wordmark{font-family:'Fraunces',serif;font-weight:600;font-size:34px;letter-spacing:-0.01em;margin-bottom:6px;}
+  .site-tagline{font-family:'IBM Plex Mono',monospace;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--stamp);margin-bottom:22px;}
 
   nav.tabs{display:flex;flex-wrap:wrap;border-top:2px solid var(--ink);border-bottom:1px solid var(--line);background:var(--white);}
   nav.tabs a{flex:1 1 auto;text-align:center;padding:14px 10px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;color:var(--ink-soft);border-right:1px solid var(--line);}
@@ -86,10 +87,8 @@
 <div class="sheet">
 
   <header class="top">
-    <div class="doc-ref">
-      <div>GREENMETRICS · ESG READINESS &amp; ASSURANCE</div>
-      <div>REV. Q3 2026</div>
-    </div>
+    <div class="wordmark">GreenMetrics</div>
+    <div class="site-tagline">Understand. Measure. Report. Improve.</div>
   </header>
 
   <nav class="tabs">
@@ -97,26 +96,19 @@
     <a href="articles.html">Articles</a>
     <a href="tools/index.html">Free tools</a>
     <a href="paid.html">Paid guides</a>
-    <a href="portfolio.html">Portfolio</a>
+    <a href="about.html">About Me</a>
     <a href="contact.html">Contact</a>
   </nav>
 
   <section class="hero">
-    <div class="eyebrow">Dossier No. GM/HOME/2026</div>
-    <h1>Sustainability reporting, read like a case file — not a brochure.</h1>
-    <p>Templates, checklists, and plain-language breakdowns of CSRD, IFRS S1/S2, GRI, and assurance standards — built for exporters and reporters who need clarity, not jargon.</p>
+    <h1>Sustainability reporting and assurance guidance for CSRD, IFRS S1/S2, and GRI.</h1>
+    <p>Practical templates, checklists, and plain-language guides for companies working through sustainability reporting and assurance requirements — wherever you're reporting from.</p>
     <div class="cta">
       <a class="btn primary" href="tools/index.html">Browse free tools</a>
       <a class="btn" href="articles.html">Read the latest</a>
     </div>
   </section>
 
-  <div class="stripe">
-    <span>3 free tools</span>
-    <span>Paid guides — coming soon</span>
-    <span>ISAE 3000/3410 assurance</span>
-    <span>CSRD · IFRS S1/S2 · GRI</span>
-  </div>
 
   <section class="block">
     <div class="block-head">
@@ -184,14 +176,10 @@
 
   <section class="block">
     <div class="block-head">
-      <h2>Portfolio</h2>
-      <a class="see-all" href="portfolio.html">Full portfolio &rarr;</a>
+      <h2>About</h2>
+      <a class="see-all" href="about.html">Read more &rarr;</a>
     </div>
-    <div class="portfolio-strip">
-      <div class="p-item"><span class="box-num">01</span><h4>CBAM/CSRD readiness project</h4><p>Exporter-facing readiness dossier, interactive checklist.</p></div>
-      <div class="p-item"><span class="box-num">02</span><h4>Materiality assessment build</h4><p>Framework-mapped worksheet for dual materiality.</p></div>
-      <div class="p-item"><span class="box-num">03</span><h4>Assurance engagement, ISAE 3410</h4><p>Add a short case summary here.</p></div>
-    </div>
+    <p style="font-size:15px;line-height:1.65;color:var(--ink-soft);max-width:70ch;">GreenMetrics is Ifat Sarfraz's sustainability reporting and assurance practice, built for companies working through CSRD, IFRS S1/S2, GRI, and ISAE 3000/3410 assurance — anywhere in the world.</p>
   </section>
 
   <footer>
@@ -202,7 +190,7 @@
       </div>
       <div class="tag">@greenmetrics</div>
     </div>
-    <p>GreenMetrics is Ifat Associates' ESG readiness and assurance practice. Tools on this site are readiness aids, not legal or regulatory advice. Confirm current standards before making binding commercial decisions.</p>
+    <p>GreenMetrics is Ifat Sarfraz's sustainability reporting and assurance practice. Tools on this site are readiness aids, not legal or regulatory advice. Confirm current standards before making binding commercial decisions.</p>
   </footer>
 
 </div>
