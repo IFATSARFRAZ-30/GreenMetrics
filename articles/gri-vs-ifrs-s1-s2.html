@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Articles — GreenMetrics</title>
+<title>GRI vs IFRS S1/S2 — GreenMetrics</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -23,18 +23,70 @@
   nav.tabs a.active{background:var(--ink);color:var(--white);}
   nav.tabs a:hover:not(.active){background:var(--paper);color:var(--ink);}
 
-  .content{padding:70px 56px;text-align:center;}
-  h1{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(26px,4vw,34px);margin:0 0 14px;}
-  .content p{font-size:15px;line-height:1.65;color:var(--ink-soft);max-width:50ch;margin:0 auto 28px;}
-  .btn{font-family:'IBM Plex Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:.06em;padding:12px 22px;border:1px solid var(--ink);background:var(--ink);color:var(--white);text-decoration:none;display:inline-block;}
+  header.article-head{padding:44px 56px 26px;border-bottom:2px solid var(--ink);}
+  .doc-ref{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--stamp);margin-bottom:16px;}
+  h1{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(28px,4vw,38px);line-height:1.15;margin:0 0 12px;}
+  .dek{font-size:16px;line-height:1.6;color:var(--ink-soft);max-width:64ch;margin:0;}
+
+  main{padding:8px 56px 10px;}
+  section.a-block{padding:30px 0;border-top:1px dashed var(--line);}
+  section.a-block:first-of-type{border-top:none;}
+  section.a-block > p{font-size:15.5px;line-height:1.75;color:var(--ink-soft);max-width:70ch;margin:0 0 14px;}
+  .a-title{font-family:'Fraunces',serif;font-weight:600;font-size:20px;margin:0 0 14px;}
+
+  .compare{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:6px;}
+  @media (max-width:700px){.compare{grid-template-columns:1fr;}}
+  .compare-col{background:var(--white);padding:20px 22px;}
+  .compare-col.gri{border-left:3px solid var(--sage);}
+  .compare-col.ifrs{border-left:3px solid var(--stamp);}
+  .compare-col h3{font-family:'Fraunces',serif;font-size:16.5px;margin:0 0 16px;}
+  .compare-row{margin-bottom:16px;}
+  .compare-row:last-child{margin-bottom:0;}
+  .clabel{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:4px;}
+  .cvalue{font-size:13.5px;line-height:1.6;color:var(--ink);}
+
+  .layers{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:6px;}
+  @media (max-width:700px){.layers{grid-template-columns:1fr;}}
+  .layer{background:var(--white);padding:20px 18px;}
+  .layer .lnum{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;color:var(--white);background:var(--sage);padding:3px 8px;display:inline-block;margin-bottom:10px;}
+  .layer h4{font-family:'Fraunces',serif;font-size:15px;margin:0 0 6px;}
+  .layer p{font-size:12.5px;color:var(--ink-soft);margin:0;line-height:1.55;}
+
+  .questions{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:6px;}
+  @media (max-width:700px){.questions{grid-template-columns:repeat(2,1fr);}}
+  .qitem{background:var(--white);padding:18px 14px;text-align:center;}
+  .qitem .qnum{font-family:'IBM Plex Mono',monospace;font-size:20px;font-weight:600;color:var(--stamp);display:block;margin-bottom:6px;}
+  .qitem h4{font-family:'Fraunces',serif;font-size:14px;margin:0;}
+
+  .byline{padding:26px 56px 40px;border-top:2px solid var(--ink);background:var(--white);font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink-soft);letter-spacing:.02em;}
+  .byline strong{color:var(--ink);}
 
   footer{padding:34px 56px 44px;background:var(--ink);color:var(--white);}
   footer .brand{font-family:'Fraunces',serif;font-weight:600;font-size:20px;}
   footer p{font-family:'IBM Plex Mono',monospace;font-size:11.5px;line-height:1.7;color:#C9BBA1;max-width:70ch;margin:10px 0 0;}
 
   @media (max-width:640px){
-    .content{padding:50px 22px;} footer{padding:28px 22px 34px;}
-    nav.tabs a{padding:12px 6px;font-size:10.5px;}
+    header.article-head{padding:32px 22px 22px;} main{padding:8px 22px 10px;} .byline{padding:22px 22px 30px;}
+    footer{padding:28px 22px 34px;} nav.tabs a{padding:12px 6px;font-size:10.5px;}
+  }
+
+  @media (prefers-reduced-motion: no-preference){
+    .sheet{opacity:0;animation:sheetIn .7s ease forwards;}
+    @keyframes sheetIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+    header.article-head .doc-ref, header.article-head h1, header.article-head .dek{opacity:0;animation:riseIn .7s ease forwards;}
+    header.article-head h1{animation-delay:.1s;}
+    header.article-head .dek{animation-delay:.18s;}
+    @keyframes riseIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+    nav.tabs{position:relative;}
+    .tab-indicator{position:absolute;bottom:-1px;height:2px;background:var(--stamp);transition:left .35s cubic-bezier(.65,0,.35,1), width .35s cubic-bezier(.65,0,.35,1);pointer-events:none;}
+    section.a-block{opacity:0;transform:translateY(16px);transition:opacity .55s ease, transform .55s ease;}
+    section.a-block.in-view{opacity:1;transform:translateY(0);}
+    .compare-col{transition:transform .25s ease, box-shadow .25s ease;}
+    .compare-col:hover{transform:translateY(-3px);box-shadow:0 10px 22px -14px rgba(27,42,65,.35);}
+    .layer, .qitem{transition:background .2s ease, transform .2s ease;}
+    .layer:hover, .qitem:hover{background:var(--paper);transform:translateY(-2px);}
+    .qitem .qnum{transition:transform .25s ease;}
+    .qitem:hover .qnum{transform:scale(1.15);}
   }
 </style>
 </head>
@@ -43,6 +95,7 @@
 
   <nav class="tabs">
     <a href="index.html">Home</a>
+    <a href="services.html">Services</a>
     <a class="active" href="articles.html">Articles</a>
     <a href="tools/index.html">Free tools</a>
     <a href="paid.html">Paid guides</a>
@@ -50,17 +103,129 @@
     <a href="contact.html">Contact</a>
   </nav>
 
-  <div class="content">
-    <h1>Articles — coming soon</h1>
-    <p>Long-form writing on CSRD, IFRS S1/S2, GRI, and assurance is on its way. In the meantime, browse the free tools.</p>
-    <a class="btn" href="index.html">Back to home</a>
-  </div>
+  <header class="article-head">
+    <div class="doc-ref">Article &middot; Free reference guide</div>
+    <h1>GRI vs IFRS S1/S2</h1>
+    <p class="dek">Two frameworks, two different questions — a one-page comparison.</p>
+  </header>
+
+  <main>
+    <section class="a-block">
+      <p>GRI and IFRS S1/S2 are not competing versions of the same standard. They are answers to two different questions: GRI asks what effect a company has on the world; IFRS S1 and S2 ask what effect the world's sustainability and climate risks could have on the company.</p>
+    </section>
+
+    <section class="a-block">
+      <h3 class="a-title">The two lenses, side by side</h3>
+      <div class="compare">
+        <div class="compare-col gri">
+          <h3>GRI — Impact on the World</h3>
+          <div class="compare-row">
+            <div class="clabel">Core question</div>
+            <div class="cvalue">What significant impact does the company have on people, the environment, and the economy?</div>
+          </div>
+          <div class="compare-row">
+            <div class="clabel">Materiality test</div>
+            <div class="cvalue">Impact materiality — significance of the company's effect on people, environment, or economy, regardless of financial consequence.</div>
+          </div>
+          <div class="compare-row">
+            <div class="clabel">Written for</div>
+            <div class="cvalue">Stakeholders broadly — communities, employees, regulators, civil society, and investors.</div>
+          </div>
+          <div class="compare-row">
+            <div class="clabel">Example: factory wastewater</div>
+            <div class="cvalue">Did the ecosystem suffer? Did fish populations drop? Did nearby communities lose access to clean water?</div>
+          </div>
+        </div>
+        <div class="compare-col ifrs">
+          <h3>IFRS S1/S2 — Impact on the Company</h3>
+          <div class="compare-row">
+            <div class="clabel">Core question</div>
+            <div class="cvalue">Could this issue reasonably affect the company's cash flows, financing, or prospects?</div>
+          </div>
+          <div class="compare-row">
+            <div class="clabel">Materiality test</div>
+            <div class="cvalue">Financial materiality — could this reasonably influence the decisions of investors, lenders, or creditors?</div>
+          </div>
+          <div class="compare-row">
+            <div class="clabel">Written for</div>
+            <div class="cvalue">Investors, lenders, and creditors making capital-allocation decisions.</div>
+          </div>
+          <div class="compare-row">
+            <div class="clabel">Example: factory wastewater</div>
+            <div class="cvalue">Will there be a fine, a lawsuit, or lost customers? Does this touch cash flow or financing?</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="a-block">
+      <h3 class="a-title">GRI's three layers</h3>
+      <div class="layers">
+        <div class="layer">
+          <div class="lnum">01</div>
+          <h4>Universal Standards</h4>
+          <p>Apply to every company, any industry. Foundational reporting rules, general disclosures, and how materiality is determined.</p>
+        </div>
+        <div class="layer">
+          <div class="lnum">02</div>
+          <h4>Sector Standards</h4>
+          <p>Written for specific industries (oil &amp; gas, agriculture, etc.). Reflect that different sectors create different impacts.</p>
+        </div>
+        <div class="layer">
+          <div class="lnum">03</div>
+          <h4>Topic Standards</h4>
+          <p>Individual subjects — energy, water, human rights, anti-corruption. Report only against topics that are material to you.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="a-block">
+      <h3 class="a-title">The four questions under every IFRS S1/S2 disclosure</h3>
+      <div class="questions">
+        <div class="qitem"><span class="qnum">1</span><h4>Governance</h4></div>
+        <div class="qitem"><span class="qnum">2</span><h4>Strategy</h4></div>
+        <div class="qitem"><span class="qnum">3</span><h4>Risk Management</h4></div>
+        <div class="qitem"><span class="qnum">4</span><h4>Metrics &amp; Targets</h4></div>
+      </div>
+    </section>
+
+    <section class="a-block">
+      <h3 class="a-title">Where they overlap — and where they don't</h3>
+      <p>Climate change is typically material under both frameworks at once. A factory's effect on a local ecosystem may be significant under GRI with no financial consequence, so it may not clear the bar under IFRS S1. An asset becoming obsolete due to the low-carbon transition can be a real impairment risk under IFRS S1/S2 without necessarily standing out under GRI's impact lens. Same company, same facts — different outcomes depending on the lens.</p>
+    </section>
+  </main>
+
+  <div class="byline">Written by <strong>Ifat Sarfraz, ACMA, APFA</strong> &middot; Sustainability Reporting &amp; Assurance (ISAE 3000/3410) &middot; GreenMetrics</div>
 
   <footer>
     <div class="brand">GreenMetrics</div>
-    <p>GreenMetrics is Ifat Sarfraz's sustainability reporting and assurance practice.</p>
+    <p>GreenMetrics is Ifat Sarfraz's sustainability reporting and assurance practice. This guide is a readiness aid, not legal or regulatory advice.</p>
   </footer>
 
 </div>
+
+<script>
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) { entry.target.classList.add('in-view'); io.unobserve(entry.target); }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('section.a-block').forEach(s => io.observe(s));
+
+    const nav = document.querySelector('nav.tabs');
+    if (nav) {
+      const indicator = document.createElement('div');
+      indicator.className = 'tab-indicator';
+      nav.appendChild(indicator);
+      const links = nav.querySelectorAll('a');
+      const place = (el) => { indicator.style.left = el.offsetLeft + 'px'; indicator.style.width = el.offsetWidth + 'px'; };
+      const active = nav.querySelector('a.active') || links[0];
+      requestAnimationFrame(() => place(active));
+      links.forEach(link => link.addEventListener('mouseenter', () => place(link)));
+      nav.addEventListener('mouseleave', () => place(active));
+    }
+  }
+</script>
 </body>
 </html>
