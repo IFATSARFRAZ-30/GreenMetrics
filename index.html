@@ -33,7 +33,8 @@
   nav.tabs a.active{background:var(--ink);color:var(--white);}
   nav.tabs a:hover:not(.active){background:var(--paper);color:var(--ink);}
 
-  .hero{padding:52px 56px 40px;border-bottom:2px solid var(--ink);}
+  .hero{padding:52px 56px 40px;border-bottom:2px solid var(--ink);display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:center;}
+  @media (max-width:860px){.hero{grid-template-columns:1fr;}}
   .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--stamp);margin-bottom:16px;}
   h1{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(30px,4vw,44px);line-height:1.1;margin:0 0 18px;letter-spacing:-0.01em;max-width:18ch;}
   .hero p{font-size:16px;line-height:1.65;color:var(--ink-soft);max-width:60ch;margin:0 0 28px;}
@@ -41,6 +42,13 @@
   .btn{font-family:'IBM Plex Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:.06em;padding:12px 22px;border:1px solid var(--ink);text-decoration:none;display:inline-block;}
   .btn.primary{background:var(--ink);color:var(--white);}
   .btn:hover:not(.primary){background:var(--white);}
+
+  /* ---- hero video ---- */
+  .hero-side{border:1px solid var(--line);background:var(--ink);overflow:hidden;position:relative;}
+  .hero-side::before{content:"Watch";position:absolute;top:0;left:0;z-index:2;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--white);background:var(--stamp);padding:5px 10px;}
+  .hero-side .video-wrap{position:relative;padding-bottom:56.25%;height:0;border:none;}
+  .hero-side .video-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0;}
+
 
   .stripe{padding:16px 56px;background:var(--white);border-bottom:1px solid var(--line);display:flex;gap:40px;flex-wrap:wrap;font-family:'IBM Plex Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-soft);}
 
@@ -81,9 +89,63 @@
     footer{padding:28px 22px 34px;}
     nav.tabs a{padding:12px 6px;font-size:10.5px;}
   }
+
+  /* ===== animation layer ===== */
+  @media (prefers-reduced-motion: no-preference){
+    .sheet{opacity:0;animation:sheetIn .7s ease forwards;}
+    @keyframes sheetIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+
+    .wordmark, .site-tagline, .hero h1, .hero p, .hero .cta, .hero .eyebrow, .hero-side{
+      opacity:0;animation:riseIn .7s ease forwards;
+    }
+    .wordmark{animation-delay:.05s;}
+    .site-tagline{animation-delay:.15s;}
+    .hero .eyebrow{animation-delay:.25s;}
+    .hero h1{animation-delay:.32s;}
+    .hero p{animation-delay:.4s;}
+    .hero .cta{animation-delay:.48s;}
+    .hero-side{animation-delay:.55s;}
+    @keyframes riseIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+
+    nav.tabs{position:relative;}
+    .tab-indicator{position:absolute;bottom:-1px;height:2px;background:var(--stamp);transition:left .35s cubic-bezier(.65,0,.35,1), width .35s cubic-bezier(.65,0,.35,1);pointer-events:none;}
+
+    .btn{position:relative;overflow:hidden;will-change:transform;transition:transform .2s ease, background .2s ease, color .2s ease;}
+    .btn:active{transform:translateY(0) scale(.96);}
+    .btn .ripple{position:absolute;border-radius:50%;background:rgba(251,248,242,.55);transform:scale(0);animation:rippleOut .6s ease-out forwards;pointer-events:none;}
+    .btn:not(.primary) .ripple{background:rgba(27,42,65,.18);}
+    @keyframes rippleOut{to{transform:scale(1);opacity:0;}}
+
+    .card{transition:transform .3s ease, box-shadow .3s ease;opacity:0;transform:translateY(18px);transform-style:preserve-3d;perspective:600px;}
+    .card.in-view{opacity:1;transform:translateY(0);transition:opacity .5s ease, transform .5s ease;}
+    .card:hover{box-shadow:0 14px 28px -16px rgba(27,42,65,0.35);z-index:1;position:relative;}
+    .card .go{transition:letter-spacing .25s ease;}
+    .card:hover .go{letter-spacing:.12em;}
+    .card .shine{position:absolute;inset:0;pointer-events:none;background:radial-gradient(180px circle at var(--mx,50%) var(--my,50%), rgba(255,255,255,.35), transparent 60%);opacity:0;transition:opacity .3s ease;}
+    .card:hover .shine{opacity:1;}
+
+    .p-item{transition:transform .25s ease;}
+    .p-item:hover{transform:translateY(-3px);}
+    .p-item .box-num{transition:transform .2s ease;}
+    .p-item:hover .box-num{transform:scale(1.08);}
+
+    .block-head h2{position:relative;}
+    .block-head h2::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:2px;background:var(--stamp);transition:width .5s ease;}
+    .block-head.in-view h2::after{width:36px;}
+
+    .video-wrap{transition:box-shadow .3s ease;}
+    .video-wrap:hover{box-shadow:0 0 0 3px rgba(181,72,43,0.25);}
+
+    #scrollbar{position:fixed;top:0;left:0;height:3px;background:var(--stamp);width:0;z-index:50;transition:width .1s linear;}
+    #toTop{position:fixed;right:22px;bottom:22px;width:42px;height:42px;background:var(--ink);color:var(--white);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:16px;opacity:0;pointer-events:none;transform:translateY(10px);transition:opacity .25s ease, transform .25s ease;z-index:50;}
+    #toTop.show{opacity:1;pointer-events:auto;transform:translateY(0);}
+    #toTop:hover{background:var(--stamp);}
+  }
 </style>
 </head>
 <body>
+<div id="scrollbar"></div>
+<div id="toTop">↑</div>
 <div class="sheet">
 
   <header class="top">
@@ -102,11 +164,20 @@
   </nav>
 
   <section class="hero">
+    <div>
+    <div class="eyebrow">CSRD · IFRS S1/S2 · GRI · Carbon Accounting</div>
     <h1>Sustainability reporting and assurance guidance for CSRD, IFRS S1/S2, and GRI.</h1>
     <p>Practical templates, checklists, and plain-language guides for companies working through sustainability reporting and assurance requirements — wherever you're reporting from.</p>
     <div class="cta">
       <a class="btn primary" href="tools/index.html">Browse free tools</a>
       <a class="btn" href="articles.html">Read the latest</a>
+    </div>
+    </div>
+
+    <div class="hero-side">
+      <div class="video-wrap">
+        <iframe src="https://www.youtube.com/embed/cpP-AxrhGnA" title="GreenMetrics YouTube" allowfullscreen></iframe>
+      </div>
     </div>
   </section>
 
@@ -144,10 +215,10 @@
       <a class="see-all" href="articles.html">View all &rarr;</a>
     </div>
     <div class="grid3">
-      <a class="card" href="articles.html">
+      <a class="card" href="gri-vs-ifrs-s1-s2.html">
         <div class="tag">Article · Part 1</div>
-        <h3>The difference between GRI and IFRS S1/S2</h3>
-        <p>Add your article link here once it's published.</p>
+        <h3>GRI vs IFRS S1/S2</h3>
+        <p>Two frameworks, two different questions — a one-page comparison.</p>
         <span class="go">Read &rarr;</span>
       </a>
       <a class="card" href="articles.html">
@@ -167,16 +238,6 @@
 
   <section class="block">
     <div class="block-head">
-      <h2>From the channel</h2>
-    </div>
-    <div class="video-wrap">
-      <iframe src="https://www.youtube.com/embed/videoseries?list=YOUR_PLAYLIST_ID" title="GreenMetrics YouTube" allowfullscreen></iframe>
-    </div>
-    <p style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink-soft);margin-top:10px;">Replace YOUR_PLAYLIST_ID above with your channel's playlist or video ID.</p>
-  </section>
-
-  <section class="block">
-    <div class="block-head">
       <h2>About</h2>
       <a class="see-all" href="about.html">Read more &rarr;</a>
     </div>
@@ -187,7 +248,7 @@
     <div class="foot-top">
       <div>
         <div class="brand">GreenMetrics</div>
-        <div class="tag">ESG · Sustainability Reporting</div>
+        <div class="tag">ESG · Sustainability Reporting & Assurance · Carbon Accounting</div>
       </div>
       <div class="tag">@greenmetrics</div>
     </div>
@@ -195,5 +256,72 @@
   </footer>
 
 </div>
+
+<script>
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (!reduceMotion) {
+    const targets = document.querySelectorAll('.card, .block-head');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('in-view'), (i % 3) * 80);
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    targets.forEach(t => io.observe(t));
+
+    const nav = document.querySelector('nav.tabs');
+    if (nav) {
+      const indicator = document.createElement('div');
+      indicator.className = 'tab-indicator';
+      nav.appendChild(indicator);
+      const links = nav.querySelectorAll('a');
+      const place = (el) => { indicator.style.left = el.offsetLeft + 'px'; indicator.style.width = el.offsetWidth + 'px'; };
+      const active = nav.querySelector('a.active') || links[0];
+      requestAnimationFrame(() => place(active));
+      links.forEach(link => link.addEventListener('mouseenter', () => place(link)));
+      nav.addEventListener('mouseleave', () => place(active));
+      window.addEventListener('resize', () => place(active));
+    }
+
+    document.querySelectorAll('.btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const rect = btn.getBoundingClientRect();
+        const ripple = document.createElement('span');
+        const size = Math.max(rect.width, rect.height) * 1.6;
+        ripple.className = 'ripple';
+        ripple.style.width = ripple.style.height = size + 'px';
+        ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
+        ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+        btn.appendChild(ripple);
+        setTimeout(() => ripple.remove(), 600);
+      });
+    });
+
+    document.querySelectorAll('.card').forEach(card => {
+      const shine = document.createElement('div');
+      shine.className = 'shine';
+      card.appendChild(shine);
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left, y = e.clientY - rect.top;
+        shine.style.setProperty('--mx', x + 'px');
+        shine.style.setProperty('--my', y + 'px');
+      });
+    });
+
+    const bar = document.getElementById('scrollbar');
+    const toTop = document.getElementById('toTop');
+    window.addEventListener('scroll', () => {
+      const h = document.documentElement;
+      const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+      bar.style.width = scrolled + '%';
+      toTop.classList.toggle('show', h.scrollTop > 500);
+    });
+    toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  }
+</script>
 </body>
 </html>
