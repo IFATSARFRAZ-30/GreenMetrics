@@ -23,7 +23,20 @@
   nav.tabs a.active{background:var(--ink);color:var(--white);}
   nav.tabs a:hover:not(.active){background:var(--paper);color:var(--ink);}
 
-  .content{padding:70px 56px;text-align:center;}
+  header.a-head{padding:44px 56px 26px;border-bottom:2px solid var(--ink);}
+  .doc-ref{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:16px;}
+  header.a-head h1{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(28px,4vw,38px);margin:0 0 12px;}
+  header.a-head p{font-size:15.5px;line-height:1.6;color:var(--ink-soft);max-width:64ch;margin:0;}
+
+  .list{padding:10px 56px 50px;}
+  .row{display:flex;gap:20px;align-items:flex-start;padding:26px 0;border-top:1px solid var(--line);text-decoration:none;color:var(--ink);}
+  .row:first-child{border-top:none;}
+  .row .num{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;color:var(--white);background:var(--ink);padding:4px 9px;flex:0 0 auto;}
+  .row .body h3{font-family:'Fraunces',serif;font-size:20px;margin:0 0 6px;}
+  .row .body p{font-size:14.5px;color:var(--ink-soft);line-height:1.6;margin:0 0 8px;max-width:64ch;}
+  .row .body .go{font-family:'IBM Plex Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--sage);}
+
+  .content{padding:40px 56px 60px;text-align:center;}
   h1{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(26px,4vw,34px);margin:0 0 14px;}
   .content p{font-size:15px;line-height:1.65;color:var(--ink-soft);max-width:50ch;margin:0 auto 28px;}
   .btn{font-family:'IBM Plex Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:.06em;padding:12px 22px;border:1px solid var(--ink);background:var(--ink);color:var(--white);text-decoration:none;display:inline-block;}
@@ -35,6 +48,26 @@
   @media (max-width:640px){
     .content{padding:50px 22px;} footer{padding:28px 22px 34px;}
     nav.tabs a{padding:12px 6px;font-size:10.5px;}
+  }
+
+  @media (prefers-reduced-motion: no-preference){
+    .sheet{opacity:0;animation:sheetIn .7s ease forwards;}
+    @keyframes sheetIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+    header.a-head .doc-ref, header.a-head h1, header.a-head p{opacity:0;animation:riseIn .7s ease forwards;}
+    header.a-head h1{animation-delay:.1s;}
+    header.a-head p{animation-delay:.18s;}
+    @keyframes riseIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+    nav.tabs{position:relative;}
+    .tab-indicator{position:absolute;bottom:-1px;height:2px;background:var(--stamp);transition:left .35s cubic-bezier(.65,0,.35,1), width .35s cubic-bezier(.65,0,.35,1);pointer-events:none;}
+    .row{opacity:0;transform:translateY(16px);transition:opacity .5s ease, transform .5s ease, padding-left .25s ease, background .25s ease;}
+    .row.in-view{opacity:1;transform:translateY(0);}
+    .row:hover{padding-left:10px;background:var(--white);}
+    .row .num{transition:transform .25s ease, background .25s ease;}
+    .row:hover .num{transform:scale(1.12);background:var(--stamp);}
+    .row .go{transition:letter-spacing .25s ease;}
+    .row:hover .go{letter-spacing:.12em;}
+    .btn{transition:transform .2s ease, background .2s ease;}
+    .btn:hover{transform:translateY(-2px);}
   }
 </style>
 </head>
@@ -51,10 +84,26 @@
     <a href="contact.html">Contact</a>
   </nav>
 
+  <header class="a-head">
+    <div class="doc-ref">Articles</div>
+    <h1>Articles</h1>
+    <p>Long-form writing on CSRD, IFRS S1/S2, GRI, and assurance.</p>
+  </header>
+
+  <div class="list">
+    <a class="row" href="gri-vs-ifrs-s1-s2.html">
+      <span class="num">01</span>
+      <span class="body">
+        <h3>GRI vs IFRS S1/S2</h3>
+        <p>Two frameworks, two different questions — a one-page comparison of what each one actually asks of a company.</p>
+        <span class="go">Read &rarr;</span>
+      </span>
+    </a>
+  </div>
+
   <div class="content">
-    <h1>Articles — coming soon</h1>
-    <p>Long-form writing on CSRD, IFRS S1/S2, GRI, and assurance is on its way. In the meantime, browse the free tools.</p>
-    <a class="btn" href="index.html">Back to home</a>
+    <p>More articles on CSRD, GRI, IFRS S1/S2, and assurance are on the way. In the meantime, browse the free tools.</p>
+    <a class="btn" href="tools/index.html">Browse free tools</a>
   </div>
 
   <footer>
@@ -63,5 +112,29 @@
   </footer>
 
 </div>
+
+<script>
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) { entry.target.classList.add('in-view'); io.unobserve(entry.target); }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.row').forEach(r => io.observe(r));
+
+    const nav = document.querySelector('nav.tabs');
+    if (nav) {
+      const indicator = document.createElement('div');
+      indicator.className = 'tab-indicator';
+      nav.appendChild(indicator);
+      const links = nav.querySelectorAll('a');
+      const place = (el) => { indicator.style.left = el.offsetLeft + 'px'; indicator.style.width = el.offsetWidth + 'px'; };
+      const active = nav.querySelector('a.active') || links[0];
+      requestAnimationFrame(() => place(active));
+      links.forEach(link => link.addEventListener('mouseenter', () => place(link)));
+      nav.addEventListener('mouseleave', () => place(active));
+    }
+  }
+</script>
 </body>
 </html>
