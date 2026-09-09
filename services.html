@@ -77,9 +77,51 @@
     nav.tabs a{padding:12px 6px;font-size:10.5px;}
     .fit-row{flex-direction:column;gap:12px;}
   }
+
+  @media (prefers-reduced-motion: no-preference){
+    .sheet{opacity:0;animation:sheetIn .7s ease forwards;}
+    @keyframes sheetIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+    header .doc-ref, header h1, header p{opacity:0;animation:riseIn .7s ease forwards;}
+    header h1{animation-delay:.1s;}
+    header p{animation-delay:.18s;}
+    @keyframes riseIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+
+    nav.tabs{position:relative;}
+    .tab-indicator{position:absolute;bottom:-1px;height:2px;background:var(--stamp);transition:left .35s cubic-bezier(.65,0,.35,1), width .35s cubic-bezier(.65,0,.35,1);pointer-events:none;}
+
+    section.service, .market-head{opacity:0;transform:translateY(16px);transition:opacity .55s ease, transform .55s ease;}
+    section.service.in-view, .market-head.in-view{opacity:1;transform:translateY(0);}
+
+    section.service{transition:opacity .55s ease, transform .55s ease, box-shadow .3s ease, background .3s ease;}
+    section.service:hover{background:var(--white);box-shadow:inset 3px 0 0 var(--stamp);}
+    section.service.flagship:hover{box-shadow:inset 3px 0 0 var(--stamp);}
+
+    .box-num{transition:transform .25s ease;}
+    section.service:hover .box-num{transform:scale(1.1);}
+
+    .fit-row{transition:transform .25s ease;}
+    section.service:hover .fit-row{transform:translateX(2px);}
+
+    .price-value{position:relative;}
+
+    .btn{position:relative;overflow:hidden;transition:transform .2s ease, background .2s ease;}
+    .btn:hover{transform:translateY(-2px);}
+    .btn .ripple{position:absolute;border-radius:50%;background:rgba(251,248,242,.5);transform:scale(0);animation:rippleOut .6s ease-out forwards;pointer-events:none;}
+    @keyframes rippleOut{to{transform:scale(1);opacity:0;}}
+
+    .market-tag{transition:transform .2s ease;}
+    .market-head:hover .market-tag{transform:translateY(-1px);}
+
+    #scrollbar{position:fixed;top:0;left:0;height:3px;background:var(--stamp);width:0;z-index:50;transition:width .1s linear;}
+    #toTop{position:fixed;right:22px;bottom:22px;width:42px;height:42px;background:var(--ink);color:var(--white);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:16px;opacity:0;pointer-events:none;transform:translateY(10px);transition:opacity .25s ease, transform .25s ease;z-index:50;}
+    #toTop.show{opacity:1;pointer-events:auto;transform:translateY(0);}
+    #toTop:hover{background:var(--stamp);}
+  }
 </style>
 </head>
 <body>
+<div id="scrollbar"></div>
+<div id="toTop">↑</div>
 <div class="sheet">
 
   <nav class="tabs">
@@ -139,6 +181,26 @@
   <section class="service">
     <div class="box-label">
       <span class="box-num">02</span>
+      <span class="box-kind">Carbon accounting</span>
+    </div>
+    <h3 class="box-title">Basic Carbon Accounting</h3>
+    <p>A starting-point Scope 1 and 2 (with early Scope 3 where data allows) carbon footprint — for companies that need a number before they need a full framework.</p>
+    <div class="fit-row">
+      <div class="fit-item"><div class="fit-label">Who it's for</div><div class="fit-value">Companies with no carbon footprint calculated yet</div></div>
+      <div class="fit-item"><div class="fit-label">Starting from</div><div class="fit-value price-value">PKR 120,000</div></div>
+    </div>
+    <ul>
+      <li>Emissions data collection (fuel, electricity, basic operational data)</li>
+      <li>Scope 1 and 2 calculation against a recognised methodology</li>
+      <li>Early-stage Scope 3 estimate, where source data exists</li>
+      <li>A plain-language summary you can hand to a customer, auditor, or board</li>
+    </ul>
+    <div class="walkaway"><span class="wa-label">You walk away with</span><span class="wa-value">A basic carbon footprint calculation and summary, ready to feed into a fuller disclosure later.</span></div>
+  </section>
+
+  <section class="service">
+    <div class="box-label">
+      <span class="box-num">03</span>
       <span class="box-kind">Reporting</span>
     </div>
     <h3 class="box-title">Sustainability Reporting &amp; Disclosure Support</h3>
@@ -159,7 +221,7 @@
 
   <section class="service">
     <div class="box-label">
-      <span class="box-num">03</span>
+      <span class="box-num">04</span>
       <span class="box-kind">Assurance</span>
     </div>
     <h3 class="box-title">Assurance Readiness &amp; ESG Data Controls</h3>
@@ -179,7 +241,7 @@
 
   <section class="service">
     <div class="box-label">
-      <span class="box-num">04</span>
+      <span class="box-num">05</span>
       <span class="box-kind">For audit &amp; advisory firms</span>
     </div>
     <h3 class="box-title">Specialist Support for Audit &amp; Advisory Firms</h3>
@@ -206,7 +268,7 @@
 
   <section class="service">
     <div class="box-label">
-      <span class="box-num">05</span>
+      <span class="box-num">06</span>
       <span class="box-kind">International</span>
     </div>
     <h3 class="box-title">Supplier ESG Data Support</h3>
@@ -227,7 +289,7 @@
 
   <section class="service">
     <div class="box-label">
-      <span class="box-num">06</span>
+      <span class="box-num">07</span>
       <span class="box-kind">International</span>
     </div>
     <h3 class="box-title">Pakistan &amp; South Asia ESG Research</h3>
@@ -247,7 +309,7 @@
 
   <section class="service">
     <div class="box-label">
-      <span class="box-num">07</span>
+      <span class="box-num">08</span>
       <span class="box-kind">International</span>
     </div>
     <h3 class="box-title">Project-Based ESG Consulting Support</h3>
@@ -271,5 +333,56 @@
   </footer>
 
 </div>
+
+<script>
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('in-view'), (i % 2) * 60);
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('section.service, .market-head').forEach(s => io.observe(s));
+
+    const nav = document.querySelector('nav.tabs');
+    if (nav) {
+      const indicator = document.createElement('div');
+      indicator.className = 'tab-indicator';
+      nav.appendChild(indicator);
+      const links = nav.querySelectorAll('a');
+      const place = (el) => { indicator.style.left = el.offsetLeft + 'px'; indicator.style.width = el.offsetWidth + 'px'; };
+      const active = nav.querySelector('a.active') || links[0];
+      requestAnimationFrame(() => place(active));
+      links.forEach(link => link.addEventListener('mouseenter', () => place(link)));
+      nav.addEventListener('mouseleave', () => place(active));
+    }
+
+    document.querySelectorAll('.btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const rect = btn.getBoundingClientRect();
+        const ripple = document.createElement('span');
+        const size = Math.max(rect.width, rect.height) * 1.6;
+        ripple.className = 'ripple';
+        ripple.style.width = ripple.style.height = size + 'px';
+        ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
+        ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+        btn.appendChild(ripple);
+        setTimeout(() => ripple.remove(), 600);
+      });
+    });
+
+    const bar = document.getElementById('scrollbar');
+    const toTop = document.getElementById('toTop');
+    window.addEventListener('scroll', () => {
+      const h = document.documentElement;
+      const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+      bar.style.width = scrolled + '%';
+      toTop.classList.toggle('show', h.scrollTop > 500);
+    });
+    toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  }
+</script>
 </body>
 </html>
