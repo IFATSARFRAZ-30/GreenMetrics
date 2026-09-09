@@ -33,8 +33,7 @@
   nav.tabs a.active{background:var(--ink);color:var(--white);}
   nav.tabs a:hover:not(.active){background:var(--paper);color:var(--ink);}
 
-  .hero{padding:52px 56px 40px;border-bottom:2px solid var(--ink);display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:center;}
-  @media (max-width:860px){.hero{grid-template-columns:1fr;}}
+  .hero{padding:52px 56px 40px;border-bottom:2px solid var(--ink);}
   .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--stamp);margin-bottom:16px;}
   h1{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(30px,4vw,44px);line-height:1.1;margin:0 0 18px;letter-spacing:-0.01em;max-width:18ch;}
   .hero p{font-size:16px;line-height:1.65;color:var(--ink-soft);max-width:60ch;margin:0 0 28px;}
@@ -42,13 +41,6 @@
   .btn{font-family:'IBM Plex Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:.06em;padding:12px 22px;border:1px solid var(--ink);text-decoration:none;display:inline-block;}
   .btn.primary{background:var(--ink);color:var(--white);}
   .btn:hover:not(.primary){background:var(--white);}
-
-  /* ---- hero video ---- */
-  .hero-side{border:1px solid var(--line);background:var(--ink);overflow:hidden;position:relative;}
-  .hero-side::before{content:"Watch";position:absolute;top:0;left:0;z-index:2;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--white);background:var(--stamp);padding:5px 10px;}
-  .hero-side .video-wrap{position:relative;padding-bottom:56.25%;height:0;border:none;}
-  .hero-side .video-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0;}
-
 
   .stripe{padding:16px 56px;background:var(--white);border-bottom:1px solid var(--line);display:flex;gap:40px;flex-wrap:wrap;font-family:'IBM Plex Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-soft);}
 
@@ -95,7 +87,7 @@
     .sheet{opacity:0;animation:sheetIn .7s ease forwards;}
     @keyframes sheetIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
 
-    .wordmark, .site-tagline, .hero h1, .hero p, .hero .cta, .hero .eyebrow, .hero-side{
+    .wordmark, .site-tagline, .hero h1, .hero p, .hero .cta, .hero .eyebrow{
       opacity:0;animation:riseIn .7s ease forwards;
     }
     .wordmark{animation-delay:.05s;}
@@ -104,7 +96,6 @@
     .hero h1{animation-delay:.32s;}
     .hero p{animation-delay:.4s;}
     .hero .cta{animation-delay:.48s;}
-    .hero-side{animation-delay:.55s;}
     @keyframes riseIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
 
     nav.tabs{position:relative;}
@@ -164,7 +155,6 @@
   </nav>
 
   <section class="hero">
-    <div>
     <div class="eyebrow">CSRD · IFRS S1/S2 · GRI · Carbon Accounting</div>
     <h1>Sustainability reporting and assurance guidance for CSRD, IFRS S1/S2, and GRI.</h1>
     <p>Practical templates, checklists, and plain-language guides for companies working through sustainability reporting and assurance requirements — wherever you're reporting from.</p>
@@ -172,15 +162,7 @@
       <a class="btn primary" href="tools/index.html">Browse free tools</a>
       <a class="btn" href="articles.html">Read the latest</a>
     </div>
-    </div>
-
-    <div class="hero-side">
-      <div class="video-wrap">
-        <iframe src="https://www.youtube.com/embed/cpP-AxrhGnA" title="GreenMetrics YouTube" allowfullscreen></iframe>
-      </div>
-    </div>
   </section>
-
 
   <section class="block">
     <div class="block-head">
@@ -215,7 +197,7 @@
       <a class="see-all" href="articles.html">View all &rarr;</a>
     </div>
     <div class="grid3">
-      <a class="card" href="gri-vs-ifrs-s1-s2.html">
+      <a class="card" href="articles/gri-vs-ifrs-s1-s2.html">
         <div class="tag">Article · Part 1</div>
         <h3>GRI vs IFRS S1/S2</h3>
         <p>Two frameworks, two different questions — a one-page comparison.</p>
@@ -233,6 +215,15 @@
         <p>Add your article link here once it's published.</p>
         <span class="go">Read &rarr;</span>
       </a>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head">
+      <h2>From the channel</h2>
+    </div>
+    <div class="video-wrap">
+      <iframe src="https://www.youtube.com/embed/cpP-AxrhGnA" title="GreenMetrics YouTube" allowfullscreen></iframe>
     </div>
   </section>
 
