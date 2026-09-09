@@ -28,6 +28,14 @@
   .content p{font-size:15px;line-height:1.65;color:var(--ink-soft);max-width:50ch;margin:0 auto 28px;}
   .btn{font-family:'IBM Plex Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:.06em;padding:12px 22px;border:1px solid var(--ink);background:var(--ink);color:var(--white);text-decoration:none;display:inline-block;}
 
+  .contact-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:6px;}
+  @media (max-width:640px){.contact-grid{grid-template-columns:1fr;}}
+  .contact-card{background:var(--white);padding:28px 26px;text-align:left;text-decoration:none;display:flex;flex-direction:column;gap:8px;transition:background .25s ease, transform .25s ease;}
+  .contact-card:hover{background:var(--paper);transform:translateY(-3px);}
+  .contact-card .clabel{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--stamp);}
+  .contact-card .cvalue{font-family:'Fraunces',serif;font-weight:600;font-size:17px;color:var(--ink);word-break:break-word;}
+  .contact-card .carrow{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--sage);text-transform:uppercase;letter-spacing:.05em;}
+
   footer{padding:34px 56px 44px;background:var(--ink);color:var(--white);}
   footer .brand{font-family:'Fraunces',serif;font-weight:600;font-size:20px;}
   footer p{font-family:'IBM Plex Mono',monospace;font-size:11.5px;line-height:1.7;color:#C9BBA1;max-width:70ch;margin:10px 0 0;}
@@ -35,6 +43,21 @@
   @media (max-width:640px){
     .content{padding:50px 22px;} footer{padding:28px 22px 34px;}
     nav.tabs a{padding:12px 6px;font-size:10.5px;}
+  }
+
+  @media (prefers-reduced-motion: no-preference){
+    .sheet{opacity:0;animation:sheetIn .7s ease forwards;}
+    @keyframes sheetIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+    h1, .content > p{opacity:0;animation:riseIn .7s ease forwards;}
+    .content > p{animation-delay:.1s;}
+    @keyframes riseIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+    .contact-card{opacity:0;transform:translateY(18px);animation:riseIn .6s ease forwards;}
+    .contact-card:nth-child(1){animation-delay:.2s;}
+    .contact-card:nth-child(2){animation-delay:.28s;}
+    .contact-card:nth-child(3){animation-delay:.36s;}
+    .contact-card:nth-child(4){animation-delay:.44s;}
+    nav.tabs{position:relative;}
+    .tab-indicator{position:absolute;bottom:-1px;height:2px;background:var(--stamp);transition:left .35s cubic-bezier(.65,0,.35,1), width .35s cubic-bezier(.65,0,.35,1);pointer-events:none;}
   }
 </style>
 </head>
@@ -52,9 +75,31 @@
   </nav>
 
   <div class="content">
-    <h1>Contact — coming soon</h1>
-    <p>A contact form is on its way. In the meantime, reach out through GreenMetrics' social channels.</p>
-    <a class="btn" href="index.html">Back to home</a>
+    <h1>Get in touch</h1>
+    <p>Questions about CSRD, IFRS S1/S2, GRI, ISAE assurance, or carbon accounting readiness — reach out directly.</p>
+
+    <div class="contact-grid">
+      <a class="contact-card" href="mailto:ifat.sarfraz@gmail.com">
+        <span class="clabel">Email</span>
+        <span class="cvalue">ifat.sarfraz@gmail.com</span>
+        <span class="carrow">Send an email &rarr;</span>
+      </a>
+      <a class="contact-card" href="https://wa.me/923352223478" target="_blank" rel="noopener">
+        <span class="clabel">WhatsApp / Phone</span>
+        <span class="cvalue">+92 335 2223478</span>
+        <span class="carrow">Message on WhatsApp &rarr;</span>
+      </a>
+      <a class="contact-card" href="https://www.linkedin.com/in/ifatsarfraz" target="_blank" rel="noopener">
+        <span class="clabel">LinkedIn</span>
+        <span class="cvalue">in/ifatsarfraz</span>
+        <span class="carrow">Connect on LinkedIn &rarr;</span>
+      </a>
+      <a class="contact-card" href="https://www.youtube.com/@GreenMetrics100" target="_blank" rel="noopener">
+        <span class="clabel">YouTube</span>
+        <span class="cvalue">@GreenMetrics100</span>
+        <span class="carrow">Watch the channel &rarr;</span>
+      </a>
+    </div>
   </div>
 
   <footer>
@@ -63,5 +108,22 @@
   </footer>
 
 </div>
+
+<script>
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const nav = document.querySelector('nav.tabs');
+    if (nav) {
+      const indicator = document.createElement('div');
+      indicator.className = 'tab-indicator';
+      nav.appendChild(indicator);
+      const links = nav.querySelectorAll('a');
+      const place = (el) => { indicator.style.left = el.offsetLeft + 'px'; indicator.style.width = el.offsetWidth + 'px'; };
+      const active = nav.querySelector('a.active') || links[0];
+      requestAnimationFrame(() => place(active));
+      links.forEach(link => link.addEventListener('mouseenter', () => place(link)));
+      nav.addEventListener('mouseleave', () => place(active));
+    }
+  }
+</script>
 </body>
 </html>
