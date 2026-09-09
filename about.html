@@ -37,6 +37,22 @@
   .box-title{font-family:'Fraunces',serif;font-weight:600;font-size:19px;margin:0 0 14px;}
   section p{font-size:15px;line-height:1.75;color:var(--ink-soft);max-width:68ch;margin:0 0 14px;}
 
+  .credentials{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;}
+  .credential{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink);border:1px solid var(--ink);padding:6px 12px;background:var(--white);}
+
+  .focus-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:6px;}
+  @media (max-width:640px){.focus-grid{grid-template-columns:1fr;}}
+  .focus-item{background:var(--white);padding:18px 20px;}
+  .focus-item .fnum{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--stamp);letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;}
+  .focus-item h4{font-family:'Fraunces',serif;font-size:15.5px;margin:0 0 6px;}
+  .focus-item p{font-size:13px;margin:0;color:var(--ink-soft);line-height:1.55;}
+
+  .proof-list{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-direction:column;gap:10px;}
+  .proof-list li{font-size:14.5px;color:var(--ink-soft);line-height:1.6;padding-left:18px;position:relative;}
+  .proof-list li::before{content:"—";position:absolute;left:0;color:var(--stamp);}
+  .proof-list a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--line);}
+  .proof-list a:hover{text-decoration-color:var(--stamp);}
+
   .linkedin-block{padding:34px 56px 44px;text-align:center;background:var(--white);border-top:2px solid var(--ink);}
   .btn{font-family:'IBM Plex Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:.06em;padding:12px 24px;border:1px solid var(--ink);background:var(--ink);color:var(--white);text-decoration:none;display:inline-block;}
   .btn:hover{background:var(--stamp);border-color:var(--stamp);}
@@ -48,6 +64,29 @@
   @media (max-width:640px){
     section{padding:24px 22px;} .linkedin-block{padding:28px 22px 34px;} footer{padding:28px 22px 34px;}
     nav.tabs a{padding:12px 6px;font-size:10.5px;}
+  }
+
+  @media (prefers-reduced-motion: no-preference){
+    .sheet{opacity:0;animation:sheetIn .7s ease forwards;}
+    @keyframes sheetIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+    .photo-frame, h1, .role, .credentials{opacity:0;animation:riseIn .7s ease forwards;}
+    .photo-frame{animation-delay:.05s;}
+    h1{animation-delay:.15s;}
+    .role{animation-delay:.2s;}
+    .credentials{animation-delay:.25s;}
+    @keyframes riseIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+    .credential{transition:background .2s ease, color .2s ease;}
+    .credential:hover{background:var(--ink);color:var(--white);}
+    section{opacity:0;transform:translateY(16px);transition:opacity .5s ease, transform .5s ease;}
+    section.in-view{opacity:1;transform:translateY(0);}
+    .focus-item{transition:background .2s ease, transform .2s ease;}
+    .focus-item:hover{background:var(--paper);transform:translateY(-2px);}
+    .proof-list li{transition:transform .2s ease;}
+    .proof-list li:hover{transform:translateX(3px);}
+    .btn{transition:transform .2s ease, background .2s ease, border-color .2s ease;}
+    .btn:hover{transform:translateY(-2px);}
+    nav.tabs{position:relative;}
+    .tab-indicator{position:absolute;bottom:-1px;height:2px;background:var(--stamp);transition:left .35s cubic-bezier(.65,0,.35,1), width .35s cubic-bezier(.65,0,.35,1);pointer-events:none;}
   }
 </style>
 </head>
@@ -66,20 +105,50 @@
 
   <div class="intro">
     <div class="photo-frame">
-      <!-- Replace src below with your photo, e.g. images/ifat.jpg -->
       <img src="images/ifat.jpg" alt="Ifat Sarfraz" onerror="this.style.display='none'; this.parentElement.querySelector('.placeholder').style.display='flex';">
       <div class="placeholder" style="display:none; align-items:center; justify-content:center; height:100%;">YOUR PHOTO HERE<br>images/ifat.jpg</div>
     </div>
     <div>
       <div class="doc-ref">ABOUT</div>
       <h1>Ifat Sarfraz</h1>
-      <p class="role">Founder, GreenMetrics &middot; Chartered Management Accountant (ACMA, APFA)</p>
+      <p class="role">Founder, GreenMetrics</p>
+      <div class="credentials">
+        <span class="credential">ACMA</span>
+        <span class="credential">APFA</span>
+      </div>
     </div>
   </div>
 
   <section>
     <h3 class="box-title">My work in ESG</h3>
-    <p>I'm a Chartered Management Accountant based in Faisalabad, Pakistan, and I built GreenMetrics to bring that accounting and assurance background into sustainability reporting. My focus is IFRS S1/S2, GRI, TCFD, and SASB disclosures, and assurance readiness under ISAE 3000/3410 — helping companies and audit firms turn sustainability requirements into evidence and data they can actually stand behind, rather than a strategy document that sits on a shelf.</p>
+    <p>I'm a Chartered Management Accountant (ACMA, APFA) based in Faisalabad, Pakistan. I built GreenMetrics to bring an accounting and assurance mindset — standards, evidence, disclosure — into sustainability reporting, rather than treating it as a communications exercise. My focus is IFRS S1/S2, GRI, TCFD, and SASB disclosures, assurance readiness under ISAE 3000/3410, and basic carbon accounting for companies that need a starting point before anything more complex.</p>
+    <p>GreenMetrics is a new practice. I'm building it in the open — the free tools, checklists, and guides on this site are the actual work, published as they're built, rather than promises about work done elsewhere.</p>
+  </section>
+
+  <section>
+    <h3 class="box-title">Where I focus</h3>
+    <div class="focus-grid">
+      <div class="focus-item">
+        <div class="fnum">01</div>
+        <h4>IFRS S1 / S2</h4>
+        <p>General sustainability and climate disclosures, structured for SECP's direction in Pakistan.</p>
+      </div>
+      <div class="focus-item">
+        <div class="fnum">02</div>
+        <h4>GRI</h4>
+        <p>Materiality-first reporting for companies whose stakeholders expect the GRI standard.</p>
+      </div>
+      <div class="focus-item">
+        <div class="fnum">03</div>
+        <h4>Assurance readiness</h4>
+        <p>Getting data and evidence into shape for ISAE 3000/3410 assurance, before the audit firm asks.</p>
+      </div>
+      <div class="focus-item">
+        <div class="fnum">04</div>
+        <h4>Carbon accounting</h4>
+        <p>Basic Scope 1/2 (and early Scope 3) accounting for companies just starting to measure.</p>
+      </div>
+    </div>
   </section>
 
   <section>
@@ -97,5 +166,29 @@
   </footer>
 
 </div>
+
+<script>
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) { entry.target.classList.add('in-view'); io.unobserve(entry.target); }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('section').forEach(s => io.observe(s));
+
+    const nav = document.querySelector('nav.tabs');
+    if (nav) {
+      const indicator = document.createElement('div');
+      indicator.className = 'tab-indicator';
+      nav.appendChild(indicator);
+      const links = nav.querySelectorAll('a');
+      const place = (el) => { indicator.style.left = el.offsetLeft + 'px'; indicator.style.width = el.offsetWidth + 'px'; };
+      const active = nav.querySelector('a.active') || links[0];
+      requestAnimationFrame(() => place(active));
+      links.forEach(link => link.addEventListener('mouseenter', () => place(link)));
+      nav.addEventListener('mouseleave', () => place(active));
+    }
+  }
+</script>
 </body>
 </html>
