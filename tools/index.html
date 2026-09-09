@@ -43,6 +43,26 @@
     header{padding:32px 22px 22px;} .list{padding:10px 22px 40px;} footer{padding:28px 22px 34px;}
     nav.tabs a{padding:12px 6px;font-size:10.5px;}
   }
+
+  @media (prefers-reduced-motion: no-preference){
+    .sheet{opacity:0;animation:sheetIn .7s ease forwards;}
+    @keyframes sheetIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+    header .doc-ref, header h1, header p{opacity:0;animation:riseIn .7s ease forwards;}
+    header h1{animation-delay:.1s;}
+    header p{animation-delay:.18s;}
+    @keyframes riseIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+
+    nav.tabs{position:relative;}
+    .tab-indicator{position:absolute;bottom:-1px;height:2px;background:var(--stamp);transition:left .35s cubic-bezier(.65,0,.35,1), width .35s cubic-bezier(.65,0,.35,1);pointer-events:none;}
+
+    .row{opacity:0;transform:translateY(16px);transition:opacity .5s ease, transform .5s ease, padding-left .25s ease, background .25s ease;}
+    .row.in-view{opacity:1;transform:translateY(0);}
+    .row:hover{padding-left:10px;background:var(--white);}
+    .row .num{transition:transform .25s ease, background .25s ease;}
+    .row:hover .num{transform:scale(1.12);background:var(--stamp);}
+    .row .go{transition:letter-spacing .25s ease;}
+    .row:hover .go{letter-spacing:.12em;}
+  }
 </style>
 </head>
 <body>
@@ -96,5 +116,32 @@
   </footer>
 
 </div>
+
+<script>
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('in-view'), i * 70);
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.row').forEach(r => io.observe(r));
+
+    const nav = document.querySelector('nav.tabs');
+    if (nav) {
+      const indicator = document.createElement('div');
+      indicator.className = 'tab-indicator';
+      nav.appendChild(indicator);
+      const links = nav.querySelectorAll('a');
+      const place = (el) => { indicator.style.left = el.offsetLeft + 'px'; indicator.style.width = el.offsetWidth + 'px'; };
+      const active = nav.querySelector('a.active') || links[0];
+      requestAnimationFrame(() => place(active));
+      links.forEach(link => link.addEventListener('mouseenter', () => place(link)));
+      nav.addEventListener('mouseleave', () => place(active));
+    }
+  }
+</script>
 </body>
 </html>
