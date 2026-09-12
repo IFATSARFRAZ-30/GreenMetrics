@@ -61,6 +61,13 @@
   .byline{padding:26px 56px 40px;border-top:2px solid var(--ink);background:var(--white);font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink-soft);letter-spacing:.02em;}
   .byline strong{color:var(--ink);}
 
+  .dl-bar{margin:0 56px 0;padding:20px 22px;border:1px solid var(--line);background:var(--white);display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;}
+  .dl-bar .dl-text h3{font-family:'Fraunces',serif;font-size:16px;margin:0 0 6px;}
+  .dl-bar .dl-text p{font-size:13px;color:var(--ink-soft);margin:0;max-width:520px;line-height:1.55;}
+  .dl-btn{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--white);background:var(--stamp);padding:12px 22px;text-decoration:none;white-space:nowrap;border:1px solid var(--stamp);}
+  .dl-btn:hover{background:var(--ink);border-color:var(--ink);}
+  @media (max-width:640px){ .dl-bar{margin:0 22px 0;} }
+
   footer{padding:34px 56px 44px;background:var(--ink);color:var(--white);}
   footer .brand{font-family:'Fraunces',serif;font-weight:600;font-size:20px;}
   footer p{font-family:'IBM Plex Mono',monospace;font-size:11.5px;line-height:1.7;color:#C9BBA1;max-width:70ch;margin:10px 0 0;}
@@ -108,6 +115,14 @@
     <h1>GRI vs IFRS S1/S2</h1>
     <p class="dek">Two frameworks, two different questions — a one-page comparison.</p>
   </header>
+
+  <div class="dl-bar">
+    <div class="dl-text">
+      <h3>Get this comparison as a one-page PDF</h3>
+      <p>The same guide, formatted as a free, print-ready reference sheet — save it, print it, or share it with your team.</p>
+    </div>
+    <a class="dl-btn" href="../downloads/GRI_vs_IFRS_S1-S2_Comparison_One-Pager.pdf" download>Download PDF</a>
+  </div>
 
   <main>
     <section class="a-block">
