@@ -39,7 +39,7 @@ nav.tabs a:last-child{border-right:none}
 nav.tabs a.active{background:var(--ink) !important;color:var(--white) !important}
 nav.tabs a:hover:not(.active){background:var(--paper);color:var(--ink)}
 /* scroll progress */
-#gm-prog{position:fixed;top:0;left:0;height:3px;width:100%;background:var(--leaf);z-index:99;transform:scaleX(0);transform-origin:0 0;will-change:transform}
+#gm-prog{position:fixed;top:0;left:0;height:3px;width:100%;background:var(--leaf);z-index:99;transform:scaleX(0);transform-origin:0 0}
 /* reveal */
 .rv{opacity:0}
 .rv.rv-in{opacity:1;animation:gmUp .6s ease backwards}
@@ -85,8 +85,10 @@ nav.tabs a:hover:not(.active){background:var(--paper);color:var(--ink)}
 .vid,.vid *{cursor:auto !important}
 .vid-play,.vid-play *{cursor:pointer !important}
 body.playing .tick div,body.playing .fl{animation:none !important}
-body.playing #gm-prog{transition:none}
-.vid:has(iframe){contain:layout paint;isolation:isolate;transform:none !important;animation:none !important;opacity:1 !important}
+body.playing #gm-prog{display:none}
+body.playing .mast .brand,body.playing .mast p,body.playing .lead *{animation:none !important}
+body.playing .c:hover,body.playing .vid-soon:hover{transform:none !important}
+.vid iframe{background:#000}
 .sec.two{display:grid;grid-template-columns:1.4fr 1fr;gap:34px;align-items:center}
 .sec.two h2{grid-column:1/-1;margin:0}
 .sec.two p{font-size:16px;line-height:1.75;color:var(--ink-soft);margin:0 0 18px}
