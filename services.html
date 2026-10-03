@@ -278,7 +278,7 @@ html body:not(.home) section.paid-free p.sub{text-align:center;font-size:18px !i
 /* ---------- services ---------- */
 .svc-hero{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(28px,5vw,80px);align-items:center}
 html body:not(.home) .svc-hero h1{max-width:none !important}
-html body:not(.home) .svc-hero .copy p{margin:0 0 24px !important;max-width:58ch !important}
+html body:not(.home) .svc-hero .copy p{margin:0 0 24px !important;max-width:none !important}
 .path-card{background:var(--white);border:1px solid var(--line);border-top:5px solid var(--stamp);padding:28px 28px 20px}
 .path-card h2{margin:0 0 4px;font:600 22px 'Fraunces',serif;color:var(--ink)}
 .path-card .sub{font-size:16.5px;color:var(--ink-soft);margin:0 0 14px}
@@ -304,7 +304,7 @@ html body:not(.home) .svc-sec{background:var(--paper)}
 .svc-group .tag{display:inline-block;font:600 12.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;text-transform:uppercase;background:var(--sage);color:#fff;padding:5px 12px;margin-bottom:12px}
 .svc-group .tag.intl{background:var(--ink-soft)}
 .svc-group h3{margin:0 0 8px;font:600 27px/1.25 'Fraunces',serif;color:var(--ink)}
-.svc-group p{margin:0;font-size:18px;line-height:1.7;color:var(--ink-soft);max-width:80ch}
+html body:not(.home) .svc-group p{margin:0;font-size:18px;line-height:1.75;color:var(--ink-soft);max-width:none !important;width:100%}
 .timeline{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
 .tl{background:var(--white);border:1px solid var(--line);border-left:5px solid var(--leaf);padding:22px 24px}
 .tl .when{font:600 24px 'Fraunces',serif;color:var(--stamp);margin-bottom:6px}
@@ -513,11 +513,6 @@ html body.rd td textarea{min-height:64px}
         <span class="tag">Pakistan</span>
         <h3>Reporting under SECP's IFRS S1/S2 requirements</h3>
         <p>If you're a Phase II PSX-listed company, your reporting requirement starts July 2026. Phase III and non-listed Public Interest Companies follow from July 2027. From your second year of reporting, your disclosures will also need external assurance — so it pays to build the evidence trail now, not later.</p>
-      </div>
-      <div class="timeline" data-group="pk">
-        <div class="tl"><div class="when">July 2026</div><p>Phase II PSX-listed companies: your reporting requirement starts.</p></div>
-        <div class="tl"><div class="when">July 2027</div><p>Phase III and non-listed Public Interest Companies follow.</p></div>
-        <div class="tl"><div class="when">Your second year</div><p>Disclosures also need external assurance, so build the evidence trail now.</p></div>
       </div>
 
       <article class="svc-card feature" data-group="pk" id="quickscan">
