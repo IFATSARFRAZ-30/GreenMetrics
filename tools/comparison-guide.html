@@ -73,8 +73,442 @@
     nav.tabs a{padding:12px 6px;font-size:10.5px;}
   }
 </style>
+<style id="gm-theme">
+/* GreenMetrics forest theme, full-width magazine layout, motion, clover cursor */
+:root{--ink:#0f3d2e;--ink-soft:#3f5f50;--paper:#f2f7f1;--paper-deep:#d9e6db;--stamp:#2f8a4f;--sage:#4c7f3a;--line:#b6cdbb;--white:#fbfdfb;--leaf:#3fa863;--mint:#dff1e3;--px:clamp(24px,5vw,96px);
+--leafbg:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M16 16V30' stroke='%230f3d2e' stroke-width='2' stroke-linecap='round'/%3E%3Cg fill='%233fa863' stroke='%230f3d2e' stroke-width='1.2' stroke-linejoin='round'%3E%3Cpath d='M16 16C9 13 8 4 12.5 3.5C14.5 3.2 16 5 16 6.5C16 5 17.5 3.2 19.5 3.5C24 4 23 13 16 16Z'/%3E%3Cpath d='M16 16C9 13 8 4 12.5 3.5C14.5 3.2 16 5 16 6.5C16 5 17.5 3.2 19.5 3.5C24 4 23 13 16 16Z' transform='rotate(120 16 16)'/%3E%3Cpath d='M16 16C9 13 8 4 12.5 3.5C14.5 3.2 16 5 16 6.5C16 5 17.5 3.2 19.5 3.5C24 4 23 13 16 16Z' transform='rotate(240 16 16)'/%3E%3C/g%3E%3C/svg%3E")}
+/* clover cursor */
+html,html *{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M16 16V30' stroke='%230f3d2e' stroke-width='2' stroke-linecap='round'/%3E%3Cg fill='%233fa863' stroke='%230f3d2e' stroke-width='1.2' stroke-linejoin='round'%3E%3Cpath d='M16 16C9 13 8 4 12.5 3.5C14.5 3.2 16 5 16 6.5C16 5 17.5 3.2 19.5 3.5C24 4 23 13 16 16Z'/%3E%3Cpath d='M16 16C9 13 8 4 12.5 3.5C14.5 3.2 16 5 16 6.5C16 5 17.5 3.2 19.5 3.5C24 4 23 13 16 16Z' transform='rotate(120 16 16)'/%3E%3Cpath d='M16 16C9 13 8 4 12.5 3.5C14.5 3.2 16 5 16 6.5C16 5 17.5 3.2 19.5 3.5C24 4 23 13 16 16Z' transform='rotate(240 16 16)'/%3E%3C/g%3E%3C/svg%3E") 16 16,auto !important}
+input[type=text],input[type=email],input[type=search],textarea{cursor:text !important}
+html,body{background:var(--paper) !important}
+footer{background:var(--ink) !important}
+footer p{color:#b7d3c0 !important}
+#toTop{background:var(--ink) !important}
+.sheet{max-width:none !important;width:100% !important;margin:0 !important;border:0 !important;box-shadow:none !important}
+.sheet::before{display:none !important}
+/* masthead */
+.mast{text-align:center;padding:22px var(--px) 12px;border-bottom:4px solid var(--ink);background:var(--white)}
+.mast .brand{font:600 clamp(28px,5vw,44px)/1 'Fraunces',Georgia,serif;letter-spacing:-.02em;color:var(--ink);text-decoration:none;display:inline-block}
+.mast p{margin:6px 0 0;font:italic 13px 'Source Serif 4',Georgia,serif;color:var(--ink-soft)}
+nav.tabs{display:flex;flex-wrap:wrap;background:var(--white);border-top:0 !important;border-bottom:1px solid var(--ink) !important;position:relative}
+nav.tabs a{flex:1 1 auto;text-align:center;padding:12px 6px;font:11px 'IBM Plex Mono',monospace;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;color:var(--ink-soft);border-right:1px solid var(--line)}
+nav.tabs a:last-child{border-right:none}
+nav.tabs a.active{background:var(--ink) !important;color:var(--white) !important}
+nav.tabs a:hover:not(.active){background:var(--paper);color:var(--ink)}
+/* scroll progress */
+#gm-prog{position:fixed;top:0;left:0;height:3px;width:0;background:var(--leaf);z-index:99;transition:width .1s linear}
+/* reveal */
+.rv{opacity:0}
+.rv.rv-in{opacity:1;animation:gmUp .6s ease backwards}
+@keyframes gmUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes gmDown{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:none}}
+@keyframes gmDrift{0%,100%{transform:translate(0,0) rotate(0)}50%{transform:translate(18px,26px) rotate(40deg)}}
+@keyframes gmTick{to{transform:translateX(-50%)}}
+/* homepage */
+.tick{overflow:hidden;white-space:nowrap;background:var(--mint);border-bottom:1px solid var(--line);font:12px 'IBM Plex Mono',monospace;color:var(--ink)}
+.tick div{display:inline-block;padding:9px 0;animation:gmTick 40s linear infinite}
+.tick:hover div{animation-play-state:paused}
+.tick span{margin:0 26px}
+.mg{display:grid;grid-template-columns:1.7fr 1fr}
+.lead{position:relative;padding:48px var(--px);border-right:1px solid var(--line);overflow:hidden}
+.lead h1{font:600 clamp(30px,4.4vw,50px)/1.1 'Fraunces',serif;margin:0 0 16px;position:relative;animation:gmUp .8s ease .1s backwards}
+.lead p{font-size:17px;line-height:1.65;color:var(--ink-soft);max-width:52ch;margin:0 0 24px;position:relative;animation:gmUp .8s ease .25s backwards}
+.hb{display:inline-block;padding:12px 22px;margin:0 10px 10px 0;background:var(--ink);color:var(--white);border:1.5px solid var(--ink);font:12px 'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.06em;text-decoration:none;position:relative;transition:background .2s,transform .2s;animation:gmUp .8s ease .4s backwards}
+.hb.o{background:none;color:var(--ink)}
+.hb:hover{background:var(--stamp);border-color:var(--stamp);color:#fff;transform:translateY(-2px)}
+.fl{position:absolute;width:36px;height:36px;background:var(--leafbg) center/contain no-repeat;opacity:.2;animation:gmDrift 14s ease-in-out infinite;pointer-events:none}
+.side{padding:40px var(--px) 32px 32px;background:var(--white)}
+.side h3,.sec h2{font:600 12px 'IBM Plex Mono',monospace;color:var(--stamp);margin:0 0 8px;letter-spacing:.05em}
+.side a.a{display:block;padding:15px 0;border-bottom:1px solid var(--line);text-decoration:none;color:var(--ink);transition:padding-left .25s,background .25s}
+.side a.a:hover{padding-left:10px;background:var(--white)}
+.side a.a b{display:block;font:600 18px/1.25 'Fraunces',serif;margin-bottom:5px}
+.side a.a small{font-size:13.5px;line-height:1.5;color:var(--ink-soft)}
+.sec{padding:36px var(--px);border-top:2px solid var(--ink)}
+.sec.m{background:var(--mint)}
+.sec h2{font:600 24px 'Fraunces',serif;color:var(--ink);letter-spacing:0;margin:0 0 16px}
+.tri{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.c{display:block;background:var(--white);border:1px solid var(--line);border-top:4px solid var(--stamp);padding:20px;text-decoration:none;color:var(--ink);transition:transform .25s,box-shadow .25s}
+.c:hover{transform:translateY(-4px);box-shadow:0 14px 24px -16px rgba(15,61,46,.5)}
+.c b{display:block;font:600 18px/1.25 'Fraunces',serif;margin-bottom:6px}
+.c small{font-size:14px;line-height:1.55;color:var(--ink-soft)}
+.vid{position:relative;aspect-ratio:16/9;border:1px solid var(--line);background:var(--ink)}
+.vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.sec.two{display:grid;grid-template-columns:1.4fr 1fr;gap:34px;align-items:center}
+.sec.two h2{grid-column:1/-1;margin:0}
+.sec.two p{font-size:16px;line-height:1.75;color:var(--ink-soft);margin:0 0 18px}
+footer{padding:34px var(--px) 44px;background:var(--ink);color:var(--white)}
+footer .brand{font:600 20px 'Fraunces',serif}
+footer p{font:11.5px/1.7 'IBM Plex Mono',monospace;color:#b7d3c0;max-width:70ch;margin:10px 0 0}
+.home .tab-indicator{position:absolute;bottom:-1px;height:2px;background:var(--stamp);transition:left .35s cubic-bezier(.65,0,.35,1),width .35s cubic-bezier(.65,0,.35,1);pointer-events:none}
+
+/* ===== Hero band for pages without the article sidebar ===== */
+body:not(.home) .hero{
+  border-right:0 !important;
+  background:linear-gradient(135deg,var(--mint),var(--paper) 65%);
+  padding:64px var(--px) !important;
+  position:relative;overflow:hidden;
+}
+body:not(.home) .hero .doc-ref,body:not(.home) .hero .subtitle{
+  font-size:12.5px !important;color:var(--stamp) !important;
+}
+body:not(.home) .hero h1{
+  font-size:clamp(34px,5.5vw,58px) !important;line-height:1.08 !important;max-width:20ch !important;margin:0 0 18px !important;
+}
+body:not(.home) .hero p,body:not(.home) .hero .dek,body:not(.home) .hero .role{
+  font-size:clamp(17px,1.6vw,21px) !important;line-height:1.7 !important;max-width:70ch !important;
+}
+body:not(.home) .hero .credentials,body:not(.home) .hero .dl{margin-top:20px !important}
+body:not(.home) .hero .intro{display:grid !important;grid-template-columns:180px 1fr;gap:34px;align-items:start}
+body:not(.home) .mg:has(.hero){display:block}
+/* section text restored to full size now the sidebar is gone on inner pages */
+body:not(.home):not(.articles-list) section p,body:not(.home):not(.articles-list) .a-block p{
+  font-size:16.5px !important;line-height:1.8 !important;max-width:74ch !important;
+}
+body:not(.home):not(.articles-list) .box-title,body:not(.home):not(.articles-list) .a-title{
+  font-size:26px !important;
+}
+@media(max-width:700px){body:not(.home) .hero .intro{grid-template-columns:1fr}}
+
+/* Generic inner-page spacing/typography, consistent across pages */
+body:not(.home) .sheet>section,body:not(.home) .sheet>main>section,body:not(.home) .sheet>.cta-block{padding:36px var(--px) !important;border:0 !important;border-top:2px solid var(--ink) !important}
+body:not(.home) .box-title,body:not(.home) .a-title{font:600 24px/1.25 'Fraunces',Georgia,serif !important;margin:0 0 14px !important;color:var(--ink)}
+body:not(.home) .sheet>.dl-bar{margin:0 !important;padding:20px var(--px) !important;border:0 !important;border-top:2px solid var(--ink) !important;background:var(--white) !important}
+body:not(.home) .byline{padding:24px var(--px) !important;border-top:2px solid var(--ink) !important}
+body:not(.home) footer{padding:34px var(--px) 44px !important}
+body:not(.home) .layer,body:not(.home) .rcard,body:not(.home) .focus-item,body:not(.home) .contact-card{border-top:4px solid var(--stamp) !important}
+body:not(.home) .sheet>.content,body:not(.home) .sheet>.linkedin-block,body:not(.home) .sheet>.price-note,body:not(.home) .sheet>.stripe,body:not(.home) .sheet>.market-head,body:not(.home) .sheet>.progress-wrap,body:not(.home) .sheet>.box-index{padding-left:var(--px) !important;padding-right:var(--px) !important}
+.list{display:grid !important;grid-template-columns:repeat(3,1fr);gap:16px;padding:30px var(--px) !important;border-top:2px solid var(--ink)}
+.list>a.row{display:block !important;background:var(--white);border:1px solid var(--line) !important;border-top:4px solid var(--stamp) !important;padding:20px !important}
+.list>a.row:hover{padding-left:20px !important;background:var(--white) !important;box-shadow:0 14px 24px -16px rgba(15,61,46,.5)}
+.list>a.row .num{display:inline-block;margin-bottom:10px}
+
+/* ===== reading rail for long articles: TOC + stat + quote, both sides used ===== */
+.art-wrap{display:grid;grid-template-columns:1fr 300px;gap:44px;align-items:start;padding:36px var(--px) !important}
+body:not(.home) .art-wrap section,body:not(.home) .art-wrap>.art-body>section{padding:26px 0 !important;border-top:1px dashed var(--line) !important;border-left:0 !important}
+body:not(.home) .art-wrap>.art-body>section:first-of-type,body:not(.home) .art-wrap section:first-of-type{border-top:0 !important}
+.rail{position:sticky;top:16px;display:flex;flex-direction:column;gap:18px}
+.rail .box{background:var(--white);border:1px solid var(--line);border-top:4px solid var(--stamp);padding:18px}
+.rail .box h4{margin:0 0 10px;font:600 12px 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--stamp)}
+.rail .toc a{display:block;font-size:13.5px;line-height:1.85;color:var(--ink);text-decoration:none;border-bottom:1px dotted var(--line);padding:4px 0;transition:padding-left .2s}
+.rail .toc a:hover{padding-left:6px}
+.rail .stat{background:var(--ink);color:#fff;border-top:0}
+.rail .stat b{display:block;font:600 30px 'Fraunces',Georgia,serif;color:#a8dcc0}
+.rail .stat span{font-size:13px;color:#d8ecdf;line-height:1.55}
+.rail .quote{font:italic 15px/1.65 'Source Serif 4',Georgia,serif;color:var(--ink)}
+@media(max-width:900px){.art-wrap{grid-template-columns:1fr}.rail{position:static}}
+
+@media(max-width:800px){
+  .mg,.sec.two{grid-template-columns:1fr}
+  .lead{border-right:0;padding:32px var(--px)}
+  .side{padding:22px var(--px)}
+  .tri{grid-template-columns:1fr}
+  .list{grid-template-columns:1fr;padding:26px 22px !important}
+  body:not(.home) .sheet>section,body:not(.home) .sheet>main>section,body:not(.home) .sheet>.cta-block{padding:26px 22px !important}
+  body:not(.home) .sheet>.dl-bar,body:not(.home) .byline{padding:20px 22px !important}
+  body:not(.home) footer{padding:28px 22px 34px !important}
+}
+@media (prefers-reduced-motion:no-preference){.mast .brand{animation:gmDown .8s ease backwards}.mast p{animation:gmUp .8s ease .25s backwards}}
+@media (prefers-reduced-motion:reduce){.tick div,.fl{animation:none}.rv{opacity:1}}
+
+/* keep header text visible: my entrance replaces each page's own (they set opacity:0) */
+.lead .doc-ref,.lead h1,.lead p,.lead .role,.lead .credentials,.lead .photo-frame,.lead .subtitle,.lead .dl{opacity:1 !important;animation:gmUp .8s ease backwards !important}
+.lead h1{animation-delay:.1s !important}
+.lead p,.lead .role{animation-delay:.22s !important}
+.lead .credentials,.lead .dl,.lead .subtitle{animation-delay:.3s !important}
+@media (prefers-reduced-motion:reduce){.lead .doc-ref,.lead h1,.lead p,.lead .role,.lead .credentials,.lead .photo-frame,.lead .subtitle,.lead .dl{animation:none !important}}
+
+</style>
+<style id="gm-extra">
+/* ================= gm-extra: layout fixes, reading comfort, new components ================= */
+.gbtn{display:inline-block;padding:13px 26px;background:var(--ink);color:var(--white) !important;border:1.5px solid var(--ink);font:13px 'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.06em;text-decoration:none;transition:background .2s,transform .2s,border-color .2s;opacity:1 !important;animation:none !important}
+.gbtn.o{background:transparent;color:var(--ink) !important}
+.gbtn:hover{background:var(--stamp);border-color:var(--stamp);color:#fff !important;transform:translateY(-2px)}
+.btn-row{display:flex;gap:12px;flex-wrap:wrap}
+
+/* ---------- centered hero ---------- */
+html body:not(.home) .hero.center{text-align:center;padding:76px var(--px) 68px !important}
+html body:not(.home) .hero.center h1{max-width:none !important;margin:0 auto 18px !important}
+html body:not(.home) .hero.center p{margin:0 auto 28px !important;max-width:62ch !important}
+html body:not(.home) .hero.center .btn-row{justify-content:center}
+html body:not(.home) .hero .doc-ref{font-size:13px !important;letter-spacing:.1em}
+
+/* ---------- home: second video ---------- */
+.sec.two{grid-template-columns:1fr 1fr !important;align-items:start !important;gap:28px !important}
+.sec.two .vcap{margin:12px 0 0 !important;font-size:15.5px !important}
+.vid-soon{display:flex !important;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;color:#fff !important;text-decoration:none;
+  background:radial-gradient(circle at 30% 20%,#1d6a49 0,transparent 55%),radial-gradient(circle at 80% 90%,#2f8a4f 0,transparent 50%),var(--ink);overflow:hidden;transition:transform .25s,box-shadow .25s}
+.vid-soon:hover{transform:translateY(-3px);box-shadow:0 16px 28px -18px rgba(15,61,46,.7)}
+.vid-soon .play{width:72px;height:72px;border-radius:50%;border:2px solid rgba(255,255,255,.55);display:grid;place-items:center;margin-bottom:6px}
+.vid-soon .play svg{width:28px;height:28px;margin-left:4px;fill:#fff}
+.vid-soon .soon-tag{font:600 12px 'IBM Plex Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8fd3ab}
+.vid-soon b{font:600 clamp(20px,2.2vw,28px)/1.2 'Fraunces',serif}
+.vid-soon small{font-size:15.5px;color:#cfe6d6}
+@media(max-width:800px){.sec.two{grid-template-columns:1fr !important}}
+
+/* ---------- about ---------- */
+html body:not(.home) .ab-vision{background:var(--ink) !important;border-top:0 !important}
+.ab-vision-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:clamp(28px,5vw,84px);align-items:center}
+html body:not(.home) .ab-vision .box-title{font:600 13px 'IBM Plex Mono',monospace !important;letter-spacing:.14em;text-transform:uppercase;color:#8fd3ab !important;margin:0 0 20px !important}
+html body:not(.home) section .ab-quote{font:500 clamp(28px,3.4vw,46px)/1.2 'Fraunces',Georgia,serif !important;max-width:none !important;margin:0 !important;color:#fff !important;letter-spacing:-.01em}
+html body:not(.home) section .ab-vision-text p{font-size:20px !important;line-height:1.8 !important;color:#d8ecdf !important;max-width:none !important;margin:0 !important;border-left:3px solid var(--leaf);padding-left:26px}
+.ab-work-grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:clamp(28px,4vw,64px);align-items:start}
+html body:not(.home) .ab-work-text p{font-size:19px !important;line-height:1.85 !important;max-width:none !important}
+.ab-glance{background:var(--white);border:1px solid var(--line);border-top:4px solid var(--stamp);padding:26px 28px}
+.ab-glance h4{margin:0 0 14px;font:600 13px 'IBM Plex Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--stamp)}
+.ab-glance dl{margin:0}
+.ab-glance dl>div{padding:13px 0;border-top:1px dotted var(--line)}
+.ab-glance dl>div:first-child{border-top:0;padding-top:0}
+.ab-glance dt{font:12.5px 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:3px}
+.ab-glance dd{margin:0;font-size:18px;line-height:1.5;color:var(--ink)}
+html body:not(.home) .ab-focus{background:var(--mint)}
+html body:not(.home) .ab-focus .focus-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;background:none;border:0;margin-top:8px}
+html body:not(.home) .ab-focus .focus-item{background:var(--white);border:1px solid var(--line);padding:26px 24px}
+html body:not(.home) .ab-focus .focus-item .fnum{font-size:14px;letter-spacing:.1em;margin-bottom:10px}
+html body:not(.home) .ab-focus .focus-item h4{font-size:22px;margin:0 0 10px}
+html body:not(.home) .ab-focus .focus-item p{font-size:17px !important;line-height:1.65 !important;max-width:none !important}
+@media(max-width:1100px){html body:not(.home) .ab-focus .focus-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:800px){.ab-vision-grid,.ab-work-grid{grid-template-columns:1fr}html body:not(.home) .ab-focus .focus-grid{grid-template-columns:1fr}}
+
+/* ---------- articles list hero ---------- */
+.art-hero{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:clamp(28px,5vw,80px);align-items:center}
+.art-hero .chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.art-hero .chips span{font:13px 'IBM Plex Mono',monospace;letter-spacing:.05em;text-transform:uppercase;border:1px solid var(--ink);padding:7px 14px;background:var(--white);color:var(--ink)}
+html body:not(.home) .art-hero h1{max-width:none !important}
+html body:not(.home) .art-hero .copy p{margin:0 0 22px !important}
+.art-feature{display:flex;flex-direction:column;gap:12px;background:var(--ink);color:#fff !important;padding:34px 34px 30px;text-decoration:none;border-top:5px solid var(--leaf);transition:transform .25s,box-shadow .25s}
+.art-feature:hover{transform:translateY(-4px);box-shadow:0 20px 34px -20px rgba(15,61,46,.75)}
+.art-feature .tag{align-self:flex-start;font:600 12px 'IBM Plex Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);background:#a8dcc0;padding:5px 11px}
+.art-feature b{font:600 clamp(24px,2.5vw,32px)/1.2 'Fraunces',serif}
+.art-feature small{font-size:17.5px;line-height:1.6;color:#d8ecdf}
+.art-feature .go{font:13px 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#a8dcc0;margin-top:4px}
+@media(max-width:900px){.art-hero{grid-template-columns:1fr}}
+
+/* list cards (articles + tools index) */
+html body.rd .list{gap:22px;padding:44px var(--px) 54px !important}
+html body.rd .list>a.row{padding:30px 30px 26px !important;display:flex !important;flex-direction:column}
+html body.rd .list>a.row .num{font-size:14px;padding:5px 11px;align-self:flex-start}
+html body.rd .list>a.row .body{display:flex;flex-direction:column;flex:1}
+html body.rd .list>a.row .body h3{font-size:25px;line-height:1.22;margin:0 0 12px}
+html body.rd .list>a.row .body p{font-size:18px;line-height:1.65;color:var(--ink-soft);max-width:none;margin:0 0 18px}
+html body.rd .list>a.row .body .go{font-size:13.5px;margin-top:auto}
+html body.rd .list>a.row .cat{display:inline-block;font:600 12px 'IBM Plex Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--stamp);margin-bottom:10px}
+html body.rd .content p{font-size:19px !important;max-width:60ch !important}
+html body.rd .content .btn{font-size:13.5px;padding:14px 26px}
+
+/* ---------- contact ---------- */
+.contact-body{background:var(--paper)}
+html body:not(.home) .contact-body .contact-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;background:none;border:0;margin:0 auto;max-width:1300px}
+html body:not(.home) .contact-body .contact-card{padding:34px 28px 28px;gap:10px;background:var(--white);border:1px solid var(--line);align-items:flex-start;text-align:left}
+.contact-card .cicon{width:54px;height:54px;border-radius:50%;background:var(--mint);display:grid;place-items:center;margin-bottom:10px}
+.contact-card .cicon svg{width:26px;height:26px;stroke:var(--ink);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+html body:not(.home) .contact-card .clabel{font-size:13px;letter-spacing:.1em}
+html body:not(.home) .contact-card .cvalue{font-size:21px;line-height:1.3}
+html body:not(.home) .contact-card .carrow{font-size:13px;margin-top:auto;padding-top:10px}
+@media(max-width:1100px){html body:not(.home) .contact-body .contact-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:640px){html body:not(.home) .contact-body .contact-grid{grid-template-columns:1fr}}
+
+/* ---------- paid ---------- */
+html body:not(.home) .hero.hero-tall{min-height:52vh;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.paid-icon{width:84px;height:84px;border-radius:50%;background:var(--white);border:1.5px solid var(--ink);display:grid;place-items:center;margin:0 auto 22px}
+.paid-icon svg{width:38px;height:38px;stroke:var(--ink);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.soon-chip{display:inline-block;font:600 12.5px 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;background:var(--ink);color:#a8dcc0;padding:6px 14px;margin-bottom:20px}
+html body:not(.home) .paid-free{background:var(--mint)}
+html body:not(.home) .paid-free h2{font:600 28px 'Fraunces',serif;text-align:center;margin:0 0 6px;color:var(--ink)}
+html body:not(.home) section.paid-free p.sub{text-align:center;font-size:18px !important;color:var(--ink-soft);margin:0 auto 26px !important;max-width:none !important}
+.paid-free .tri{max-width:1300px;margin:0 auto}
+.paid-free .c b{font-size:21px}
+.paid-free .c small{font-size:16.5px}
+
+/* ---------- services ---------- */
+.svc-hero{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(28px,5vw,80px);align-items:center}
+html body:not(.home) .svc-hero h1{max-width:none !important}
+html body:not(.home) .svc-hero .copy p{margin:0 0 24px !important;max-width:58ch !important}
+.path-card{background:var(--white);border:1px solid var(--line);border-top:5px solid var(--stamp);padding:28px 28px 20px}
+.path-card h2{margin:0 0 4px;font:600 22px 'Fraunces',serif;color:var(--ink)}
+.path-card .sub{font-size:16.5px;color:var(--ink-soft);margin:0 0 14px}
+.path-card a.path{display:flex;align-items:center;gap:14px;padding:15px 0;border-top:1px solid var(--line);text-decoration:none;color:var(--ink);transition:padding-left .2s}
+.path-card a.path:hover{padding-left:8px}
+.path-card .pn{flex:0 0 auto;width:42px;height:42px;border-radius:50%;background:var(--mint);display:grid;place-items:center;font:600 13px 'IBM Plex Mono',monospace;color:var(--ink)}
+.path-card .pt{flex:1;font-size:18px;line-height:1.35}
+.path-card .pt b{display:block;font:600 19px 'Fraunces',serif}
+.path-card .pt small{font-size:15.5px;color:var(--ink-soft)}
+.path-card .arr{font:15px 'IBM Plex Mono',monospace;color:var(--stamp)}
+
+html body:not(.home) .svc-sec{background:var(--paper)}
+.svc-bar{display:flex;flex-wrap:wrap;gap:14px 24px;align-items:center;justify-content:space-between;margin-bottom:26px}
+.svc-bar h2{margin:0;font:600 30px 'Fraunces',serif;color:var(--ink)}
+.chips-f{display:flex;gap:10px;flex-wrap:wrap}
+.chips-f button{font:13px 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;padding:11px 18px;border:1.5px solid var(--ink);background:var(--white);color:var(--ink);transition:background .2s,color .2s}
+.chips-f button:hover{background:var(--mint)}
+.chips-f button[aria-pressed="true"]{background:var(--ink);color:#fff}
+.price-strip{background:var(--ink);color:#d8ecdf;font:12.5px/1.6 'IBM Plex Mono',monospace;letter-spacing:.03em;padding:12px 18px;margin-bottom:26px}
+.svc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;align-items:stretch}
+.svc-grid [hidden]{display:none !important}
+.svc-group{grid-column:1/-1;padding-top:6px}
+.svc-group .tag{display:inline-block;font:600 12.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;text-transform:uppercase;background:var(--sage);color:#fff;padding:5px 12px;margin-bottom:12px}
+.svc-group .tag.intl{background:var(--ink-soft)}
+.svc-group h3{margin:0 0 8px;font:600 27px/1.25 'Fraunces',serif;color:var(--ink)}
+.svc-group p{margin:0;font-size:18px;line-height:1.7;color:var(--ink-soft);max-width:80ch}
+.timeline{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.tl{background:var(--white);border:1px solid var(--line);border-left:5px solid var(--leaf);padding:22px 24px}
+.tl .when{font:600 24px 'Fraunces',serif;color:var(--stamp);margin-bottom:6px}
+.tl p{margin:0;font-size:17px;line-height:1.6;color:var(--ink-soft)}
+.svc-card{background:var(--white);border:1px solid var(--line);border-top:4px solid var(--stamp);padding:28px 28px 24px;display:flex;flex-direction:column;gap:14px;transition:transform .25s,box-shadow .25s;scroll-margin-top:24px}
+.svc-card:hover{transform:translateY(-4px);box-shadow:0 18px 30px -20px rgba(15,61,46,.55)}
+.svc-card.pulse{animation:svcPulse 1.6s ease 1}
+@keyframes svcPulse{0%,100%{box-shadow:0 0 0 0 rgba(47,138,79,0)}30%{box-shadow:0 0 0 8px rgba(47,138,79,.35)}}
+.svc-top{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.svc-num{font:600 14px 'IBM Plex Mono',monospace;background:var(--ink);color:#fff;padding:4px 10px}
+.svc-kind{font:600 12.5px 'IBM Plex Mono',monospace;letter-spacing:.09em;text-transform:uppercase;color:var(--stamp)}
+.svc-card h3{margin:0;font:600 24px/1.25 'Fraunces',serif;color:var(--ink)}
+.svc-desc{margin:0;font-size:17.5px;line-height:1.65;color:var(--ink-soft)}
+.svc-for,.svc-walk{font-size:16.5px;line-height:1.55;color:var(--ink)}
+.svc-for span,.svc-walk span{display:block;font:12.5px 'IBM Plex Mono',monospace;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:3px}
+.svc-walk{background:var(--mint);padding:13px 15px;border-left:3px solid var(--leaf)}
+.svc-price{display:flex;gap:10px;flex-wrap:wrap;margin-top:auto}
+.svc-price>div{flex:1;min-width:130px;border:1px solid var(--line);background:var(--paper);padding:10px 14px}
+.svc-price span{display:block;font:12px 'IBM Plex Mono',monospace;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft)}
+.svc-price b{font:600 21px 'Fraunces',serif;color:var(--stamp)}
+.svc-more{border-top:1px dashed var(--line);padding-top:10px}
+.svc-more summary{cursor:pointer;list-style:none;font:600 13px 'IBM Plex Mono',monospace;letter-spacing:.07em;text-transform:uppercase;color:var(--ink);display:flex;justify-content:space-between;align-items:center;padding:4px 0}
+.svc-more summary::-webkit-details-marker{display:none}
+.svc-more summary::after{content:"+";font-size:20px;color:var(--stamp);line-height:1}
+.svc-more[open] summary::after{content:"–"}
+.svc-more ul{margin:12px 0 4px;padding-left:20px}
+.svc-more li{font-size:16.5px;line-height:1.6;color:var(--ink-soft);margin-bottom:6px}
+.svc-cta{font:13px 'IBM Plex Mono',monospace;letter-spacing:.07em;text-transform:uppercase;color:var(--ink);text-decoration:none;border-bottom:2px solid var(--leaf);align-self:flex-start;padding-bottom:2px}
+.svc-cta:hover{color:var(--stamp);border-color:var(--stamp)}
+.svc-card.feature{grid-column:span 2;background:var(--ink);border-color:var(--ink);border-top-color:var(--leaf)}
+.svc-card.feature h3,.svc-card.feature .svc-for{color:#fff}
+.svc-card.feature .svc-desc,.svc-card.feature .svc-more li{color:#d8ecdf}
+.svc-card.feature .svc-kind{color:#a8dcc0}
+.svc-card.feature .svc-num{background:var(--leaf)}
+.svc-card.feature .svc-for span,.svc-card.feature .svc-price span{color:#a8dcc0}
+.svc-card.feature .svc-price>div{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2)}
+.svc-card.feature .svc-price b{color:#fff}
+.svc-card.feature .svc-more{border-color:rgba(255,255,255,.25)}
+.svc-card.feature .svc-more summary{color:#fff}
+.svc-card.feature .svc-walk{background:rgba(255,255,255,.1);color:#fff}
+.svc-card.feature .svc-walk span{color:#a8dcc0}
+.svc-card.feature .svc-cta{color:#fff}
+@media(max-width:1100px){.svc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.svc-card.feature{grid-column:1/-1}.timeline{grid-template-columns:1fr}}
+@media(max-width:800px){.svc-hero{grid-template-columns:1fr}}
+@media(max-width:700px){.svc-grid{grid-template-columns:1fr}}
+html body:not(.home) .cta-block h3{font-size:28px}
+html body:not(.home) .cta-block p{font-size:18.5px !important;max-width:56ch !important;margin-left:auto !important;margin-right:auto !important}
+
+/* ================= reading comfort: articles & tools ================= */
+html body.rd{--read:19.5px}
+/* hero / header */
+html body.rd:not(.home):not(.articles-list) .hero h1{font-size:clamp(36px,5vw,60px) !important;max-width:24ch !important}
+html body.rd:not(.home):not(.articles-list) .hero .dek,html body.rd:not(.home):not(.articles-list) .hero p{font-size:clamp(19px,1.7vw,23px) !important;max-width:78ch !important;line-height:1.65 !important}
+html body.rd:not(.home):not(.articles-list) .hero .subtitle{font-size:15px !important;letter-spacing:.06em}
+html body.rd:not(.home):not(.articles-list) .hero .meta-row{font-size:14px;margin-top:14px}
+html body.rd:not(.home):not(.articles-list) .hero .intro{font-size:20px !important;max-width:90ch !important;display:block !important}
+html body.rd:not(.home):not(.articles-list) .hero .stamp{font-size:12px}
+html body.rd:not(.home):not(.articles-list) .hero .box-index a{font-size:13px}
+html body.rd:not(.home):not(.articles-list) .hero .doc-ref{font-size:13px !important}
+html body.rd:not(.home):not(.articles-list) .btn,html body.rd:not(.home):not(.articles-list) .dl-btn{font-size:13.5px;padding:14px 26px}
+
+/* download bar */
+html body.rd:not(.home):not(.articles-list) .sheet>.dl-bar{padding:24px var(--px) !important}
+html body.rd:not(.home):not(.articles-list) .dl-bar .dl-text h3{font-size:22px !important}
+html body.rd:not(.home):not(.articles-list) .dl-bar .dl-text p{font-size:17px !important;max-width:70ch !important}
+
+/* article body: fill the column, bigger type */
+.art-wrap{grid-template-columns:minmax(0,1fr) 340px !important;gap:56px !important}
+html body.rd:not(.home):not(.articles-list) section.a-block{padding:34px 0 !important}
+html body.rd:not(.home):not(.articles-list) section.a-block>p{font-size:var(--read) !important;line-height:1.85 !important;max-width:none !important;color:var(--ink-soft);margin:0 0 18px}
+html body.rd:not(.home):not(.articles-list) .a-title{font-size:32px !important;line-height:1.2 !important;margin:0 0 20px !important}
+html body.rd:not(.home):not(.articles-list) .a-kicker{font-size:13px !important;letter-spacing:.1em}
+html body.rd:not(.home):not(.articles-list) .compare{margin-top:10px}
+html body.rd:not(.home):not(.articles-list) .compare-col{padding:26px 28px}
+html body.rd:not(.home):not(.articles-list) .compare-col h3{font-size:22px;margin:0 0 20px}
+html body.rd:not(.home):not(.articles-list) .compare-col p,html body.rd:not(.home):not(.articles-list) .compare-col .cvalue{font-size:17.5px !important;line-height:1.65 !important;max-width:none !important}
+html body.rd:not(.home):not(.articles-list) .compare-col .tag,html body.rd:not(.home):not(.articles-list) .clabel{font-size:12.5px !important;letter-spacing:.07em;margin-top:12px}
+html body.rd:not(.home):not(.articles-list) .compare-row{margin-bottom:6px}
+html body.rd:not(.home):not(.articles-list) .layers{margin-top:10px}
+html body.rd:not(.home):not(.articles-list) .layer{padding:26px 24px}
+html body.rd:not(.home):not(.articles-list) .layer .lnum,html body.rd:not(.home):not(.articles-list) .layer .n{font-size:13.5px}
+html body.rd:not(.home):not(.articles-list) .layer h4{font-size:21px;margin:0 0 10px}
+html body.rd:not(.home):not(.articles-list) .layer p{font-size:17px !important;line-height:1.65 !important;max-width:none !important}
+html body.rd:not(.home):not(.articles-list) .questions{grid-template-columns:repeat(4,minmax(0,1fr)) !important}
+html body.rd:not(.home):not(.articles-list) .qitem{padding:24px 14px}
+html body.rd:not(.home):not(.articles-list) .qitem .qnum{font-size:30px}
+html body.rd:not(.home):not(.articles-list) .qitem h4{font-size:18px}
+html body.rd:not(.home):not(.articles-list) .pipe-num{font-size:16px}
+html body.rd:not(.home):not(.articles-list) .pipe-body h4{font-size:21px}
+html body.rd:not(.home):not(.articles-list) .pipe-body p{font-size:17px !important;line-height:1.65 !important;max-width:none !important}
+html body.rd:not(.home):not(.articles-list) .pipe-risk{font-size:15.5px;line-height:1.55}
+html body.rd:not(.home):not(.articles-list) .pipe-risk b{font-size:12.5px}
+html body.rd:not(.home):not(.articles-list) .grid3 .card{padding:24px 22px}
+html body.rd:not(.home):not(.articles-list) .grid3 .card h4{font-size:20px}
+html body.rd:not(.home):not(.articles-list) .grid3 .card p{font-size:16.5px !important;line-height:1.65 !important;max-width:none !important}
+html body.rd:not(.home):not(.articles-list) .stack-row{grid-template-columns:210px 1fr}
+html body.rd:not(.home):not(.articles-list) .stack-row .s-name{font-size:13.5px}
+html body.rd:not(.home):not(.articles-list) .stack-row p{font-size:17px !important;line-height:1.65 !important;max-width:none !important}
+html body.rd:not(.home):not(.articles-list) .callout{font-size:19px !important;line-height:1.7 !important;padding:22px 26px !important;max-width:none !important}
+html body.rd:not(.home):not(.articles-list) .callout p{font-size:19px !important;max-width:none !important}
+html body.rd:not(.home):not(.articles-list) .plain-list li,html body.rd:not(.home):not(.articles-list) .prep-list li{font-size:18px !important;line-height:1.7 !important;max-width:none !important;margin-bottom:10px}
+html body.rd:not(.home):not(.articles-list) .sources-list li{font-size:16px !important;line-height:1.6}
+html body.rd:not(.home):not(.articles-list) .stat-cell .snum{font-size:40px}
+html body.rd:not(.home):not(.articles-list) .stat-cell .slabel{font-size:15.5px;line-height:1.5}
+html body.rd:not(.home):not(.articles-list) .check-item strong,html body.rd:not(.home):not(.articles-list) .gap-item strong{font-size:19px}
+html body.rd:not(.home):not(.articles-list) .check-item span,html body.rd:not(.home):not(.articles-list) .gap-item span{font-size:17px;line-height:1.65}
+html body.rd:not(.home):not(.articles-list) .check-item::before{font-size:15px}
+html body.rd:not(.home):not(.articles-list) .byline{font-size:14.5px !important;line-height:1.7}
+html body.rd:not(.home):not(.articles-list) .dl-box .dl-text h3{font-size:21px}
+html body.rd:not(.home):not(.articles-list) .dl-box .dl-text p{font-size:17px;max-width:70ch}
+
+/* reading rail */
+.rail{gap:20px !important}
+.rail .box{padding:22px !important}
+.rail .box h4{font-size:13px !important}
+.rail .toc a{font-size:16px !important;line-height:1.5 !important;padding:9px 0 !important}
+.rail .stat b{font-size:42px !important}
+.rail .stat span{font-size:16px !important;line-height:1.6}
+.rail .quote{font-size:18.5px !important;line-height:1.65 !important}
+@media(max-width:1000px){.art-wrap{grid-template-columns:1fr !important}}
+
+/* tools (no rail): full-width sections */
+html body.rd:not(.home):not(.articles-list) section .box-title{font-size:30px !important;margin:0 0 14px !important}
+html body.rd:not(.home):not(.articles-list) .box-num{font-size:14px;padding:4px 10px}
+html body.rd:not(.home):not(.articles-list) .box-help{font-size:18px !important;line-height:1.7 !important;max-width:105ch !important}
+html body.rd:not(.home):not(.articles-list) .field-row label{font-size:13.5px}
+html body.rd:not(.home):not(.articles-list) .fill-line{font-size:17px;padding:9px 2px}
+html body.rd:not(.home):not(.articles-list) .item label{font-size:19px !important;line-height:1.55}
+html body.rd:not(.home):not(.articles-list) .item label .note{font-size:15.5px !important;line-height:1.55}
+html body.rd:not(.home):not(.articles-list) .not-in-scope,html body.rd:not(.home):not(.articles-list) .not-in-scope p,html body.rd:not(.home):not(.articles-list) .not-in-scope li{font-size:17.5px !important;line-height:1.65}
+html body.rd:not(.home):not(.articles-list) .not-in-scope h4{font-size:13.5px}
+html body.rd:not(.home):not(.articles-list) .progress-label{font-size:13.5px}
+html body.rd:not(.home):not(.articles-list) .progress-count{font-size:15px}
+html body.rd:not(.home):not(.articles-list) .row .k{font-size:13px}
+html body.rd:not(.home):not(.articles-list) .row .v{font-size:17.5px;line-height:1.6}
+html body.rd:not(.home):not(.articles-list) .col h4{font-size:14px}
+html body.rd:not(.home):not(.articles-list) .four div{padding:22px 16px}
+html body.rd:not(.home):not(.articles-list) .four div .n{font-size:26px}
+html body.rd:not(.home):not(.articles-list) .four div p{font-size:17px !important;line-height:1.55 !important;max-width:none !important}
+html body.rd:not(.home):not(.articles-list) .reading{grid-template-columns:repeat(4,minmax(0,1fr)) !important}
+html body.rd:not(.home):not(.articles-list) .rcard{padding:22px}
+html body.rd:not(.home):not(.articles-list) .rcard h4{font-size:14px}
+html body.rd:not(.home):not(.articles-list) .rcard p{font-size:16.5px !important;line-height:1.6 !important;max-width:none !important}
+html body.rd:not(.home):not(.articles-list) table{font-size:15.5px}
+html body.rd:not(.home):not(.articles-list) th{font-size:12px;padding:12px 10px}
+html body.rd:not(.home):not(.articles-list) td{padding:10px}
+html body.rd:not(.home):not(.articles-list) td input[type="text"],html body.rd:not(.home):not(.articles-list) td textarea{font-size:16px}
+html body.rd:not(.home):not(.articles-list) .yn label{font-size:14px}
+html body.rd:not(.home):not(.articles-list) .rownum,html body.rd:not(.home):not(.articles-list) .del{font-size:13px}
+@media(max-width:1000px){html body.rd:not(.home):not(.articles-list) .reading,html body.rd:not(.home):not(.articles-list) .questions{grid-template-columns:repeat(2,minmax(0,1fr)) !important}}
+@media(max-width:700px){html body.rd:not(.home):not(.articles-list) .stack-row{grid-template-columns:1fr}}
+html body.rd main{padding-left:0 !important;padding-right:0 !important}
+html body.rd .art-wrap{padding-left:var(--px) !important;padding-right:var(--px) !important}
+html body.rd .hero .stamp{top:auto !important;bottom:44px !important;right:var(--px) !important;width:120px !important;height:120px !important}
+@media(max-width:700px){html body.rd .hero .stamp{position:static !important;width:104px !important;height:104px !important;bottom:auto !important}}
+html body.rd td textarea{min-height:64px}
+
+</style>
 </head>
-<body>
+<body class="rd">
 <div class="sheet">
 
   <nav class="tabs">
@@ -156,5 +590,86 @@
   </footer>
 
 </div>
+<script>
+(function(){
+var rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+var sheet=document.querySelector('.sheet');
+var isHome=document.body.classList.contains('home');
+var first0=document.querySelector('nav.tabs a');
+var pre=(first0?first0.getAttribute('href'):'index.html').replace(/index\.html$/,'');
+if(sheet&&!sheet.querySelector('.mast')){
+ var first=document.querySelector('nav.tabs a');
+ var m=document.createElement('div');m.className='mast';
+ m.innerHTML='<a class="brand" href="'+(first?first.getAttribute('href'):'index.html')+'">GreenMetrics</a><p>Understand. Measure. Report. Improve.</p>';
+ sheet.insertBefore(m,sheet.firstChild);
+}
+var bar=document.createElement('div');bar.id='gm-prog';document.body.appendChild(bar);
+addEventListener('scroll',function(){var h=document.documentElement;var t=h.scrollHeight-h.clientHeight;bar.style.width=(t>0?h.scrollTop/t*100:0)+'%'},{passive:true});
+if(document.body.classList.contains('home')&&!rm){
+ var nav=document.querySelector('nav.tabs');
+ if(nav){var ind=document.createElement('div');ind.className='tab-indicator';nav.appendChild(ind);
+ var links=nav.querySelectorAll('a');var act=nav.querySelector('a.active')||links[0];
+ var place=function(e){ind.style.left=e.offsetLeft+'px';ind.style.width=e.offsetWidth+'px'};
+ requestAnimationFrame(function(){place(act)});
+ links.forEach(function(l){l.addEventListener('mouseenter',function(){place(l)})});
+ nav.addEventListener('mouseleave',function(){place(act)});}
+}
+var navEl=document.querySelector('nav.tabs');
+if(sheet&&navEl&&!sheet.querySelector('.tick')){
+ var t=document.createElement('div');t.className='tick';
+ var one='<span>New: What Sustainability Assurance Actually Looks Like</span><span>Free: CBAM / CSRD readiness checklist</span><span>Free: Materiality assessment worksheet</span><span>CSRD · IFRS S1/S2 · GRI · Carbon Accounting</span>';
+ t.innerHTML='<div>'+one+one+'</div>';navEl.parentNode.insertBefore(t,navEl.nextSibling);
+}
+var wantsSidebar=document.body.classList.contains('sidebar-page');
+var lead=sheet&&!isHome&&(sheet.querySelector(':scope > header')||sheet.querySelector(':scope > .intro')||sheet.querySelector(':scope > .content'));
+if(lead&&wantsSidebar&&!sheet.querySelector('.mg')){
+ var A=[['What Sustainability Assurance Actually Looks Like','Demystifying ISAE 3000 and ISAE 3410 for teams about to go through their first engagement.','articles/sustainability-assurance-isae-3000-3410.html'],['AI in ESG Disclosure and Assurance','How AI is used across the disclosure lifecycle, and what CSRD, ISSB, and California now require.','articles/ai-esg-disclosure-assurance.html'],['GRI vs IFRS S1/S2','Two frameworks, two different questions, in one page.','articles/gri-vs-ifrs-s1-s2.html']];
+ var mg=document.createElement('div');mg.className='mg';
+ var ld=document.createElement('div');ld.className='lead';
+ var sd=document.createElement('aside');sd.className='side';
+ sd.innerHTML='<h3>Latest articles</h3>'+A.map(function(a){return '<a class="a" href="'+pre+a[2]+'"><b>'+a[0]+'</b><small>'+a[1]+'</small></a>'}).join('');
+ lead.parentNode.insertBefore(mg,lead);ld.appendChild(lead);mg.appendChild(ld);mg.appendChild(sd);
+ ld.insertAdjacentHTML('afterbegin','<i class="fl" style="left:70%;top:10%"></i><i class="fl" style="left:86%;top:60%;animation-delay:-6s"></i>');
+}else if(lead&&!wantsSidebar&&!lead.classList.contains('hero')){
+ lead.classList.add('hero');
+ lead.insertAdjacentHTML('beforeend','<i class="fl" style="right:8%;top:16%"></i><i class="fl" style="right:20%;bottom:12%;animation-delay:-6s"></i>');
+}
+/* ---- reading rail for long articles: TOC + stat + quote, both sides used ---- */
+var RAILS={
+ 'articles/gri-vs-ifrs-s1-s2.html':{toc:['The two lenses, side by side',"GRI's three layers","The four questions under every IFRS S1/S2 disclosure","Where they overlap — and where they don't"],quote:'Same company, same facts — different outcomes depending on the lens.'},
+ 'articles/ai-esg-disclosure-assurance.html':{toc:['The regulatory picture has narrowed, not disappeared','Investors are already reading disclosures with AI','Where AI is actually being used across the reporting lifecycle','The control set that makes AI-assisted disclosures assurance-ready','Can AI actually detect greenwashing?','A practical architecture for an assurance-ready AI stack','What this means for Pakistan and other emerging markets','A 90-day roadmap to AI-ready ESG disclosure'],stat:['~60%','of global investors are already using, or plan to use, AI in sustainability analysis.'],quote:'Every reported metric must be reconstructable: source data → transformation → factor → formula → final value.'},
+ 'articles/sustainability-assurance-isae-3000-3410.html':{toc:['The difference is worth understanding before an engagement begins','Limited assurance vs. reasonable assurance','What auditors are actually checking','Where companies get caught out','How to actually prepare'],stat:['4','things every auditor checks: completeness, accuracy, methodology consistency, governance.'],quote:"A report that hasn't been through rigorous assurance is a claim. A report that has is evidence."}
+};
+(function(){
+ var path=(location.pathname.split('/').slice(-2).join('/'))||'';
+ var cfg=RAILS[path];
+ var main=document.querySelector('main');
+ if(!cfg||!main||main.dataset.railDone)return;
+ main.dataset.railDone='1';
+ var heads=main.querySelectorAll('h3.a-title');
+ var wrap=document.createElement('div');wrap.className='art-wrap';
+ var body=document.createElement('div');body.className='art-body';
+ while(main.firstChild)body.appendChild(main.firstChild);
+ var rail=document.createElement('aside');rail.className='rail';
+ var tocHtml='<div class="box toc"><h4>In this article</h4>'+cfg.toc.map(function(t){return '<a href="#">'+t+'</a>'}).join('')+'</div>';
+ var statHtml=cfg.stat?('<div class="box stat"><b>'+cfg.stat[0]+'</b><span>'+cfg.stat[1]+'</span></div>'):'';
+ var quoteHtml=cfg.quote?('<div class="box quote">“'+cfg.quote+'”</div>'):'';
+ rail.innerHTML=tocHtml+statHtml+quoteHtml;
+ wrap.appendChild(body);wrap.appendChild(rail);main.appendChild(wrap);
+ var idx=0;
+ heads.forEach(function(h){var id='sec-'+(++idx);h.id=id});
+ rail.querySelectorAll('.toc a').forEach(function(a,i){
+  var h=heads[i];if(!h)return;a.href='#'+h.id;
+  a.addEventListener('click',function(e){e.preventDefault();h.scrollIntoView({behavior:rm?'auto':'smooth',block:'start'})});
+ });
+})();
+if(!rm&&'IntersectionObserver' in window){
+ var els=document.querySelectorAll('.layer,.qitem,.compare-col,.focus-item,.rcard,.side a.a,.c,.sec .vid,.sec.about');
+ var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var el=e.target;var i=[].indexOf.call(el.parentNode.children,el);el.style.animationDelay=(i%4)*80+'ms';el.classList.add('rv-in');el.addEventListener('animationend',function(){el.classList.remove('rv','rv-in');el.style.animationDelay=''},{once:true});io.unobserve(el)}})},{threshold:.15});
+ els.forEach(function(el){el.classList.add('rv');io.observe(el)});
+}
+})();
+
+</script>
 </body>
 </html>
