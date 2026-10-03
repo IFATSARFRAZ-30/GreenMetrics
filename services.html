@@ -328,8 +328,11 @@ html body:not(.home) .svc-group p{margin:0;font-size:18px;line-height:1.75;color
 .svc-more{border-top:1px dashed var(--line);padding-top:10px}
 .svc-more summary{cursor:pointer;list-style:none;font:600 13px 'IBM Plex Mono',monospace;letter-spacing:.07em;text-transform:uppercase;color:var(--ink);display:flex;justify-content:space-between;align-items:center;padding:4px 0}
 .svc-more summary::-webkit-details-marker{display:none}
-.svc-more summary::after{content:"+";font-size:20px;color:var(--stamp);line-height:1}
-.svc-more[open] summary::after{content:"–"}
+.svc-more summary::after{content:"+";flex:0 0 auto;width:34px;height:34px;border-radius:50%;background:var(--stamp);color:#fff;display:grid;place-items:center;font:600 24px/1 'IBM Plex Mono',monospace;box-shadow:0 2px 0 rgba(15,61,46,.25);transition:background .2s,transform .2s}
+.svc-more summary:hover::after{background:var(--ink);transform:scale(1.1)}
+.svc-more summary .hint{margin-left:auto;margin-right:12px;font:500 13px 'IBM Plex Mono',monospace;letter-spacing:.02em;text-transform:none;color:var(--stamp)}
+.svc-more[open] summary .hint{display:none}
+.svc-more[open] summary::after{content:"\2013";background:var(--ink)}
 .svc-more ul{margin:12px 0 4px;padding-left:20px}
 .svc-more li{font-size:16.5px;line-height:1.6;color:var(--ink-soft);margin-bottom:6px}
 .svc-cta{font:13px 'IBM Plex Mono',monospace;letter-spacing:.07em;text-transform:uppercase;color:var(--ink);text-decoration:none;border-bottom:2px solid var(--leaf);align-self:flex-start;padding-bottom:2px}
@@ -344,6 +347,13 @@ html body:not(.home) .svc-group p{margin:0;font-size:18px;line-height:1.75;color
 .svc-card.feature .svc-price b{color:#fff}
 .svc-card.feature .svc-more{border-color:rgba(255,255,255,.25)}
 .svc-card.feature .svc-more summary{color:#fff}
+.svc-card.feature .svc-more summary::after{background:var(--leaf);color:var(--ink)}
+.svc-card.feature .svc-more summary:hover::after{background:#a8dcc0}
+.svc-card.feature .svc-more[open] summary::after{background:#a8dcc0}
+.svc-card.feature .svc-more summary .hint{color:#a8dcc0}
+.svc-card.feature .svc-more ul{columns:2;column-gap:40px}
+.svc-card.feature .svc-more li{break-inside:avoid}
+@media(max-width:700px){.svc-card.feature .svc-more ul{columns:1}}
 .svc-card.feature .svc-walk{background:rgba(255,255,255,.1);color:#fff}
 .svc-card.feature .svc-walk span{color:#a8dcc0}
 .svc-card.feature .svc-cta{color:#fff}
@@ -521,7 +531,7 @@ html body.rd td textarea{min-height:64px}
         <p class="svc-desc">A short diagnostic, then a full assessment if you want to go further. For companies that don't yet know what Phase II actually requires of them.</p>
         <div class="svc-for"><span>Who it's for</span>Companies unsure of their applicability or starting point</div>
         <div class="svc-walk"><span>You walk away with</span>A readiness score and a written gap-and-roadmap memo you can take to your board or your auditor.</div>
-        <details class="svc-more"><summary>What's included</summary><ul><li>An applicability check against SECP's phased timeline</li><li>A disclosure gap analysis — what you're missing and why it matters</li><li>A data gap assessment</li><li>A review of governance and responsibility gaps</li><li>An evidence and documentation gap review</li><li>Priority actions and a 90-day / 12-month roadmap</li></ul></details>
+        <details class="svc-more" open><summary>What's included<span class="hint">Click to expand</span></summary><ul><li>An applicability check against SECP's phased timeline</li><li>A disclosure gap analysis — what you're missing and why it matters</li><li>A data gap assessment</li><li>A review of governance and responsibility gaps</li><li>An evidence and documentation gap review</li><li>Priority actions and a 90-day / 12-month roadmap</li></ul></details>
         <div class="svc-price"><div><span>QuickScan</span><b>Free</b></div><div><span>Full assessment, from</span><b>PKR 150,000</b></div></div>
         <a class="svc-cta" href="contact.html">Enquire about this &rarr;</a>
       </article>
@@ -531,7 +541,7 @@ html body.rd td textarea{min-height:64px}
         <p class="svc-desc">A starting-point Scope 1 and 2 (with early Scope 3 where data allows) carbon footprint — for companies that need a number before they need a full framework.</p>
         <div class="svc-for"><span>Who it's for</span>Companies with no carbon footprint calculated yet</div>
         <div class="svc-walk"><span>You walk away with</span>A basic carbon footprint calculation and summary, ready to feed into a fuller disclosure later.</div>
-        <details class="svc-more"><summary>What's included</summary><ul><li>Emissions data collection (fuel, electricity, basic operational data)</li><li>Scope 1 and 2 calculation against a recognised methodology</li><li>Early-stage Scope 3 estimate, where source data exists</li><li>A plain-language summary you can hand to a customer, auditor, or board</li></ul></details>
+        <details class="svc-more"><summary>What's included<span class="hint">Click to expand</span></summary><ul><li>Emissions data collection (fuel, electricity, basic operational data)</li><li>Scope 1 and 2 calculation against a recognised methodology</li><li>Early-stage Scope 3 estimate, where source data exists</li><li>A plain-language summary you can hand to a customer, auditor, or board</li></ul></details>
         <div class="svc-price"><div><span>Starting from</span><b>PKR 120,000</b></div></div>
         <a class="svc-cta" href="contact.html">Enquire about this &rarr;</a>
       </article>
@@ -541,7 +551,7 @@ html body.rd td textarea{min-height:64px}
         <p class="svc-desc">Working alongside your team to structure and prepare disclosures that hold up. For companies already through the readiness stage and now writing the report.</p>
         <div class="svc-for"><span>Who it's for</span>Companies drafting their first or next sustainability disclosure</div>
         <div class="svc-walk"><span>You walk away with</span>A disclosure draft mapped to IFRS S1/S2 or GRI, ready for internal sign-off.</div>
-        <details class="svc-more"><summary>What's included</summary><ul><li>Disclosure mapping against the standard</li><li>Drafting support for your report</li><li>Data structuring</li><li>Framework alignment</li><li>Coordination across your finance, sustainability, and operations teams</li></ul></details>
+        <details class="svc-more"><summary>What's included<span class="hint">Click to expand</span></summary><ul><li>Disclosure mapping against the standard</li><li>Drafting support for your report</li><li>Data structuring</li><li>Framework alignment</li><li>Coordination across your finance, sustainability, and operations teams</li></ul></details>
         <div class="svc-price"><div><span>Starting from</span><b>PKR 400,000</b></div></div>
         <a class="svc-cta" href="contact.html">Enquire about this &rarr;</a>
       </article>
@@ -551,7 +561,7 @@ html body.rd td textarea{min-height:64px}
         <p class="svc-desc">Building the evidence, controls, and traceability your auditor will need. For companies entering their second reporting year, when assurance becomes mandatory.</p>
         <div class="svc-for"><span>Who it's for</span>Companies approaching their first assurance cycle</div>
         <div class="svc-walk"><span>You walk away with</span>An evidence file and controls map your auditor can work from directly.</div>
-        <details class="svc-more"><summary>What's included</summary><ul><li>Evidence and documentation systems</li><li>Data ownership and controls mapping</li><li>Traceability from your source data through to your disclosure</li><li>A pre-assurance readiness review before your auditor steps in</li></ul></details>
+        <details class="svc-more"><summary>What's included<span class="hint">Click to expand</span></summary><ul><li>Evidence and documentation systems</li><li>Data ownership and controls mapping</li><li>Traceability from your source data through to your disclosure</li><li>A pre-assurance readiness review before your auditor steps in</li></ul></details>
         <div class="svc-price"><div><span>Starting from</span><b>PKR 300,000</b></div></div>
         <a class="svc-cta" href="contact.html">Enquire about this &rarr;</a>
       </article>
@@ -561,7 +571,7 @@ html body.rd td textarea{min-height:64px}
         <p class="svc-desc">Working as an extension of your engagement team. For firms with listed clients moving into sustainability reporting, without an in-house specialist.</p>
         <div class="svc-for"><span>Who it's for</span>Mid-tier audit and advisory firms</div>
         <div class="svc-walk"><span>You walk away with</span>Working papers and technical analysis your team can put your firm's name on.</div>
-        <details class="svc-more"><summary>What's included</summary><ul><li>IFRS S1/S2 disclosure mapping</li><li>Sustainability reporting gap assessments</li><li>ESG data and evidence systems</li><li>Technical research support</li><li>Working-paper development</li></ul></details>
+        <details class="svc-more"><summary>What's included<span class="hint">Click to expand</span></summary><ul><li>IFRS S1/S2 disclosure mapping</li><li>Sustainability reporting gap assessments</li><li>ESG data and evidence systems</li><li>Technical research support</li><li>Working-paper development</li></ul></details>
         <div class="svc-price"><div><span>Day rate, from</span><b>PKR 35,000</b></div></div>
         <a class="svc-cta" href="contact.html">Enquire about this &rarr;</a>
       </article>
@@ -578,7 +588,7 @@ html body.rd td textarea{min-height:64px}
         <p class="svc-desc">Collecting and structuring your suppliers' sustainability data, locally. For buyers who need it in a form they can actually report on.</p>
         <div class="svc-for"><span>Who it's for</span>EU/US buyers with suppliers in Pakistan or South Asia</div>
         <div class="svc-walk"><span>You walk away with</span>A structured supplier ESG data file, mapped to the framework you report under.</div>
-        <details class="svc-more"><summary>What's included</summary><ul><li>Supplier ESG questionnaires</li><li>ESG data collection</li><li>Carbon and environmental data structuring</li><li>Labour and social data documentation</li><li>Framework mapping and evidence collection</li></ul></details>
+        <details class="svc-more"><summary>What's included<span class="hint">Click to expand</span></summary><ul><li>Supplier ESG questionnaires</li><li>ESG data collection</li><li>Carbon and environmental data structuring</li><li>Labour and social data documentation</li><li>Framework mapping and evidence collection</li></ul></details>
         <div class="svc-price"><div><span>Starting from</span><b>$400 per supplier</b></div></div>
         <a class="svc-cta" href="contact.html">Enquire about this &rarr;</a>
       </article>
@@ -588,7 +598,7 @@ html body.rd td textarea{min-height:64px}
         <p class="svc-desc">Local regulatory and sector intelligence, delivered to your team. For consulting and advisory firms working in the region without local presence.</p>
         <div class="svc-for"><span>Who it's for</span>International consulting and advisory firms</div>
         <div class="svc-walk"><span>You walk away with</span>A written briefing or research memo your team can drop straight into your own deliverable.</div>
-        <details class="svc-more"><summary>What's included</summary><ul><li>Local regulatory research</li><li>Company and stakeholder engagement in Pakistan</li><li>ESG data structuring</li><li>Documentation and evidence review</li></ul></details>
+        <details class="svc-more"><summary>What's included<span class="hint">Click to expand</span></summary><ul><li>Local regulatory research</li><li>Company and stakeholder engagement in Pakistan</li><li>ESG data structuring</li><li>Documentation and evidence review</li></ul></details>
         <div class="svc-price"><div><span>Day rate, from</span><b>$150</b></div></div>
         <a class="svc-cta" href="contact.html">Enquire about this &rarr;</a>
       </article>
