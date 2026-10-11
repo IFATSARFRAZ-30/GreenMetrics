@@ -1,0 +1,1736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A practical beginner's guide to sustainability reporting frameworks — GRI, IFRS S1 and IFRS S2.">
+<title>Understanding GRI & IFRS S1/S2 — GreenMetrics Mini-Course</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --pine:#1B4332; --moss:#2D6A4F; --leaf:#52B788; --mint:#D8F3DC; --mint2:#EAF7EE;
+  --paper:#F4F7F4; --card:#FFFFFF; --ink:#1C2A22; --mut:#5C6B62; --line:#DFE8E0;
+  --red:#B3261E; --redbg:#FBEDEB; --amber:#92600A; --amberbg:#FFF6E0;
+  --rad:14px; --shadow:0 1px 3px rgba(20,40,30,.08),0 8px 24px rgba(20,40,30,.06);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--paper);color:var(--ink);line-height:1.65;font-size:16px}
+header{position:sticky;top:0;z-index:50;background:linear-gradient(90deg,var(--pine),var(--moss));color:#fff;display:flex;align-items:center;gap:16px;padding:12px 20px;box-shadow:0 2px 12px rgba(0,0,0,.15)}
+#menuBtn{display:none;background:none;border:0;color:#fff;font-size:22px;cursor:pointer;line-height:1}
+.brand{display:flex;align-items:center;gap:10px;min-width:0}
+.brand .logo{font-size:22px}
+.brand b{font-size:16px;letter-spacing:.2px}
+.brand .crs{display:block;font-size:11.5px;opacity:.85;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hprog{margin-left:auto;display:flex;align-items:center;gap:10px;min-width:180px}
+.hbar{flex:1;height:8px;background:rgba(255,255,255,.25);border-radius:99px;overflow:hidden}
+#hbarFill{height:100%;width:0;background:var(--leaf);border-radius:99px;transition:width .4s ease}
+#hpct{font-size:13px;font-weight:700;min-width:38px;text-align:right}
+.layout{display:flex;max-width:1280px;margin:0 auto}
+nav#sidebar{width:300px;flex-shrink:0;background:var(--card);border-right:1px solid var(--line);padding:18px 14px 90px;position:sticky;top:61px;overflow-y:auto;max-height:calc(100vh - 61px)}
+.sb-sec{font-size:11px;font-weight:800;letter-spacing:.12em;color:var(--mut);text-transform:uppercase;margin:18px 8px 6px}
+.sb-mod{font-size:12px;font-weight:700;color:var(--mut);margin:14px 8px 4px}
+.sb-item{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:9px;color:var(--ink);text-decoration:none;font-size:13.5px;font-weight:500;cursor:pointer;border-left:3px solid transparent}
+.sb-item:hover{background:var(--mint2)}
+.sb-item.active{background:var(--mint2);border-left-color:var(--leaf);font-weight:700}
+.sb-item .st{width:18px;height:18px;border-radius:50%;border:2px solid var(--line);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px;color:#fff}
+.sb-item.qz .st{border-radius:5px}
+.sb-item.done .st{background:var(--leaf);border-color:var(--leaf)}
+.sb-item.done .st::after{content:'✓'}
+.sb-lock{font-size:12px;color:var(--mut);padding:6px 10px}
+.sb-foot{margin-top:26px;padding-top:14px;border-top:1px solid var(--line)}
+.sb-foot button{background:none;border:0;color:var(--mut);font-size:12px;cursor:pointer;text-decoration:underline;font-family:inherit}
+main#main{flex:1;min-width:0;padding:28px 22px 90px}
+.page{max-width:840px;margin:0 auto;background:var(--card);border:1px solid var(--line);border-radius:var(--rad);box-shadow:var(--shadow);padding:34px 38px 30px;animation:fadeup .28s ease}
+@keyframes fadeup{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.crumbs{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--moss);margin-bottom:8px}
+h1.pagetitle{font-size:27px;line-height:1.25;letter-spacing:-.02em;margin-bottom:6px}
+.metas{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 20px}
+.chip{font-size:12px;font-weight:600;background:var(--mint2);color:var(--moss);padding:4px 11px;border-radius:99px;border:1px solid var(--mint)}
+.video-wrap{position:relative;width:100%;aspect-ratio:16/9;background:#0e1f18;border-radius:12px;overflow:hidden;margin:6px 0 24px}
+.video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vph{display:flex;align-items:center;justify-content:center;background:repeating-linear-gradient(45deg,#13291f,#13291f 14px,#16321f 14px,#16321f 28px)}
+.vph-inner{display:flex;align-items:center;gap:16px;color:#cfe7d6;text-align:left}
+.vph-icon{width:64px;height:64px;border-radius:50%;background:var(--leaf);display:flex;align-items:center;justify-content:center;color:#0e1f18;font-size:24px;box-shadow:0 0 0 8px rgba(82,183,136,.25)}
+.vph-inner span{display:block;font-size:13px;opacity:.85;max-width:380px}
+.lesson-body h3{font-size:19px;margin:26px 0 10px;letter-spacing:-.01em}
+.lesson-body h4{font-size:15.5px;margin:18px 0 8px}
+.lesson-body p{margin:0 0 14px}
+.lesson-body ul,.lesson-body ol{margin:0 0 16px;padding-left:24px}
+.lesson-body li{margin-bottom:7px}
+.lesson-body blockquote{border-left:4px solid var(--leaf);background:var(--mint2);padding:14px 18px;border-radius:0 10px 10px 0;margin:0 0 16px;font-weight:600;color:var(--pine)}
+.lesson-body table{width:100%;border-collapse:collapse;margin:6px 0 18px;font-size:14px}
+.lesson-body th{background:var(--pine);color:#fff;text-align:left;padding:9px 12px;font-size:13px}
+.lesson-body td{border:1px solid var(--line);padding:9px 12px;vertical-align:top}
+.lesson-body tr:nth-child(even) td{background:#FAFCFA}
+.lesson-body a{color:var(--moss);font-weight:600}
+.callout{background:var(--mint2);border:1px solid var(--mint);border-radius:12px;padding:14px 18px;margin:18px 0;font-size:15px}
+.callout.warn{background:var(--amberbg);border-color:#F2DCA0;color:#6b4a08}
+.pause{background:var(--amberbg);border:1px dashed #E8C877;border-radius:12px;padding:14px 18px;margin:20px 0;font-size:15px}
+.scen{background:#F7FAF7;border:1px solid var(--line);border-left:4px solid var(--moss);border-radius:10px;padding:12px 16px;margin:14px 0}
+.scen h4{margin:0 0 4px}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+.two-col>div{background:#F7FAF7;border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.arrows{display:grid;gap:12px;margin:16px 0}
+.arrow-box{border:1px solid var(--line);border-radius:12px;padding:14px 18px;background:#F7FAF7;display:flex;flex-wrap:wrap;align-items:baseline;gap:10px 16px}
+.arrow-box .fw{font-weight:800;color:var(--pine);font-size:16px}
+.arrow-box .dir{font-family:ui-monospace,Menlo,Consolas,monospace;font-weight:700;color:var(--moss);background:var(--mint2);padding:2px 10px;border-radius:8px;font-size:13.5px}
+.arrow-box .q{width:100%;font-size:14.5px;color:#33463b}
+.arrow-box.alt{background:#F2F7FF;border-color:#D8E4F5}
+.step-list{counter-reset:step;list-style:none;padding-left:0!important}
+.step-list li{counter-increment:step;position:relative;padding:10px 0 10px 52px;margin:0;border-bottom:1px dashed var(--line)}
+.step-list li::before{content:counter(step);position:absolute;left:0;top:10px;width:34px;height:34px;border-radius:10px;background:var(--pine);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:15px}
+.step-list strong.t{display:block;font-size:15.5px}
+.takeaway{margin-top:26px;background:var(--pine);color:#E7F5EC;border-radius:12px;padding:16px 20px;font-size:15px}
+.takeaway b{color:#fff}
+details.reveal{border:1px solid var(--line);border-radius:12px;margin:10px 0 18px;background:#FBFDFB;overflow:hidden}
+details.reveal summary{cursor:pointer;list-style:none;padding:12px 18px;font-weight:700;color:var(--moss);font-size:14.5px}
+details.reveal summary::-webkit-details-marker{display:none}
+details.reveal summary::before{content:'▸ ';color:var(--leaf)}
+details.reveal[open] summary::before{content:'▾ '}
+details.reveal .rv{padding:2px 18px 14px;font-size:14.5px}
+details.reveal .rv p{margin:0 0 10px}
+.tag{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.05em;padding:2px 8px;border-radius:6px;margin-right:6px}
+.tag.g{background:var(--mint);color:var(--pine)}
+.tag.i{background:#E3EDFB;color:#274b7a}
+.tag.b{background:#F1E8FA;color:#5b2d86}
+.btn{display:inline-flex;align-items:center;gap:8px;border-radius:10px;padding:11px 20px;font-weight:700;font-size:14.5px;cursor:pointer;border:1px solid transparent;font-family:inherit;transition:all .15s}
+.btn-primary{background:var(--moss);color:#fff}
+.btn-primary:hover{background:var(--pine)}
+.btn-ghost{background:#fff;border-color:var(--line);color:var(--ink)}
+.btn-ghost:hover{border-color:var(--moss);color:var(--moss)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.page-actions{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:28px;padding-top:20px;border-top:1px solid var(--line);flex-wrap:wrap}
+.qcard{border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:14px 0;transition:border-color .2s}
+.qcard.miss{border-color:var(--red);box-shadow:0 0 0 3px rgba(179,38,30,.08)}
+.qnum{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin-bottom:6px}
+.qtext{font-weight:600;margin-bottom:12px;font-size:15.5px}
+.opt{display:flex;gap:10px;align-items:flex-start;border:1.5px solid var(--line);border-radius:10px;padding:10px 14px;margin:8px 0;cursor:pointer;font-size:14.5px;transition:all .15s;background:#fff}
+.opt:hover{border-color:var(--leaf)}
+.opt input{margin-top:3px;accent-color:var(--moss)}
+.opt .letter{font-weight:800;color:var(--moss);min-width:16px}
+.opt.right{border-color:var(--leaf);background:var(--mint2)}
+.opt.wrong{border-color:var(--red);background:var(--redbg)}
+.match-row{display:flex;align-items:center;gap:12px;padding:8px 0;flex-wrap:wrap}
+.match-row label{flex:1;min-width:220px;font-size:14.5px}
+.match-row select{padding:8px 10px;border-radius:8px;border:1.5px solid var(--line);font-family:inherit;font-size:14px;background:#fff;min-width:160px}
+select.right{border-color:var(--leaf);background:var(--mint2)}
+select.wrong{border-color:var(--red);background:var(--redbg)}
+textarea.written{width:100%;min-height:110px;border:1.5px solid var(--line);border-radius:10px;padding:12px;font-family:inherit;font-size:14.5px;resize:vertical}
+textarea.written:focus{outline:none;border-color:var(--moss)}
+.model{background:var(--mint2);border:1px solid var(--mint);border-radius:10px;padding:12px 16px;margin:10px 0;font-size:14.5px}
+.selfbtns{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.selfbtns button{border:1.5px solid var(--line);background:#fff;border-radius:8px;padding:7px 13px;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer}
+.selfbtns button.sel{border-color:var(--moss);background:var(--mint2);color:var(--pine)}
+.qwhy{margin-top:10px;font-size:13.5px;background:#F5F8F5;border-radius:8px;padding:10px 14px;color:#3c4f44}
+.qwhy b{color:var(--pine)}
+#quizMsg{background:var(--redbg);color:var(--red);border-radius:10px;padding:10px 16px;font-size:14px;font-weight:600;margin:12px 0}
+.results{margin-top:18px;border-radius:12px;padding:18px 22px;text-align:center}
+.results.pass{background:var(--mint2);border:1px solid var(--mint)}
+.results.fail{background:var(--redbg);border:1px solid #F0C9C5}
+.scorebig{font-size:34px;font-weight:800;color:var(--pine)}
+.results.fail .scorebig{color:var(--red)}
+.results .rbtns{display:flex;gap:10px;justify-content:center;margin-top:14px;flex-wrap:wrap}
+.hero{background:linear-gradient(135deg,var(--pine),var(--moss));color:#fff;border-radius:var(--rad);padding:36px 36px 30px;margin-bottom:22px}
+.hero h1{font-size:30px;letter-spacing:-.02em;line-height:1.2}
+.hero p.sub{opacity:.92;margin:8px 0 18px;font-size:16px}
+.herobadges{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.hbadge{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);padding:5px 12px;border-radius:99px;font-size:12.5px;font-weight:600}
+.osec{margin:26px 0}
+.osec h2{font-size:20px;margin-bottom:12px;letter-spacing:-.01em}
+.ogrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ogrid .oc{display:flex;gap:10px;background:#F7FAF7;border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-size:14px}
+.ogrid .oc .n{color:var(--leaf);font-weight:800}
+.mod-list{border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.mod-row{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--line);font-size:14.5px;background:#fff}
+.mod-row:last-child{border-bottom:0}
+.mod-row .mn{font-weight:700;color:var(--pine);min-width:110px;font-size:13px}
+.mod-row .bar{flex:1;height:6px;background:var(--paper);border-radius:99px;overflow:hidden;min-width:60px}
+.mod-row .bar i{display:block;height:100%;background:var(--leaf)}
+.mod-row .cnt{font-size:12.5px;color:var(--mut);min-width:44px;text-align:right}
+.res-card{display:flex;gap:16px;align-items:flex-start;border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:14px 0;background:#FBFDFB}
+.res-ic{font-size:26px;background:var(--mint2);border-radius:12px;width:52px;height:52px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.res-card h4{margin:0 0 4px;font-size:16px}
+.res-card p{font-size:14px;color:var(--mut);margin:0 0 12px}
+.res-btns{display:flex;gap:10px;flex-wrap:wrap}
+.btn-sm{padding:8px 14px;font-size:13px;border-radius:8px}
+.chk-row{display:flex;gap:10px;align-items:center;padding:8px 0;font-size:14.5px}
+.chk-row .box{width:20px;height:20px;border-radius:6px;border:2px solid var(--line);display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;flex-shrink:0}
+.chk-row.ok .box{background:var(--leaf);border-color:var(--leaf)}
+.chk-row.ok .box::after{content:'✓'}
+.chk-row.bad .box{border-color:var(--red)}
+.cert-card{border:6px double var(--pine);border-radius:8px;padding:44px 36px;text-align:center;background:#FFFDF6;margin:18px 0}
+.cert-card .cbrand{font-weight:800;letter-spacing:.28em;font-size:13px;color:var(--moss);text-transform:uppercase}
+.cert-card h2{font-family:Georgia,'Times New Roman',serif;font-size:34px;margin:14px 0 6px;color:var(--pine)}
+.cert-card .cname{font-family:Georgia,serif;font-size:30px;font-weight:700;border-bottom:2px solid var(--pine);display:inline-block;padding:6px 34px;margin:16px 0 10px;min-width:280px}
+.cert-card .cline{font-size:13px;color:var(--mut)}
+.cert-card .cdate{margin-top:18px;font-size:13.5px}
+input.name-input{font-size:16px;padding:10px 14px;border:1.5px solid var(--line);border-radius:10px;font-family:inherit;min-width:260px}
+input.name-input:focus{outline:none;border-color:var(--moss)}
+#backdrop{display:none;position:fixed;inset:0;background:rgba(10,25,18,.45);z-index:60}
+@media print{
+  header,nav#sidebar,#backdrop,.no-print,.page-actions,.crumbs{display:none!important}
+  body{background:#fff}.page{border:0;box-shadow:none;max-width:100%;padding:0}.layout{display:block}
+  .cert-card{margin:0;border-color:#333}
+}
+@media(max-width:920px){
+  #menuBtn{display:block}
+  .brand .crs{display:none}
+  nav#sidebar{position:fixed;left:0;top:0;bottom:0;z-index:70;transform:translateX(-105%);transition:transform .25s ease;max-height:100vh;height:100vh}
+  nav#sidebar.open{transform:none}
+  #backdrop.show{display:block}
+  main#main{padding:18px 12px 70px}
+  .page{padding:24px 20px}
+  .two-col,.ogrid{grid-template-columns:1fr}
+  .hero{padding:26px 22px}
+  .hprog{min-width:110px}
+}
+
+/* ===== v3 additions ===== */
+.brand .logo{width:42px;height:42px;border-radius:50%;object-fit:cover;background:#0f1f36;box-shadow:0 0 0 2px rgba(255,255,255,.4);flex-shrink:0}
+#userChip{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600}
+#userChip .uname{max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#userChip button{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:8px;padding:5px 11px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit}
+#userChip button:hover{background:rgba(255,255,255,.28)}
+.unauth nav#sidebar,.unauth .hprog,.unauth #menuBtn,.unauth #userChip{display:none!important}
+.unauth header{justify-content:flex-start}
+.sb-user{font-size:12.5px;color:var(--mut);margin-bottom:8px;word-break:break-word}
+.sb-foot button{font-weight:700}
+.auth-wrap{display:flex;justify-content:center;padding:26px 0}
+.auth-card{width:100%;max-width:440px;background:var(--card);border:1px solid var(--line);border-radius:var(--rad);box-shadow:var(--shadow);padding:32px 34px;text-align:center}
+.auth-logo{width:96px;height:96px;border-radius:50%;box-shadow:0 6px 20px rgba(15,31,54,.3);margin-bottom:10px}
+.auth-card h1{font-size:23px;letter-spacing:-.02em;margin:4px 0 6px}
+.auth-card .mut{font-size:13.5px;color:var(--mut);margin-bottom:14px}
+.auth-tabs{display:flex;gap:6px;background:var(--paper);border-radius:10px;padding:4px;margin:14px 0 16px}
+.auth-tabs button{flex:1;border:0;background:none;padding:9px;border-radius:8px;font-family:inherit;font-weight:700;font-size:14px;color:var(--mut);cursor:pointer}
+.auth-tabs button.on{background:#fff;color:var(--pine);box-shadow:0 1px 4px rgba(20,40,30,.12)}
+.auth-card form{text-align:left}
+.auth-card label{display:block;font-size:12.5px;font-weight:700;color:var(--mut);margin:12px 0 5px}
+.auth-card input{width:100%;font-size:15px;padding:11px 13px;border:1.5px solid var(--line);border-radius:10px;font-family:inherit}
+.auth-card input:focus{outline:none;border-color:var(--moss)}
+.auth-card .btn{width:100%;justify-content:center;margin-top:18px}
+#authMsg{min-height:20px;margin-top:12px;font-size:13.5px;font-weight:600;color:var(--red)}
+#authMsg.ok{color:var(--moss)}
+.auth-links{margin-top:10px;font-size:13px;text-align:center}
+.auth-links a{color:var(--moss);font-weight:700;cursor:pointer}
+.demo-note{background:var(--amberbg);border:1px solid #F2DCA0;color:#6b4a08;border-radius:10px;padding:10px 12px;font-size:12.5px;margin:0 0 12px;text-align:left}
+#toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,20px);background:var(--pine);color:#fff;padding:11px 20px;border-radius:99px;font-weight:700;font-size:14px;box-shadow:0 8px 24px rgba(0,0,0,.25);opacity:0;pointer-events:none;transition:all .3s;z-index:200}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+.trackhint{background:var(--amberbg);border:1px solid #F2DCA0;color:#6b4a08;border-radius:10px;padding:9px 14px;font-size:13.5px;margin:0 0 16px;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center}
+.trackhint.ok{background:var(--mint2);border-color:var(--mint);color:var(--pine);font-weight:600}
+.trackhint .th{font-weight:600}
+.trackhint .th.y{color:var(--moss)}
+.video-note{background:var(--amberbg);border:1px solid #F2DCA0;color:#6b4a08;border-radius:10px;padding:10px 14px;font-size:13.5px;margin:-12px 0 18px}
+.ansbar{position:sticky;top:61px;z-index:20;background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px 14px;margin:12px 0;display:flex;align-items:center;gap:12px;font-size:13.5px;font-weight:700;color:var(--pine);box-shadow:0 2px 8px rgba(20,40,30,.06)}
+.ansbar .bar{flex:1;height:6px;background:var(--paper);border-radius:99px;overflow:hidden}
+.ansbar .bar i{display:block;height:100%;width:0;background:var(--leaf);transition:width .2s}
+.modbreak{display:grid;grid-template-columns:1fr 1fr;gap:6px 18px;text-align:left;font-size:13.5px;margin:14px auto 0;max-width:460px}
+.modbreak div{display:flex;justify-content:space-between;gap:10px;border-bottom:1px dashed var(--line);padding:3px 0}
+.lockbox{background:var(--amberbg);border:1px solid #F2DCA0;border-radius:12px;padding:16px 20px;margin:14px 0;color:#6b4a08}
+.lockbox h3{margin:0 0 6px;font-size:17px}
+
+/* ----- certificate ----- */
+.cert-card{position:relative;overflow:hidden;border:6px double var(--pine);border-radius:8px;padding:38px 40px 30px;text-align:center;background:#FFFEF9;margin:18px 0;min-height:540px;display:flex;align-items:center;justify-content:center}
+.cert-card::before{content:'';position:absolute;inset:10px;border:1.5px solid #B8D8C4;border-radius:4px;pointer-events:none}
+.cert-wm{position:absolute;left:50%;top:50%;width:62%;max-width:430px;transform:translate(-50%,-50%);opacity:.075;pointer-events:none;user-select:none}
+.cert-inner{position:relative;z-index:2;width:100%}
+.cert-logo{width:92px;height:92px;border-radius:50%;box-shadow:0 4px 14px rgba(15,31,54,.3)}
+.cert-card .cbrand{font-weight:800;letter-spacing:.3em;font-size:14px;color:var(--pine);text-transform:uppercase;margin-top:8px}
+.cert-card .ctag{font-size:11px;letter-spacing:.28em;color:var(--moss);text-transform:uppercase;margin-top:2px}
+.cert-card h2{font-family:Georgia,'Times New Roman',serif;font-size:35px;margin:16px 0 6px;color:var(--pine)}
+.cert-card .cname{font-family:Georgia,serif;font-size:32px;font-weight:700;border-bottom:2px solid var(--pine);display:inline-block;padding:6px 34px;margin:14px 0 10px;min-width:300px;max-width:100%;word-break:break-word}
+.cert-card .cline{font-size:13.5px;color:var(--mut);margin:4px 0}
+.cert-card .ctitle{font-weight:800;font-size:21px;color:var(--pine);margin:8px 0 4px}
+.cert-card .cmeta{display:flex;justify-content:center;gap:48px;margin-top:22px;font-size:12px;color:var(--mut);flex-wrap:wrap}
+.cert-card .cmeta b{display:block;font-size:14px;color:var(--ink);margin-top:2px}
+.cert-stamp{position:absolute;z-index:3;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-24deg);font-size:88px;font-weight:900;letter-spacing:.12em;color:rgba(179,38,30,.16);border:8px solid rgba(179,38,30,.16);padding:0 30px;border-radius:14px;pointer-events:none}
+.cert-card.sample .cname{color:#8a978f}
+.cert-card,.cert-card *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+@page{size:A4 landscape;margin:10mm}
+@media print{
+  .cert-card{min-height:175mm;margin:0;border-color:#1B4332}
+  .cert-wm{opacity:.09}
+  #toast{display:none!important}
+}
+@media(max-width:920px){
+  #userChip .uname{display:none}
+  .cert-card{padding:30px 18px 24px;min-height:0}
+  .cert-card h2{font-size:26px}
+  .cert-card .cname{font-size:24px;padding:6px 14px;min-width:0}
+  .cert-stamp{font-size:52px}
+  .modbreak{grid-template-columns:1fr}
+}
+
+#userChip[hidden]{display:none!important}
+
+/* link back to the main GreenMetrics website */
+.sitelink{color:#fff;text-decoration:none;font-size:12.5px;font-weight:700;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.12);border-radius:8px;padding:5px 11px;white-space:nowrap}
+.sitelink:hover{background:rgba(255,255,255,.26)}
+@media(max-width:700px){.sitelink .sl-text{display:none}.sitelink{padding:5px 9px}}
+</style>
+</head>
+<body>
+
+<header>
+  <button id="menuBtn" aria-label="Menu">☰</button>
+  <div class="brand">
+    <img class="logo" id="hdrLogo" alt="GreenMetrics">
+    <div><b>GreenMetrics</b><span class="crs">Understanding GRI &amp; IFRS S1/S2</span></div>
+  </div>
+  <a class="sitelink" href="../index.html" aria-label="Back to the GreenMetrics website" title="Back to the GreenMetrics website"><span aria-hidden="true">&larr;</span><span class="sl-text"> GreenMetrics site</span></a>
+  <div class="hprog"><div class="hbar"><div id="hbarFill"></div></div><span id="hpct">0%</span></div>
+  <div id="userChip" hidden></div>
+</header>
+
+<div class="layout">
+  <div id="backdrop"></div>
+  <nav id="sidebar"></nav>
+  <main id="main"></main>
+</div>
+
+<script>
+/* ============================================================================
+   ☁️  CLOUD LOGIN SETUP (Firebase) — paste your project's config here
+   ----------------------------------------------------------------------------
+   1. Go to https://console.firebase.google.com → Add project (free plan is fine).
+   2. Project settings (gear icon) → "Your apps" → add a Web app (</>) →
+      copy the firebaseConfig values into the block below.
+   3. Build → Authentication → Get started → Sign-in method → turn ON "Email/Password".
+   4. Build → Firestore Database → Create database (production mode), then open the
+      "Rules" tab and paste the rules shown at the bottom of this comment.
+   5. Authentication → Settings → Authorized domains → add the address where you
+      host this course (for example  yourname.github.io ).
+
+   Until apiKey and projectId are filled in, the course runs in DEMO MODE:
+   accounts and progress are saved in the visitor's own browser only.
+
+   Firestore rules to paste:
+     rules_version = '2';
+     service cloud.firestore {
+       match /databases/{database}/documents {
+         match /users/{userId} {
+           allow read, write: if request.auth != null && request.auth.uid == userId;
+         }
+       }
+     }
+   ============================================================================ */
+const FIREBASE_CONFIG = {
+  apiKey: "AIzaSyD7cl6XqxbpvEqTRbffcZ8zx1Mnmr5O2BI",
+  authDomain: "greenmetrics-course.firebaseapp.com",
+  projectId: "greenmetrics-course",
+  storageBucket: "greenmetrics-course.firebasestorage.app",
+  messagingSenderId: "479537644977",
+  appId: "1:479537644977:web:97bb05bdb767273ed3a990"
+};
+
+/* ============================================================================
+   🎬🎬🎬  HOW TO ADD YOUR VIDEOS — READ THIS FIRST  🎬🎬🎬
+
+   Each key below is a lesson id (matches the lesson's id in COURSE, further
+   down). Only lessons with a key in this object show a video slot at all —
+   the two bonus written-only lessons (Welcome, Final Assignment) never show
+   a video area, so they're not listed here.
+
+   1. Upload your lesson video to YouTube (unlisted is fine).
+   2. Copy the video ID or the whole link. ALL of these work:
+        dQw4w9WgXcQ
+        https://youtu.be/dQw4w9WgXcQ
+        https://www.youtube.com/watch?v=dQw4w9WgXcQ
+   3. Paste it between the empty quotes "" next to the lesson below.
+   4. Save this file, refresh / re-upload. Done — the video appears in the lesson.
+
+   While a slot is empty, students see a tidy "Video coming soon" placeholder,
+   and the full written lesson is still readable below it.
+   ============================================================================ */
+
+const VIDEOS = {
+  "1.1": "cpP-AxrhGnA",  // Video 1  — The Difference Between GRI and IFRS S1/S2
+  "1.2": "",             // Video 2  — What a Sustainability Report Is Actually For
+  "2.1": "",             // Video 3  — Materiality: The Word That Confuses Everyone
+  "2.2": "",             // Video 4  — Two Lenses on One Company
+  "3.1": "",             // Video 5  — What GRI Actually Is, in Plain Terms
+  "3.2": "",             // Video 6  — How a Company Actually Builds a GRI Report
+  "4.1": "",             // Video 7  — What IFRS S1 Actually Is, in Plain Terms
+  "5.1": "",             // Video 8  — IFRS S2 Is IFRS S1's Climate Chapter
+  "5.2": "",             // Video 9  — The Four Questions Every Disclosure Answers
+  "6.1": ""              // Video 10 — One Company, Both Frameworks — A Worked Example
+};
+
+/* ============================================================================
+   COURSE CONTENT — edit text here if you want to change lessons or quizzes.
+   Quiz question types: "mcq" (auto-graded), "match" (dropdowns, auto-graded),
+   "written" (student self-checks against your model answer).
+
+   Lessons 0.1 (Welcome) and 7.1 (Final Assignment) are bonus written-only
+   lessons with no matching video in your YouTube series.
+   ============================================================================ */
+
+const COURSE = {
+  title: "Understanding GRI & IFRS S1/S2",
+  subtitle: "A practical beginner's guide to sustainability reporting frameworks — built from the GreenMetrics YouTube series",
+  modules: [
+
+  /* ---------------- MODULE 0 — bonus, no video ---------------- */
+  { id:0, name:"Module 0 — Introduction", items:[
+    { type:"lesson", id:"0.1", title:"Welcome to the Course", minutes:4,
+      takeaway:"GRI looks at the company's impact on the world. IFRS S1/S2 looks at the world's impact on the company. Everything else in this course is detail.",
+      html:`
+<p>Welcome! This course is built around a ten-part video series that walks through sustainability reporting from first principles. Each lesson pairs one video with a full written version of the same material and a downloadable resource you can reuse in your own work. Every module ends with a short multiple-choice assignment, and the course closes with a 40-question Final Assessment.</p>
+<p>Here's the problem this course solves. You've probably heard the words <em>GRI, IFRS S1, IFRS S2, materiality, sustainability disclosures</em> — and everyone uses them as if they're interchangeable. They're not. And the confusion isn't your fault: the frameworks genuinely answer different questions, and almost nobody explains that clearly.</p>
+<h3>By the end of this course, you'll be able to:</h3>
+<ol>
+<li>Explain what sustainability reporting is — and why companies do it</li>
+<li>Explain the basic purpose of GRI</li>
+<li>Explain the basic purpose of IFRS S1 and IFRS S2</li>
+<li>Explain the difference between impact materiality and financial materiality</li>
+<li>Describe how a GRI report is structured and built</li>
+<li>Describe the disclosure structure of IFRS S1/S2</li>
+<li>Apply both frameworks to a real business case</li>
+</ol>
+<div class="callout"><strong>What you should already know:</strong> nothing. If you understand what a company is — factories, employees, customers, suppliers — you're ready.</div>
+<div class="callout warn"><strong>What you won't learn (on purpose):</strong> Scope 1/2/3 calculations, climate scenario analysis, ESRS/CSRD, assurance, or paragraph-by-paragraph standards coverage. That's deliberate — trying to learn everything at once is how people get overwhelmed and quit. Those are future courses. This one gives you the foundation the advanced stuff sits on.</div>
+<h3>How to use this course</h3>
+<ul>
+<li>Watch the video for each lesson — or read the full written notes below it. Both cover the same ground.</li>
+<li>Download the resource attached to each lesson. You'll use several of them again in the final assignment.</li>
+<li>Your progress is tracked automatically: a lesson counts as complete once you have watched its video to the end and read to the bottom of the page. There is nothing to click.</li>
+<li>Take each module assignment. You can retake any assignment, any time — your best score is saved.</li>
+<li>Pass the Final Assessment with at least 70% to unlock your certificate.</li>
+</ul>
+<p>One promise before we start. If you remember only one sentence from this entire course, make it this one:</p>
+<blockquote>GRI looks at the company's impact on the world. IFRS S1/S2 looks at the world's impact on the company.</blockquote>
+<p>Everything else is detail. Let's begin.</p>`}
+  ]},
+
+  /* ---------------- MODULE 1 — Foundations (Videos 1–2) ---------------- */
+  { id:1, name:"Module 1 — Foundations", items:[
+    { type:"lesson", id:"1.1", title:"The Difference Between GRI and IFRS S1/S2", minutes:8,
+      takeaway:"GRI looks at the company's impact on the world. IFRS S1/S2 looks at how the world's sustainability and climate issues can affect the company. They're not competing frameworks — they're different questions, and they're often used together.",
+      html:`
+<p>If you're new to ESG reporting, there is one question you will run into almost immediately: should a company report using GRI, or using IFRS S1 and IFRS S2? That question is where a lot of confusion starts, because GRI and IFRS S1/S2 are not two competing versions of the same reporting framework. They are designed to answer different questions. Once that distinction is clear, sustainability reporting becomes considerably easier to follow — and that distinction is what this lesson is about.</p>
+<h3>The same event, asked about twice</h3>
+<div class="scen"><h4>🏭 A factory discharges polluted wastewater into a nearby river.</h4></div>
+<p>Start with GRI. GRI is interested in the company's impact on the world around it, so the questions it asks are: how much pollution entered the river? Was the ecosystem damaged? Were fish or other species affected? Did nearby communities lose access to clean water? What is the company doing to prevent or reduce the impact? The important point is that this impact matters under GRI even if it never shows up as a financial loss for the company.</p>
+<p>Now look at the identical event through IFRS S1. The question changes entirely. Instead of asking what impact the company had on the river, IFRS S1 asks whether this sustainability-related issue could reasonably affect the company's prospects. Could the pollution result in regulatory penalties, lawsuits, higher compliance costs, lost customers, reputational damage, difficulty obtaining financing, or reduced future cash flows? The focus has shifted to information that could reasonably be expected to affect an investor's decisions about the company. Same event — a genuinely different question.</p>
+<h3>Where IFRS S2 fits in</h3>
+<p>IFRS S1 is the broader standard: it deals with sustainability-related risks and opportunities of every kind that could affect a company's prospects. IFRS S2 sits inside that broader standard and focuses specifically on climate. If climate change could affect a company's cash flows, its access to finance, or its cost of capital, IFRS S2 is what helps the company report that to investors. Think of IFRS S2 as the climate-specific chapter within the wider IFRS Sustainability framework — a distinction we'll come back to properly in Module 5.</p>
+<h3>Before choosing a reporting approach, ask four questions</h3>
+<p>So when you're looking at a company's sustainability reporting, resist the urge to ask "GRI or IFRS?" as the first question. Ask these instead: who is the report primarily designed to inform? Are we measuring the company's impacts, or sustainability-related risks and opportunities to the company? What does materiality mean under the framework being used? And does the company need information for broad impact reporting, investor-focused reporting, or potentially both?</p>
+<p>That last question matters more than it looks. Using GRI and using IFRS S1/S2 are not mutually exclusive. A company may have good reasons to report its impacts on the world while also providing investor-focused sustainability disclosures. The frameworks are frequently complementary rather than alternatives.</p>
+<div class="callout">💡 <strong>The one-sentence rule:</strong> GRI looks primarily at the company's impacts on the economy, environment and people. IFRS S1 and S2 look at sustainability- and climate-related risks and opportunities that could affect the company's prospects. Or even shorter — GRI: what impact are we having on the world? IFRS S1/S2: how can sustainability and climate affect the company?</div>
+<p>That distinction is the foundation for everything else in this course. Next, we step back even further and ask a more basic question: what is a sustainability report actually for?</p>`},
+    { type:"lesson", id:"1.2", title:"What a Sustainability Report Is Actually For", minutes:9,
+      takeaway:"A sustainability report isn't a collection of ESG numbers — it's a structured explanation of what's happening, why it matters, what the company is doing, and what it could mean for the future. The framework just supplies the rules for answering those questions.",
+      html:`
+<p>Before comparing GRI, IFRS S1 or IFRS S2 any further, it's worth stepping back and asking a more basic question: what is a sustainability report actually trying to do? The answer is simpler than the terminology suggests. A sustainability report is a structured way of telling the story of what is happening around a company, what matters, what the company is doing about it, and what that could mean going forward.</p>
+<h3>Companies already generate this information</h3>
+<p>Take an ordinary manufacturing company. It has employees. It uses electricity and fuel. It consumes water. It generates waste. It buys materials from suppliers, transports products, and sells to customers. In the course of all of that, it can also create — or face — a wide range of other issues: workers getting injured, suppliers with poor labour practices, pollution of a nearby water source, extreme heat making production harder, new regulations that could raise costs, or customers demanding more sustainable products.</p>
+<p>All of this information already exists simply because the company operates. The problem is that it's usually scattered — HR holds some of it, operations holds some, procurement holds some, finance holds some, and the sustainability team holds the rest. A sustainability report brings the relevant pieces together into one coherent account.</p>
+<h3>Turning a number into a story</h3>
+<p>Suppose the company uses a large amount of water. A sustainability report doesn't just need to say "we used 500,000 cubic metres of water" — that's just a number, and a number without context tells the reader very little. Instead, four questions turn it into something useful:</p>
+<ol>
+<li><strong>What's happening?</strong> How much water is being used, where, and is consumption rising or falling?</li>
+<li><strong>What effect is it having?</strong> Is the company operating in a water-stressed area? Could its use affect local communities or ecosystems?</li>
+<li><strong>What is the company doing about it?</strong> Is it recycling water, changing its process, or setting reduction targets?</li>
+<li><strong>What could this mean for the future?</strong> Could scarcity disrupt production? Could regulation raise costs? Could stakeholders become concerned?</li>
+</ol>
+<p>Answered together, these four questions turn a random figure into a picture of the company's actual sustainability-related situation.</p>
+<h3>Where the frameworks come in</h3>
+<p>A company facing all of these issues can't report everything, so a framework gives it a structured way to decide what to identify, what's important enough to report, what to disclose, and how to present it. This is exactly where GRI, IFRS S1 and IFRS S2 begin to diverge — they don't look at the company in the same way. They have different purposes, different audiences, and different approaches to deciding what's material. But underneath the technical language, every framework is still describing the same real-world company.</p>
+<div class="callout">🧭 <strong>Before reporting anything, ask:</strong> what's happening? Who or what is affected? What is the company doing about it? Could this create meaningful consequences later? And then a fifth question that matters more than it sounds: who needs this information, and why? That last one is the question that separates GRI from IFRS S1/S2 — the same issue can matter for entirely different reasons depending on who's asking.</div>
+<p>So don't think of a sustainability report as a pile of ESG numbers. Think of it as a structured explanation — what's happening, why it matters, what's being done, and what could happen next — with the reporting framework supplying the rules for which questions matter and how to answer them. With that foundation in place, we can tackle the word sitting underneath almost everything in this field: materiality.</p>`}
+  ]},
+
+  /* ---------------- MODULE 2 — Materiality (Videos 3–4) ---------------- */
+  { id:2, name:"Module 2 — Materiality", items:[
+    { type:"lesson", id:"2.1", title:"Materiality — The Word That Confuses Everyone", minutes:9,
+      takeaway:"GRI's materiality test asks how significant the company's impact is on people, environment or economy. IFRS S1's materiality test asks whether an issue could reasonably affect the company's own financial prospects. Same word, two different questions.",
+      html:`
+<p>If there's one word that trips up more people in ESG than any other, it's materiality. It sounds the same everywhere it's used, but GRI and IFRS attach genuinely different meanings to it — and mixing them up is one of the most common mistakes people make when they're new to this field.</p>
+<h3>GRI: materiality as impact</h3>
+<p>Under GRI, materiality is about impact. The question is: how significant is the company's effect on people, the environment, or the economy? Picture a factory with two thousand workers that discovers some of its suppliers are paying employees below the legally required wage. That issue might have no meaningful effect on the company's financial performance today — investors might never notice. But it's a serious impact on real people, and under GRI, that alone can be enough to make it material.</p>
+<h3>IFRS S1: materiality as financial relevance</h3>
+<p>Under IFRS S1, materiality means something different. The question becomes: could this reasonably affect the decisions of investors, lenders, or creditors? In plain terms — could it eventually touch the company's cash flow, its access to financing, or its cost of capital? If the answer is no, the issue may still matter to the world, but it won't clear the bar for IFRS S1.</p>
+<div class="callout">⚖️ Neither test is wrong — they're answering different questions. Impact materiality serves the Company → World direction; financial materiality serves the World → Company direction. We'll build that mental picture properly in the next lesson.</div>
+<h3>A worked example: water in a water-stressed region</h3>
+<div class="scen"><h4>💧 A factory uses a large amount of water every day, in a region where the local community already struggles with water scarcity.</h4></div>
+<p>Run the GRI test first: is that water use damaging the environment or hurting the people nearby? If it is, it's very likely material under GRI. Now run the IFRS S1 test: could water scarcity disrupt production or raise costs for the company? If the company has cheap, secure water access and faces no regulatory pressure, the answer might be no — even though the real-world environmental impact is very real. Same facts, examined through two different tests, with two different outcomes.</p>
+<div class="callout">💡 That's not a flaw in the system — it's the entire reason both lenses exist. An issue can be significant to the world and financially irrelevant to the company at the same time, and a good ESG professional needs to be comfortable holding both conclusions about the same fact pattern.</div>
+<p>Once this clicks, a lot of what follows in sustainability reporting gets easier to read: who a report is written for, how each framework structures its disclosures, and why the same topic can appear so differently depending on which standard you're looking at. Next, we'll turn this into a simple picture you can carry with you every time you're deciding what's material.</p>`},
+    { type:"lesson", id:"2.2", title:"Two Lenses on One Company", minutes:8,
+      takeaway:"Every issue gets looked at through two independent lenses — GRI asks what impact the company has on the world, IFRS S1/S2 asks what effect the world's sustainability issues could have on the company. They sometimes agree, and sometimes don't — both outcomes are normal.",
+      html:`
+<p>By now the pattern from the last lesson should feel familiar, so let's turn it into a picture you can hold in your head permanently.</p>
+<p>Imagine standing in front of a company and being handed two different lenses to look through. The first lens is GRI. Looking through it, you ask what significant impact this company has on the people around it, on the environment, on the local economy, and on human rights. Whatever comes into sharp focus becomes a GRI material topic.</p>
+<p>The second lens is IFRS S1 and S2. Looking through it, you ask something different: what sustainability-related risks or opportunities could affect this company's cash flows, its access to finance, its cost of capital, or its business strategy? Whatever comes into focus through this lens becomes material under the ISSB standards.</p>
+<h3>The two lenses don't always show the same picture</h3>
+<p>Sometimes an issue is sharp through both lenses at once — climate change is the classic example, and we'll come back to exactly why in Module 5. Sometimes an issue is obvious through one lens and nearly invisible through the other, the way water scarcity worked in the previous lesson: clearly material to GRI, and only conditionally material to IFRS S1 depending on how exposed the company actually is.</p>
+<div class="two-col">
+<div><h4>GRI lens</h4><p>What significant impact does this company have on people, the environment, the economy and human rights?</p></div>
+<div><h4>IFRS S1/S2 lens</h4><p>What sustainability-related risks or opportunities could affect this company's cash flows, financing, cost of capital or strategy?</p></div>
+</div>
+<p>Once you start thinking of materiality as two separate lenses rather than one blurry idea, the rest of ESG reporting becomes much easier to follow — including the practice exercises in your downloadable worksheet for this lesson, where you'll run both lenses against a set of real scenarios yourself. Next, we open up GRI itself and look at how it's actually structured.</p>`}
+  ]},
+
+  /* ---------------- MODULE 3 — Understanding GRI (Videos 5–6) ---------------- */
+  { id:3, name:"Module 3 — Understanding GRI", items:[
+    { type:"lesson", id:"3.1", title:"What GRI Actually Is, in Plain Terms", minutes:10,
+      takeaway:"GRI is built from three stacked layers: Universal Standards apply to everyone, Sector Standards narrow by industry, and Topic Standards cover the specific issues that turn out to be material for a given company.",
+      html:`
+<p>GRI stands for the Global Reporting Initiative, and although its standards can look intimidating at first glance, they're organized in a way that's more logical than it appears. There are three layers, stacked on top of each other.</p>
+<h3>The three layers</h3>
+<ul>
+<li><strong>Layer 1 — Universal Standards.</strong> These apply to every company, regardless of industry. They cover the foundational rules of reporting, general disclosures about the organization, and how material topics are determined. This is the base layer that every company builds on.</li>
+<li><strong>Layer 2 — Sector Standards.</strong> Written for specific industries — oil and gas, agriculture, textiles, mining — because a mining company and a software company generate very different kinds of impact and shouldn't be assessed against the same starting assumptions.</li>
+<li><strong>Layer 3 — Topic Standards.</strong> Individual subjects: energy, emissions, water and effluents, biodiversity, occupational health and safety, human rights, anti-corruption. A company only reports against the topic standards that turned out to be material for it — not all of them.</li>
+</ul>
+<h3>Made concrete: a textile manufacturer</h3>
+<ul>
+<li><strong>Universal</strong> → the general reporting foundation: who the company is, how it determines materiality.</li>
+<li><strong>Sector</strong> → textile and apparel sector considerations: the topics likely to matter for this industry.</li>
+<li><strong>Topic</strong> → the specific material topics that emerge, such as Energy, Water and Effluents, Occupational Health and Safety, Emissions, and Human Rights in the supply chain.</li>
+</ul>
+<p>GRI describes these three layers as an interconnected system rather than three separate rulebooks, and that's the right way to think about them. Start broad with the Universal Standards. Narrow by industry with the Sector Standards. Get specific with the Topic Standards that are actually material to the business.</p>
+<div class="callout">👥 Because GRI is impact-focused, its reports serve a broad audience — communities, employees, NGOs, governments, customers, and investors. That's worth holding onto, because it contrasts sharply with who IFRS S1 is written for, which we'll get to in Module 4.</div>
+<p>Understanding what GRI is in theory is one thing. Next, we'll walk through exactly how a company actually goes from "we need to report" to a finished report, step by step.</p>`},
+    { type:"lesson", id:"3.2", title:"How a Company Actually Builds a GRI Report", minutes:12,
+      takeaway:"A GRI report is built through seven steps: understand the organization, map the value chain, identify impacts, filter by severity and likelihood, convert survivors into formal topics, gather the data, and report policies and performance — not just numbers.",
+      html:`
+<p>Understanding GRI in theory is one thing. Watching how a company actually gets from "we need to report" to a finished report is another — and it happens in a logical, repeatable sequence of seven steps. This is one of the more practically useful lessons in the course, so it's worth returning to.</p>
+<ol class="step-list">
+<li><strong class="t">Understand the organization.</strong> Products, factories, employees, suppliers, customers, energy and water use, waste, emissions, and community relationships. You cannot decide what's material until you actually understand the business.</li>
+<li><strong class="t">Look beyond the factory walls.</strong> Impacts don't stop at the company's own operations — they run through the full value chain, from raw-material suppliers to the end of the product's life. A garment brand's biggest human-rights impacts might sit in cotton farms it doesn't even own.</li>
+<li><strong class="t">Identify impacts across that chain.</strong> Environmental impacts like emissions, water and waste; social impacts like health and safety, wages and human rights; economic impacts like employment and local taxes. Cast a wide net — a company might identify thirty, forty, even fifty potential impacts at this stage.</li>
+<li><strong class="t">Narrow the list down.</strong> Not all fifty matter equally. GRI asks you to judge each impact by its severity — scale (how bad?), scope (how widespread?), and irremediability (how hard to fix?) — plus the likelihood of it occurring. This filtering step is the analytical heart of a GRI report.</li>
+<li><strong class="t">Turn what survives into formal topics.</strong> "Employees getting injured" becomes Occupational Health and Safety. "Excessive water use" becomes Water and Effluents. This gives you your list of material topics.</li>
+<li><strong class="t">Match each topic to its GRI Topic Standard and gather the data.</strong> Each material topic has a standard with specific disclosures and metrics attached — this becomes the data-collection effort, with an owner for each figure.</li>
+<li><strong class="t">Go beyond the number.</strong> This step is easy to skip, and skipping it is the mark of a weak report. For each material topic, GRI wants the company's policies, its commitments, the actions it's taking, and its actual performance against targets — not just a figure.</li>
+</ol>
+<div class="callout">🧭 Notice what this process actually is: the Company → World arrow, operationalized. Understand the company, look outward at its impacts, judge their significance, and report on what matters. In the next module, we switch arrows entirely.</div>`}
+  ]},
+
+  /* ---------------- MODULE 4 — Understanding IFRS S1 (Video 7) ---------------- */
+  { id:4, name:"Module 4 — Understanding IFRS S1", items:[
+    { type:"lesson", id:"4.1", title:"What IFRS S1 Actually Is, in Plain Terms", minutes:9,
+      takeaway:"IFRS S1 is the general, umbrella sustainability standard, written for investors, lenders and creditors. Its one consistent test: could this issue reasonably affect the company's own prospects?",
+      html:`
+<p>Time to switch lenses — the arrow reverses, from Company → World to World → Company. IFRS S1's full name is <em>General Requirements for Disclosure of Sustainability-related Financial Information</em>, and that clunky title is actually a fairly accurate description: it's the general, umbrella standard within the ISSB framework.</p>
+<h3>What it covers</h3>
+<p>Sustainability-related risks and opportunities broadly — not just climate. Water availability. Human capital and labour issues. Supply-chain risk. Technology shifts. Reputational exposure. Regulatory change. If it's a sustainability issue that could plausibly touch the business, it can fall under IFRS S1.</p>
+<h3>Who it's written for</h3>
+<p>This is the sharpest contrast with GRI: investors, lenders, and other creditors. Not communities, not employees, not the general public. GRI's audience is broad; IFRS S1's audience is capital markets, and that single fact shapes everything about how the standard is designed.</p>
+<h3>The one consistent test</h3>
+<p>Underneath all of that variety, there's one test running through the entire standard: could this issue reasonably be expected to affect the company's prospects? If a sustainability issue can plausibly move the needle on cash flows, financing, or future performance, it falls within scope. If it can't, it generally doesn't.</p>
+<div class="two-col">
+<div><h4>GRI asks about impact</h4><p>What effect does the company have on the world?</p></div>
+<div><h4>IFRS S1 asks about financial relevance</h4><p>How could the world's sustainability issues affect the company?</p></div>
+</div>
+<div class="callout">📅 <strong>Practical note:</strong> IFRS S1 became effective for annual reporting periods beginning on or after 1 January 2024, with early application allowed as long as IFRS S2 is applied alongside it. That condition is a natural bridge into what IFRS S2 covers, which is exactly where we're headed next.</div>`}
+  ]},
+
+  /* ---------------- MODULE 5 — Understanding IFRS S2 (Videos 8–9) ---------------- */
+  { id:5, name:"Module 5 — Understanding IFRS S2", items:[
+    { type:"lesson", id:"5.1", title:"IFRS S2 Is IFRS S1's Climate Chapter", minutes:9,
+      takeaway:"IFRS S2 is IFRS S1's climate-specific chapter, applied alongside it. Climate risk splits into physical risk (the climate itself) and transition risk (the shift away from carbon).",
+      html:`
+<p>If IFRS S1 is the broad umbrella, IFRS S2 is much narrower — and, honestly, easier to remember. IFRS S1 covers sustainability-related risks and opportunities of every kind. IFRS S2 covers exactly one of them: climate. The two are meant to be applied together — S1 sets the general structure, and S2 fills in the climate-specific detail within it.</p>
+<h3>Two families of climate risk</h3>
+<div class="two-col">
+<div><h4>🌀 Physical risk</h4><p>The direct, physical effects of climate change: flooding, extreme heat, drought, storms, rising sea levels. The risks of a changing physical world.</p></div>
+<div><h4>⚙️ Transition risk</h4><p>Risk from the shift toward a lower-carbon economy: carbon pricing, tightening regulation, changing customer preferences, and new technology making older assets less competitive. The risks of the transition itself.</p></div>
+</div>
+<p>A company reporting under IFRS S2 is expected to think through both categories and explain how each could plausibly affect its business going forward — and "plausibly" is doing real work in that sentence. It isn't enough to note that a risk exists; the standard wants a company to trace the mechanism by which that risk could show up in its financial results.</p>
+<div class="callout">🌱 Notice the symmetry with GRI one more time: under GRI, a company's emissions are an impact on the world. Under IFRS S2, those same emissions are a source of financial risk. Same molecule of CO2, two completely different questions being asked about it.</div>
+<p>In the next lesson, we'll look at the four questions that sit underneath every single IFRS S1 and S2 disclosure, no matter which specific issue is being discussed — including climate.</p>`},
+    { type:"lesson", id:"5.2", title:"The Four Questions Every IFRS S1/S2 Disclosure Answers", minutes:11,
+      takeaway:"Every IFRS S1/S2 disclosure answers the same four questions — Governance, Strategy, Risk Management, and Metrics & Targets — no matter which sustainability issue is being discussed.",
+      html:`
+<p>One of the more genuinely useful things about IFRS S1 and S2 is that, underneath all the detail, every single disclosure is built around the same four questions. Learn these four and you can pick up almost any ISSB-aligned report and immediately know what you're looking at.</p>
+<ol class="step-list">
+<li><strong class="t">Governance — who's responsible?</strong> Who actually oversees this sustainability-related risk or opportunity? Usually this means naming the board committee that watches it, plus the management roles handling it day to day. The underlying question: is anyone actually accountable, or is this a PDF nobody owns?</li>
+<li><strong class="t">Strategy — how does it affect the business?</strong> How does this issue affect the business model and strategy? A textile manufacturer facing water scarcity, for instance, might invest in water-efficient machinery or switch suppliers — that chain of reasoning, issue leading to business consequence leading to strategic response, is exactly what belongs in this section.</li>
+<li><strong class="t">Risk management — how is it identified and handled?</strong> How does the company identify, assess, and respond? Usually described as a process: identify, assess by likelihood and impact, respond, and monitor. And critically: is this process integrated with the company's overall enterprise risk management, or bolted on separately?</li>
+<li><strong class="t">Metrics and targets — how is it measured?</strong> This is where the numbers live — tonnes of CO2e, energy consumption, water usage, employee turnover, progress against stated targets. This is often where GRI-style data reappears, but framed inside a financial story rather than an impact story.</li>
+</ol>
+<div class="callout">🧠 <strong>Memory device:</strong> G → S → R → M — Governance, Strategy, Risk Management, Metrics &amp; Targets.</div>
+<p>Two things worth noticing before we move on. First, GRI's seven steps from Module 3 are about finding what to report — a funnel. IFRS S1/S2's four-part structure is about how to describe each issue once you've decided it matters — a frame. Different jobs entirely. Second, Metrics &amp; Targets is where the two frameworks physically overlap in a final report — a water-usage number can appear in both — but under GRI it sits as an impact disclosure, while under IFRS S1 it sits inside a risk story: who governs it, how it affects strategy, how it's managed, how it's measured.</p>
+<p>With both frameworks now covered individually, the final lesson brings them together in a single worked example, applied to one company at once.</p>`}
+  ]},
+
+  /* ---------------- MODULE 6 — Bringing It Together (Video 10) ---------------- */
+  { id:6, name:"Module 6 — Bringing It Together", items:[
+    { type:"lesson", id:"6.1", title:"One Company, Both Frameworks — A Worked Example", minutes:14,
+      takeaway:"One company, two lenses: GRI asks what impact the company has on the world, IFRS S1/S2 asks how the world's sustainability and climate risks loop back onto the company. The strongest reporting programs run both, because together they tell a fuller story than either alone.",
+      html:`
+<p>Everything covered in this course comes together most clearly with a single worked example. Picture a company called PakManufacture Ltd., a manufacturer of surgical instruments for export, with a thousand employees, heavy metal-processing operations, high electricity, gas and water consumption, and a complex international supply chain.</p>
+<h3>The GRI view</h3>
+<p>The question here is: what impact does PakManufacture have? Looking across its operations, the significant impacts include workplace injuries and long hours, human-rights risks in the supplier base, energy consumption and emissions, water use and wastewater, hazardous waste, and product safety. After assessing significance, five material topics emerge: occupational health and safety, energy and emissions, water and effluents, waste, and human rights in the supply chain.</p>
+<h3>The IFRS S1/S2 view</h3>
+<p>Now switch lenses. The question becomes: which of these issues could actually affect the company's financial prospects? Could extreme heat reduce factory productivity? Could flooding disrupt transport? Could export customers demand lower-carbon products? Extreme heat, for example, could reduce productivity, which lowers production, which lowers revenue. High emissions could cause customers to demand lower-carbon suppliers, risking lost contracts and lower revenue. Build the chain each time: climate issue → operational consequence → financial consequence.</p>
+<h3>The same topic, pulling in different directions</h3>
+<p>Look closely at worker safety and you can see the two frameworks pulling apart. GRI asks what impact operations have on worker health and safety, full stop. IFRS S1 asks whether workforce safety issues could affect the company's prospects — through compensation costs, lawsuits, or production disruption. Both frameworks care about the same topic; they're simply measuring different things about it.</p>
+<h3>Where the two lenses land</h3>
+<p>Climate change is material under both frameworks at once — GRI cares because company emissions affect the environment, and IFRS S2 cares because transition risk could affect revenue and cost. A factory's impact on a local ecosystem might be significant under GRI while creating no financial consequence, so it may not clear the bar under IFRS S1. And the reverse happens too: an asset becoming obsolete because of the shift to low-carbon technology could create a real impairment risk under IFRS S1/S2 without necessarily standing out under GRI's impact lens at all.</p>
+<div class="callout">🧭 <strong>The complete picture:</strong> GRI is fundamentally about the company's impact on the world. IFRS S1 and S2 are fundamentally about how the world's sustainability and climate risks loop back and affect the company. They're not rivals — the strongest reporting programs run both assessments side by side, because together they tell a fuller story than either one does alone.</div>
+<p>That's the whole course, applied to one real case. Before you move on, your downloadable Case Study Analysis Template lets you run this exact exercise on a company of your own choosing — which is also the foundation of the final assignment.</p>`}
+  ]},
+
+  /* ---------------- MODULE 7 — bonus, no video ---------------- */
+  { id:7, name:"Module 7 — Final Assignment", items:[
+    { type:"lesson", id:"7.1", title:"Final Assignment: PakTextile Ltd.", minutes:2,
+      takeaway:"This is your portfolio piece. If you're job-hunting in sustainability, it's a talking point in interviews: 'Let me walk you through how I'd assess a textile exporter under both frameworks.'",
+      html:`
+<p>You've completed the course. Now prove it — and build a portfolio piece while you're at it.</p>
+<div class="scen"><h4>🧵 Meet PakTextile Ltd.</h4>
+<ul style="margin-bottom:4px">
+<li>2 factories, 1,500 employees</li>
+<li>High electricity consumption (gas-powered generation plus grid)</li>
+<li>High water consumption, located in a region with increasing water stress</li>
+<li>International buyers in Europe and North America</li>
+<li>Imported raw materials (cotton, synthetics) from a global supply chain</li>
+<li>Documented worker safety concerns on the factory floor</li>
+<li>Labour issues reported at some raw-material suppliers</li>
+<li>Facilities and transport routes exposed to flooding</li>
+<li>Increasing customer demand for low-carbon products</li>
+</ul></div>
+<h3>Your task</h3>
+<p>Prepare a 2–3 page analysis — or complete the downloadable Materiality Worksheet and Case Study Analysis Template from earlier lessons — covering:</p>
+<ol>
+<li><strong>Part A — GRI:</strong> Identify <strong>5 potentially material impacts</strong> and explain, for each, why it's significant (severity: scale, scope, irremediability — plus likelihood).</li>
+<li><strong>Part B — IFRS S1/S2:</strong> Identify <strong>5 potentially material sustainability-related risks or opportunities</strong> and explain the <strong>potential business consequence</strong> for each — build the chain: issue → operational consequence → financial consequence.</li>
+<li><strong>Part C — Compare:</strong> For each issue: GRI material? IFRS S1/S2 material? Both? Why? Use the Framework Comparison Sheet from Lesson 1.1 to justify your reasoning.</li>
+</ol>
+<div class="callout">📥 The full assignment brief, with the company profile and all three parts spelled out, is downloadable right below.</div>
+<div class="callout">🏁 The next step is the <strong>Final Assessment</strong>: 40 multiple-choice questions, 70% to pass. Pass it and your GreenMetrics <strong>Certificate</strong> of completion unlocks.</div>`}
+  ]},
+
+  /* ---------------- MODULE 8 — Final Assessment ---------------- */
+  { id:8, name:"Module 8 — Final Assessment", items:[
+    { type:"final", id:"final", title:"Final Assessment", minutes:40 }
+  ]}
+]};
+
+
+
+/* ============================================================================
+   MODULE ASSIGNMENTS (multiple choice, pass mark 70%)
+   One assignment sits at the end of each of Modules 1–6. Every question is
+   auto-graded. Students can retake any assignment; the best score is kept.
+   ============================================================================ */
+const QUIZZES = {
+  "q1": { title:"Assignment 1 — Foundations", passMark:70, afterModule:1, questions:[
+    { q:"At its core, a sustainability report is best described as:",
+      options:["A marketing document about a company's green initiatives","An organized attempt to explain what's happening around the company, its impacts, its responses, and what it means for the future","A second set of financial statements","A document only regulators read"],
+      answer:1, why:"It's an organized answer to four questions: what's happening, what impact is it having, what's being done, and what it means for the future." },
+    { q:"Which pairing correctly describes the two lenses?",
+      options:["GRI: world → company; IFRS S1/S2: company → world","GRI: company → world; IFRS S1/S2: world → company","Both point from company → world","Both point from world → company"],
+      answer:1, why:"GRI measures the company's impact on the world; IFRS S1/S2 measures how the world's sustainability issues could affect the company." },
+    { q:"A factory's pollution destroys a downstream fishery. The company faces no fines, no lawsuits, and no customer reaction. Which framework considers this within scope?",
+      options:["GRI only","IFRS S1 only","Both, for identical reasons","Neither"],
+      answer:0, why:"The destroyed fishery is exactly what GRI measures — the company's impact on the world. With no financial consequence, there's nothing for IFRS S1's lens to capture." },
+    { q:"True or False: GRI and IFRS S1/S2 are essentially two versions of the same thing, and a company simply picks one.",
+      options:["True","False"],
+      answer:1, why:"False. They answer different questions (impact vs. financial prospects), and many companies use both together." },
+    { q:"Which four questions turn a bare sustainability figure into a useful account?",
+      options:["What's happening? What effect is it having? What is the company doing about it? What could it mean for the future?","Who audited it? What did it cost? Which competitor reports it? When was it published?","What is the share price? What is the dividend? What is the credit rating? What is the market share?","Which country? Which sector? Which year? Which currency?"],
+      answer:0, why:"Lesson 1.2: a number without context tells the reader very little. These four questions turn it into a picture of the company's sustainability-related situation." }
+  ]},
+  "q2": { title:"Assignment 2 — Materiality", passMark:70, afterModule:2, questions:[
+    { q:"Under GRI, \"material\" is judged by:",
+      options:["Effect on share price","Significance of the company's impact on the economy, environment, and people","Size of the company","What competitors disclose"],
+      answer:1, why:"GRI materiality = impact materiality: how significant is the company's effect on the economy, environment, and people?" },
+    { q:"Under IFRS S1, \"material\" is judged by:",
+      options:["Whether the issue affects the local community","Whether the issue could reasonably affect the decisions of investors, lenders, and creditors","Whether the issue is publicly controversial","Whether the issue is regulated"],
+      answer:1, why:"IFRS S1 materiality = financial materiality: information is material if omitting it could influence decisions of investors, lenders, and creditors." },
+    { q:"A factory sits in a floodplain. Under which framework is flood exposure potentially material?",
+      options:["GRI (impact lens)","IFRS S1/S2 (financial lens)","Both equally","Neither"],
+      answer:1, why:"Flooding is the world acting on the company — physical climate risk with clear routes to cash flows and insurance. The arrow points World → Company." },
+    { q:"Suppliers pay below minimum wage; no financial effect is expected. Is this material under GRI?",
+      options:["Yes","No","Only if investors notice","Only if it's illegal in the company's home country"],
+      answer:0, why:"Yes — a serious impact on real people is material under the impact lens regardless of financial effect." },
+    { q:"Can the same issue be material under both frameworks?",
+      options:["No, it's always one or the other","Yes — climate change is the classic example, for different reasons under each"],
+      answer:1, why:"Yes. Climate is material under GRI (environmental impact) and under IFRS S2 (transition/physical financial risk) — same issue, different questions." }
+  ]},
+  "q3": { title:"Assignment 3 — Understanding GRI", passMark:70, afterModule:3, questions:[
+    { q:"What is the correct order of GRI's three layers?",
+      options:["Topic → Sector → Universal","Universal → Sector → Topic","Sector → Universal → Topic","Universal → Topic → Sector"],
+      answer:1, why:"Start broad (Universal), narrow by industry (Sector), then get specific (Topic)." },
+    { q:"A cotton textile mill wants to know which topics are likely material for its industry. Which layer does it look to?",
+      options:["Universal Standards","Sector Standards","Topic Standards","All three equally"],
+      answer:1, why:"Sector Standards highlight the topics likely to matter for a specific industry." },
+    { q:"In GRI's materiality assessment, severity is judged by:",
+      options:["Scale, scope, and irremediability","Cost to the company","Media coverage","Shareholder preference"],
+      answer:0, why:"Severity = scale (how bad), scope (how widespread), irremediability (how hard to fix) — with likelihood assessed alongside." },
+    { q:"True or False: For a material emissions topic, a GRI report only needs to state tonnes of CO2e.",
+      options:["True","False"],
+      answer:1, why:"False — GRI also wants policies, commitments, actions, and performance against targets. The number alone isn't enough." },
+    { q:"Put these steps in the correct order: (a) Determine material topics, (b) Understand the organization, (c) Collect information and report, (d) Identify impacts.",
+      options:["b → d → a → c","d → b → a → c","b → a → d → c","a → d → b → c"],
+      answer:0, why:"Understand the organization → identify impacts → determine material topics → collect and report. It's a funnel." }
+  ]},
+  "q4": { title:"Assignment 4 — Understanding IFRS S1", passMark:70, afterModule:4, questions:[
+    { q:"IFRS S1's primary audience is:",
+      options:["Local communities","Investors, lenders, and other creditors","Employees","NGOs"],
+      answer:1, why:"IFRS S1 is built for capital markets: investors, lenders, and other creditors." },
+    { q:"Which is NOT one of the four pillars?",
+      options:["Governance","Strategy","Audit","Metrics & Targets"],
+      answer:2, why:"The four pillars are Governance, Strategy, Risk Management, and Metrics & Targets." },
+    { q:"Which pillar answers: \"Who oversees sustainability-related risks and opportunities?\"",
+      options:["Governance","Strategy","Risk Management","Metrics & Targets"],
+      answer:0, why:"Governance — the board committee and management roles accountable for the issue." },
+    { q:"The one consistent test running through IFRS S1 is:",
+      options:["Is the issue material to the local community?","Could the issue reasonably affect the company's prospects?","Is the issue regulated?","Is the industry high-emitting?"],
+      answer:1, why:"Everything under IFRS S1 passes through one test: could this reasonably affect cash flows, financing, or the company's prospects?" },
+    { q:"IFRS S1 became effective for annual reporting periods beginning on or after:",
+      options:["1 January 2022","1 January 2024","1 January 2026","1 July 2023"],
+      answer:1, why:"IFRS S1 took effect for annual periods beginning on or after 1 January 2024, with early application allowed if IFRS S2 is applied alongside it." }
+  ]},
+  "q5": { title:"Assignment 5 — Understanding IFRS S2", passMark:70, afterModule:5, questions:[
+    { q:"IFRS S2 covers:",
+      options:["All sustainability topics","Climate only","Social topics only","Governance only"],
+      answer:1, why:"IFRS S1 is the broad umbrella; IFRS S2 is its climate chapter — applied together." },
+    { q:"A key market introduces carbon pricing that raises a company's production costs. This is an example of:",
+      options:["Physical risk","Transition risk"],
+      answer:1, why:"Carbon pricing comes from the shift away from carbon, so it is transition risk." },
+    { q:"Increasing drought in a manufacturing region is an example of:",
+      options:["Physical risk","Transition risk"],
+      answer:0, why:"Drought is a direct physical effect of a changing climate, so it is physical risk." },
+    { q:"\"Risk from the world's shift toward a lower-carbon economy — regulation, carbon pricing, changing preferences, technology\" describes:",
+      options:["Physical risk","Transition risk","Reputational risk","Impact risk"],
+      answer:1, why:"That's the definition of transition risk." },
+    { q:"Which of these correctly builds a climate issue into a business consequence?",
+      options:["Carbon pricing → employee morale falls → logo needs redesign","Extreme heat → worker productivity falls → production falls → revenue may fall","Flooding → marketing budget increases → brand awareness rises","Drought → office plants die → cleaning costs rise slightly"],
+      answer:1, why:"The chain always runs: climate issue → operational consequence → financial consequence." }
+  ]},
+  "q6": { title:"Assignment 6 — Bringing It Together", passMark:70, afterModule:6, questions:[
+    { q:"In the PakManufacture case, flood risk to facilities is primarily:",
+      options:["A GRI impact-material issue","An IFRS S1/S2 financial-materiality issue","Both","Neither"],
+      answer:1, why:"Flooding is the world acting on the company — the arrow points the wrong way for GRI's impact lens." },
+    { q:"Supplier human-rights conditions are primarily:",
+      options:["A GRI impact-material issue","An IFRS S1/S2 issue","Both equally","Out of scope for both"],
+      answer:0, why:"A serious impact on people in the value chain — core GRI territory, with only a weak financial link on the given facts." },
+    { q:"Energy consumption and GHG emissions at PakManufacture are:",
+      options:["GRI-only","IFRS-only","Material under both, but for different reasons","Neither"],
+      answer:2, why:"GRI: environmental impact. IFRS: cost risk and transition risk. Same issue, two different questions." },
+    { q:"For worker safety at PakManufacture, the two frameworks ask:",
+      options:["The same question, so the answer is identical under both","GRI: what impact do operations have on workers' health and safety? IFRS S1: could safety issues affect the company's prospects through costs, lawsuits or disruption?","GRI: what does safety cost the company? IFRS S1: how many workers are affected?","Neither framework covers worker safety"],
+      answer:1, why:"Both frameworks care about the same topic, but GRI measures the impact on people while IFRS S1 measures the effect on the company." },
+    { q:"Which statement best describes how GRI and IFRS S1/S2 relate in practice?",
+      options:["A company must choose one and ignore the other","They are different perspectives, and the strongest reporting programs run both side by side","IFRS S1/S2 replaces GRI for all companies","GRI is only for investors and IFRS is only for communities"],
+      answer:1, why:"They are not rivals. Together they tell a fuller story than either one alone." }
+  ]}
+};
+
+/* ============================================================================
+   FINAL ASSESSMENT — 40 multiple-choice questions, pass mark 70% (28 / 40).
+   For each question below, the FIRST option in `o` is the correct one. The app
+   shuffles both the questions and the options on every attempt, so students
+   never see the same order twice.  mod = the module the question comes from.
+   ============================================================================ */
+const FINAL_RAW = [
+  // ---- Module 1 — Foundations
+  { mod:1, q:"Which sentence best summarises the difference between GRI and IFRS S1/S2?",
+    o:["GRI looks at the company's impact on the world; IFRS S1/S2 looks at how sustainability and climate issues can affect the company","GRI covers environmental topics only; IFRS S1/S2 covers social topics only","GRI is voluntary and IFRS S1/S2 is a tax standard","They are two versions of the same framework under different names"],
+    why:"GRI: Company → World. IFRS S1/S2: World → Company." },
+  { mod:1, q:"A factory discharges polluted wastewater into a river. Which question is IFRS S1 primarily asking about it?",
+    o:["Could this issue reasonably affect the company's prospects, for example through penalties, lawsuits or lost customers?","How much damage did the ecosystem suffer?","Did nearby communities lose access to clean water?","What is the company's policy on fish stocks?"],
+    why:"Ecosystem and community damage are GRI questions. IFRS S1 asks about the effect on the company's prospects." },
+  { mod:1, q:"Why does a sustainability report need to bring information together in the manufacturing example?",
+    o:["Because HR, operations, procurement, finance and the sustainability team each hold part of the information","Because regulators forbid departments from sharing data","Because the data does not exist until a report is written","Because only the finance team can measure water use"],
+    why:"The information already exists because the company operates, but it is scattered across departments." },
+  { mod:1, q:"Which of the following is a reason companies report on sustainability?",
+    o:["Regulation, investor and lender expectations, customer requirements, and better management of the issues","To reduce the company's income tax","Because every framework forbids financial reporting","Only to win advertising awards"],
+    why:"Lesson 1.1: regulation, capital, customers and better management." },
+  { mod:1, q:"The relationship between IFRS S1 and IFRS S2 is best described as:",
+    o:["S1 is the general umbrella standard and S2 is its climate-specific companion, applied together","S2 replaces S1 for large companies","S1 covers climate and S2 covers social topics","They are unrelated standards from different bodies"],
+    why:"IFRS S2 is IFRS S1's climate chapter." },
+  { mod:1, q:"Which is the better first question when looking at a company's reporting, rather than \"GRI or IFRS?\"",
+    o:["Who is the report designed to inform, and are we measuring impacts or risks and opportunities to the company?","Which framework has more pages?","Which framework is cheaper to print?","Which framework do competitors use?"],
+    why:"The right question is who the company is answering to, and what they are asking." },
+
+  // ---- Module 2 — Materiality
+  { mod:2, q:"Under GRI, an issue is material mainly because:",
+    o:["The company's impact on people, the environment or the economy is significant","It could reduce the share price","A competitor also reports it","It is easy to measure"],
+    why:"GRI uses impact materiality." },
+  { mod:2, q:"Under IFRS S1, information is material if:",
+    o:["Omitting it could reasonably influence decisions of investors, lenders and creditors","It is popular on social media","It relates only to the environment","It is requested by local communities"],
+    why:"IFRS S1 uses financial materiality." },
+  { mod:2, q:"Some suppliers pay below the legal minimum wage, with no expected financial effect on the company. This issue is:",
+    o:["Material under GRI, but generally not under IFRS S1 on those facts","Material under IFRS S1 only","Not material under either","Material under both for identical reasons"],
+    why:"A serious impact on real people is material under GRI even with no financial effect." },
+  { mod:2, q:"A factory uses large volumes of water in a water-stressed region but has cheap, secure supply and faces no regulatory pressure. The likely conclusion is:",
+    o:["Material under GRI; possibly not material under IFRS S1","Not material under GRI; material under IFRS S1","Material under both, always","Not material under either"],
+    why:"The environmental impact is real (GRI), but there may be no route to the company's cash flows (IFRS S1)." },
+  { mod:2, q:"Which pairing correctly matches each framework with its direction?",
+    o:["GRI: Company → World; IFRS S1/S2: World → Company","GRI: World → Company; IFRS S1/S2: Company → World","Both: Company → World","Both: World → Company"],
+    why:"The arrows point in opposite directions." },
+  { mod:2, q:"Why is it normal for the two materiality tests to give different answers for the same issue?",
+    o:["Because they answer different questions: impact on the world versus effect on the company","Because one of the tests is wrong","Because GRI ignores the environment","Because IFRS S1 only applies to small companies"],
+    why:"Two lenses, two questions, and possibly two answers." },
+  { mod:2, q:"Which issue is the classic example of being material under both lenses, for different reasons?",
+    o:["Climate change","Office furniture choices","Logo design","Dividend timing"],
+    why:"GRI cares about the environmental impact; IFRS S2 cares about the financial consequence." },
+
+  // ---- Module 3 — Understanding GRI
+  { mod:3, q:"What is GRI's layered structure, from broad to specific?",
+    o:["Universal → Sector → Topic","Topic → Sector → Universal","Sector → Topic → Universal","Universal → Topic → Sector"],
+    why:"Start broad, narrow by industry, then get specific." },
+  { mod:3, q:"Which GRI layer would a mining company consult to see which topics are likely material for its industry?",
+    o:["Sector Standards","Universal Standards","Topic Standards","None of them"],
+    why:"Sector Standards highlight the topics likely to matter for an industry." },
+  { mod:3, q:"A company reports against GRI Topic Standards:",
+    o:["Only for the topics that turned out to be material for it","For every topic, without exception","For environmental topics only","Only for topics that affect profit"],
+    why:"A company reports against the topics that survive its materiality assessment." },
+  { mod:3, q:"Why does GRI's process look beyond the company's own factory walls?",
+    o:["Because impacts occur across the full value chain, from raw-material suppliers to the end of the product's life","Because GRI only covers suppliers","Because the factory walls are not relevant to any impact","Because regulators require it for tax purposes"],
+    why:"A garment brand's biggest human-rights impacts might sit on cotton farms it does not own." },
+  { mod:3, q:"GRI judges the severity of an impact using:",
+    o:["Scale, scope and irremediability","Cost, revenue and margin","Media coverage, share price and rating","Size, age and location of the company"],
+    why:"Scale (how bad), scope (how widespread), irremediability (how hard to fix), with likelihood alongside." },
+  { mod:3, q:"In the course example, \"employees getting injured\" becomes which formal GRI topic?",
+    o:["Occupational Health and Safety","Anti-corruption","Biodiversity","Water and Effluents"],
+    why:"Impacts that survive the filter are turned into formal topics." },
+  { mod:3, q:"Beyond a number for a material topic, GRI expects the company to disclose:",
+    o:["Its policies, commitments, actions and performance against targets","Only the number","Only the auditor's name","Competitor comparisons"],
+    why:"Going beyond the number is the mark of a strong GRI report." },
+
+  // ---- Module 4 — Understanding IFRS S1
+  { mod:4, q:"IFRS S1 is written primarily for:",
+    o:["Investors, lenders and other creditors","Local communities","Employees","NGOs"],
+    why:"IFRS S1's audience is capital markets." },
+  { mod:4, q:"The one consistent test running through IFRS S1 is:",
+    o:["Could this issue reasonably affect the company's prospects?","Is this issue important to the local community?","Is this issue regulated?","Does this issue appear in the sector standard?"],
+    why:"If it can plausibly move cash flows, financing or future performance, it is in scope." },
+  { mod:4, q:"Which is within the scope of IFRS S1, provided it could affect the company's prospects?",
+    o:["Sustainability-related risks and opportunities of any kind, such as water, labour, supply chain and regulation","Climate only","Audit findings only","Marketing spend only"],
+    why:"IFRS S1 is the broad umbrella standard." },
+  { mod:4, q:"Early application of IFRS S1 is allowed provided:",
+    o:["IFRS S2 is applied alongside it","The company is listed","GRI is no longer used","An auditor signs off first"],
+    why:"S1 sets the general structure and S2 fills in the climate detail, so they go together." },
+  { mod:4, q:"IFRS S1's full name describes it as general requirements for the disclosure of:",
+    o:["Sustainability-related financial information","Tax-related financial information","Audit-related financial information","Marketing-related financial information"],
+    why:"General Requirements for Disclosure of Sustainability-related Financial Information." },
+
+  // ---- Module 5 — Understanding IFRS S2
+  { mod:5, q:"IFRS S2 can best be described as:",
+    o:["IFRS S1's climate chapter","A replacement for IFRS S1","A social-topics standard","A governance-only standard"],
+    why:"S1 covers sustainability broadly; S2 covers exactly one topic: climate." },
+  { mod:5, q:"Extreme heat, flooding and drought are examples of:",
+    o:["Physical risk","Transition risk","Governance risk","Impact risk"],
+    why:"These are direct physical effects of a changing climate." },
+  { mod:5, q:"Carbon pricing, tighter regulation and customers moving to greener suppliers are examples of:",
+    o:["Transition risk","Physical risk","Governance risk","Impact risk"],
+    why:"They come from the shift toward a lower-carbon economy." },
+  { mod:5, q:"Which is a correct chain from a climate issue to a financial consequence?",
+    o:["Flooding → transport routes disrupted → deliveries missed → customer contracts at risk","Flooding → office plants die → cleaning costs rise slightly","Carbon pricing → employee morale falls → logo needs redesign","Drought → marketing budget rises → brand awareness rises"],
+    why:"Climate issue → operational consequence → financial consequence." },
+  { mod:5, q:"The four questions every IFRS S1/S2 disclosure answers correspond to:",
+    o:["Governance, Strategy, Risk Management, and Metrics & Targets","Impact, Scale, Scope, and Likelihood","Universal, Sector, Topic, and Value chain","Audit, Assurance, Review, and Certification"],
+    why:"Remember G → S → R → M." },
+  { mod:5, q:"Which pillar describes how a company identifies, assesses, responds to and monitors a risk?",
+    o:["Risk Management","Governance","Strategy","Metrics & Targets"],
+    why:"Identify → assess (likelihood and impact) → respond → monitor." },
+  { mod:5, q:"Where would tonnes of CO2e, water usage and progress against targets appear in an IFRS S1/S2 disclosure?",
+    o:["Metrics & Targets","Governance","Strategy","Risk Management"],
+    why:"Metrics & Targets is where the numbers live." },
+  { mod:5, q:"A textile manufacturer facing water scarcity invests in water-efficient machinery. Which pillar does this reasoning belong to?",
+    o:["Strategy","Governance","Metrics & Targets","None of the pillars"],
+    why:"Issue → business consequence → strategic response belongs under Strategy." },
+
+  // ---- Module 6 — Bringing It Together
+  { mod:6, q:"For PakManufacture, flood risk to facilities and transport routes is primarily:",
+    o:["An IFRS S1/S2 financial-materiality issue","A GRI impact-material issue","Material under both, for identical reasons","Outside both frameworks"],
+    why:"Flooding is the world acting on the company." },
+  { mod:6, q:"At PakManufacture, extreme heat reduces productivity, which lowers production and then revenue. This is:",
+    o:["A physical climate risk analysed through the IFRS S1/S2 lens","A GRI severity assessment","A governance disclosure","An anti-corruption topic"],
+    why:"Climate issue → operational consequence → financial consequence." },
+  { mod:6, q:"Export customers demanding lower-carbon suppliers is best classified as:",
+    o:["Transition risk that could lead to lost contracts","Physical risk from flooding","A GRI Universal Standard","A governance failure"],
+    why:"Customer preference shifting toward low carbon is a transition risk, and potentially a transition opportunity." },
+  { mod:6, q:"An asset becoming obsolete because of the shift to low-carbon technology is most likely to stand out:",
+    o:["Under IFRS S1/S2 as an impairment risk, without necessarily standing out under GRI's impact lens","Under GRI only","Under neither framework","Only under GRI's Universal Standards"],
+    why:"It is a financial consequence for the company rather than an impact on the world." },
+  { mod:6, q:"Which list shows the material topics that emerged for PakManufacture under GRI?",
+    o:["Occupational health and safety, energy and emissions, water and effluents, waste, and human rights in the supply chain","Advertising, dividends, share buybacks, patents and branding","Only greenhouse gas emissions","Only human rights"],
+    why:"These five topics emerged after assessing significance." },
+  { mod:6, q:"A factory significantly harms a local ecosystem with no financial consequence to the company. This would most likely be:",
+    o:["Significant under GRI but possibly not material under IFRS S1","Material under IFRS S1 but not under GRI","Material under neither framework","Automatically material under both"],
+    why:"GRI significance does not depend on whether anyone is financially affected." },
+  { mod:6, q:"Which best describes how a company should use the two frameworks?",
+    o:["Run both assessments side by side, because together they tell a fuller story than either alone","Choose whichever is shorter","Use IFRS S1/S2 only and drop GRI","Use GRI only and drop IFRS S1/S2"],
+    why:"They are different perspectives, not rivals." }
+];
+const FINAL = {
+  title:"Final Assessment", passMark:70, shuffle:true,
+  questions: FINAL_RAW.map(r => ({ q:r.q, options:r.o, answer:0, why:r.why, mod:r.mod }))
+};
+
+
+/* ============================================================================
+   APP CODE — you shouldn't need to touch anything below this line.
+   ============================================================================ */
+const LOGO = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAaQAAAGkCAMAAABJkqEHAAADAFBMVEULGzQAAAAMIDwMI0IrxNEON04SxbcORVgPuLISVmsbxcQvucwUSWU6xOJHxun+//8Uh9QNqbAMZ3ISl8zv+fwoOEwJHUMmtrgDt5wwRVYpp7UTlpMrmq8RedAGU1stVm8neI9IuNQXd4o0qcb9//8YaYgPpcULdHdFu+MausJKx9UPmbIVh479//8lhtHP//8saIsRppkBDSYvmMnX5u8oh625//9Ip86o1+UMOWc9veHQ+fkrS2YWheLv/v6R1+cYWYdy19YvZXWv5up3hZPy/v4pxLhXZnZIWGkSiLMZerYke8sjZ6hJdpNvxusaaaqV4uTk7PR////Q9/koh5RHmc+NyOYmeLFvyNOL2Nq2x9HO2+QR0bnU+fpyuuZQ09Rteoust8UA//9LaoaOmagr0ssKhXuy9vfW/P0QSoVNiKiXprGP4twllpe06fDI1dwoW4Zxt9UABxqFkpvl+/wgLUSs2uav5+uz9PKJydhjaoJMprbG6PB/v7+/v78Af38WfeEa0MFx1ugNbckjhOJCTFxHhZVOmLRVqqpRqeZndHplqtWY5OKZ//+ks7vCydPN9/mKu9KhrLnS/PpEUV2CjJmo1twAAP8EMTsZW6MuVF0ymuQjpJtLe6FQuLxT0uNhanl15uOHvOYILGJDTmBFxLh049qy+fnMzP/m/v5Uc3xnq+eKyOaqqv/B6vF/f/+s8/TMzMwFYl4sdno7peF1lJl/v/95x8qO2+Oqqqqs49sAAH8BER4XkONVVapDnOF4pa6ZzMyZ8+6/v/+q1P+w2+26/Pe8+vz/2NgCwZokXaMluJ5TkpdJo5hwi6V5l6Bzs6+dq8GatLyL1ti47v7U1NTD3fDB7eLP7///2rYAf/8IkX8iKTolNT4gPmAgfeEhgH0rwZ4l0rxAX4JHjslvm8V1rs58udVnw7t91dp//7+ZmcyAu9+IveCZzP+S492kzuao29638N7U1P/M3uL/6f///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAC98xdaAAABAHRSTlP+AP///v/+//7///7///8E/v3//v////7+//7//vz////+//4v//7///7+/f9O/gX//v/+/f4D/vf//6z//oz1//z/8v9w/v///f7+///9/vr/Avr//vX//vn+//+V/v7//wH/////rW7////2/7D///3//6r/2db28///1QQEAv7//fv+////A/7//tkF///W/P9K///4Af////////////z+////8poF1v/+1gOzAtIF/////wTY2wP2Av//A///BfcEBqVHbAb/////////////2pcGp0dhBwL//////////////93d/9sEBdPbBd3ypkcGRwwBAAAAAAAAAAAA/jVRZQAAToxJREFUeNrtvXdgG0eS9j0BkRhpkAiIIAIJAqQEgCSYSTOTokSJIhVISZRkKmdZsmTL6Wzv+rwO67XXYXe9Oe9tvI2X03t37+U35/TlnHP6++vq7hnMDAYZmAEpta1AYABS/UNVPV1dXcOw22qI4ujo5dyXiV4ybq4vPnXsqaeO4TFLx1NnFtdv0gsSuddcHh0Vxe31r2a2zU96mR0V+ykpUZyZnLwxeePYmXk8LgQ9uiN4gTx/5hi6ePLhDLwSv0W/OMpefgypvvYjffRFZBU/XFz84uL894MHDhxwOBx7BjAOh+7I4XK5LMFvzs+eGV/8IXoL6e22iU01PyRx9LPUerYmJ59HpnMtN/cqIvvoUHylQ8tjQYb1ryYfblGr+uyo+BhSbRYk288LZ47NH7BY9ulbjSediXfkj0y7R4EJ/6JwLa7O+WNffEW2qea2qOaFJP6qH8/ezOSNf3VmPqhkAxYSCqMRd9qdUafdbrdyjM7grOipqF0QnPEwuj4kvZZaVjo4f+Z/vDE5gwn1/0p8DKlCF0ctaGtxcTNocSgIBYOhDBpeK89zumQ0YxAGw3Ecz1md8EpPyCPbFgSr4Obi+Ba1qCZ1fc0ICYKQKCYeTv7+fMqj1gHt3qhgR2wGmWoHZ3cKzkwIKT/HPilMpVPzvz/5MAEW9VnxMaTSNnSCrH9eGJ///gGFBXkyGx12ZA1MrQO/A7JCe7YjkyZv3d2NQB1IzR97gaynToiPIRVDhG1o68Z8LgbZHKHQhjdqrx1P/rAimwqnPfv2UUXhen3zxlYT2lPzQCJxKPH5F45980DOw2UyPVauEYAkw+L4eCbT1SWvp16efeHziSaLT80Cqb8fK7kbmxcUGiHjjHI5H9UQRuR3JP+IRAfH1/2tzXtY8fX/6DEkhQ2dwHHove+kLDKh9v/C3kADyhs8b+/IIMfX7UH/e1yds8/j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";
+const main = document.getElementById('main');
+const sidebar = document.getElementById('sidebar');
+const $ = s => document.querySelector(s);
+let MIN_SECONDS_ON_LESSON = 10;   // a lesson can't auto-complete before this many seconds on the page
+const esc = s => String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+
+/* ---------- toast ---------- */
+function toast(msg){
+  let t = document.getElementById('toast');
+  if(!t){ t = document.createElement('div'); t.id = 'toast'; document.body.appendChild(t); }
+  t.textContent = msg; t.classList.add('show');
+  clearTimeout(toast._t); toast._t = setTimeout(() => t.classList.remove('show'), 3200);
+}
+
+/* ============================================================================
+   ACCOUNTS & SAVED PROGRESS
+   • If FIREBASE_CONFIG (top of this file) is filled in → real cloud accounts
+     (Firebase Authentication + Cloud Firestore). Progress follows the student
+     to any device.
+   • If it is empty → "demo mode": accounts and progress are stored in the
+     browser only, so you can test the whole course before Firebase is set up.
+   ============================================================================ */
+const FB_CONFIGURED = !!(FIREBASE_CONFIG.apiKey && FIREBASE_CONFIG.projectId);
+const FB_OK = FB_CONFIGURED && !!window.firebase;
+const DEMO_MODE = !FB_OK;
+
+const Backend = (function(){
+  if(FB_OK){
+    firebase.initializeApp(FIREBASE_CONFIG);
+    const auth = firebase.auth(), db = firebase.firestore();
+    const ref = uid => db.collection('users').doc(uid);
+    let pendingName = null;
+    return {
+      init(cb){
+        auth.onAuthStateChanged(async u => {
+          if(!u){ cb(null); return; }
+          let name = pendingName || u.displayName || '';
+          try{ const s = await ref(u.uid).get(); if(s.exists && s.data().name) name = s.data().name; }catch(e){}
+          cb({ uid:u.uid, email:u.email, name: name || (u.email||'').split('@')[0] });
+        });
+      },
+      async signUp(name, email, pw){
+        pendingName = name;
+        const c = await auth.createUserWithEmailAndPassword(email, pw);
+        try{ await c.user.updateProfile({ displayName:name }); }catch(e){}
+        try{ await ref(c.user.uid).set({ name, email }, { merge:true }); }catch(e){}
+      },
+      signIn(email, pw){ return auth.signInWithEmailAndPassword(email, pw); },
+      signOut(){ return auth.signOut(); },
+      reset(email){ return auth.sendPasswordResetEmail(email); },
+      async load(uid){ const s = await ref(uid).get(); return s.exists ? s.data() : {}; },
+      save(uid, d){ return ref(uid).set(d, { merge:true }); }
+    };
+  }
+  /* ----- demo mode (browser only) ----- */
+  const U = 'gm_demo_users', S = 'gm_demo_session', P = 'gm_demo_progress_';
+  const rd = (k, f) => { try{ return JSON.parse(localStorage.getItem(k)) || f; }catch(e){ return f; } };
+  const hash = s => { let h1=0xdeadbeef, h2=0x41c6ce57; for(let i=0;i<s.length;i++){ const c=s.charCodeAt(i); h1=Math.imul(h1^c,2654435761); h2=Math.imul(h2^c,1597334677); }
+    h1=Math.imul(h1^(h1>>>16),2246822507)^Math.imul(h2^(h2>>>13),3266489909); h2=Math.imul(h2^(h2>>>16),2246822507)^Math.imul(h1^(h1>>>13),3266489909);
+    return (4294967296*(2097151&h2)+(h1>>>0)).toString(36); };
+  const pub = u => ({ uid:u.uid, email:u.email, name:u.name });
+  let listener = () => {};
+  return {
+    init(cb){ listener = cb; const em = localStorage.getItem(S); const u = em && rd(U,{})[em]; cb(u ? pub(u) : null); },
+    async signUp(name, email, pw){
+      const users = rd(U,{}), k = email.toLowerCase();
+      if(users[k]) throw { code:'auth/email-already-in-use' };
+      if(pw.length < 6) throw { code:'auth/weak-password' };
+      users[k] = { uid:'local-'+hash(k), name, email:k, h:hash(k+pw) };
+      localStorage.setItem(U, JSON.stringify(users)); localStorage.setItem(S, k); listener(pub(users[k]));
+    },
+    async signIn(email, pw){
+      const users = rd(U,{}), k = email.toLowerCase(), u = users[k];
+      if(!u || u.h !== hash(k+pw)) throw { code:'auth/invalid-credential' };
+      localStorage.setItem(S, k); listener(pub(u));
+    },
+    async signOut(){ localStorage.removeItem(S); listener(null); },
+    async reset(){ throw { code:'demo/no-reset' }; },
+    async load(uid){ return rd(P+uid, {}); },
+    async save(uid, d){ localStorage.setItem(P+uid, JSON.stringify(d)); }
+  };
+})();
+
+function authMsg(e){
+  const c = (e && e.code) || '';
+  const m = {
+    'auth/email-already-in-use':'An account with this email already exists. Try signing in.',
+    'auth/invalid-email':'Please enter a valid email address.',
+    'auth/weak-password':'Password must be at least 6 characters.',
+    'auth/invalid-credential':'Email or password is incorrect.',
+    'auth/wrong-password':'Email or password is incorrect.',
+    'auth/user-not-found':'Email or password is incorrect.',
+    'auth/too-many-requests':'Too many attempts. Please wait a moment and try again.',
+    'auth/network-request-failed':'Network problem. Check your connection and try again.',
+    'auth/unauthorized-domain':'This website address is not authorised in your Firebase project (Authentication → Settings → Authorized domains).',
+    'auth/operation-not-allowed':'Email/password sign-in is not switched on in your Firebase project.',
+    'demo/no-reset':'Password reset needs cloud accounts, which are not switched on in demo mode.'
+  };
+  return m[c] || ('Something went wrong (' + (c || (e && e.message) || 'unknown') + ').');
+}
+
+/* ---------- state ---------- */
+let currentUser = null, data = {}, authReady = false, authMode = 'signin', persistBlocked = false;
+function persist(){
+  if(!currentUser || persistBlocked) return;
+  const snap = JSON.parse(JSON.stringify(data));
+  Promise.resolve().then(() => Backend.save(currentUser.uid, snap)).catch(() => toast('Could not save your progress. Check your connection.'));
+}
+function onUser(u){
+  if(!u){ currentUser = null; data = {}; persistBlocked = false; authReady = true; authMode = 'signin'; route(); return; }
+  currentUser = u;
+  Promise.resolve().then(() => Backend.load(u.uid))
+    .then(d => { data = d || {}; persistBlocked = false; if(!data.name) data.name = u.name; })
+    .catch(() => { data = { name:u.name }; persistBlocked = true; toast('Could not load your saved progress. Please reload the page.'); })
+    .then(() => { authReady = true; route(); });
+}
+function doSignOut(){ Promise.resolve(Backend.signOut()).then(() => { location.hash = '#/'; }); }
+
+/* ---------- course helpers ---------- */
+Object.keys(QUIZZES).forEach(qid => {
+  const q = QUIZZES[qid];
+  const mod = COURSE.modules.find(m => m.id === q.afterModule);
+  if(mod && !mod.items.some(i => i.type==='quiz' && i.id===qid)) mod.items.push({ type:'quiz', id:qid, title:q.title, minutes:5 });
+});
+const FLAT = [];
+COURSE.modules.forEach(m => m.items.forEach(it => FLAT.push({ ...it, module:m })));
+function findItem(id){ return FLAT.find(i => i.id === id); }
+function isDone(it){
+  if(it.type === 'lesson') return !!(data.completed && data.completed.includes(it.id));
+  if(it.type === 'quiz') return !!(data.assignments && data.assignments[it.id] && data.assignments[it.id].passed);
+  if(it.type === 'final') return !!(data.final && data.final.passed);
+  return false;
+}
+function pctDone(){ return Math.round(FLAT.filter(isDone).length / FLAT.length * 100); }
+function moduleProgress(m){ return { done:m.items.filter(isDone).length, total:m.items.length }; }
+function allLessonsDone(){ return FLAT.filter(i => i.type==='lesson').every(isDone); }
+function allAssignmentsPassed(){ return FLAT.filter(i => i.type==='quiz').every(isDone); }
+function finalUnlocked(){ return allLessonsDone() && allAssignmentsPassed(); }
+function certificateEarned(){ return !!(data.final && data.final.passed); }
+function genCertId(){ return 'GM-' + Date.now().toString(36).toUpperCase().slice(-6) + Math.random().toString(36).toUpperCase().slice(2,6); }
+function itemHref(it){ return '#/' + it.type + '/' + it.id; }
+function itemIcon(it){
+  if(it.type === 'quiz') return '📝';
+  if(it.type === 'final') return '🏁';
+  return VIDEOS.hasOwnProperty(it.id) ? '🎬' : '📖';
+}
+
+/* ---------- routing ---------- */
+function go(hash){ location.hash = hash; }
+function destroyTracking(){
+  if(track){
+    if(track.timer) clearTimeout(track.timer);
+    if(track.observer) track.observer.disconnect();
+    if(track.player && track.player.destroy){ try{ track.player.destroy(); }catch(e){} }
+  }
+  track = null;
+}
+function route(){
+  destroyTracking();
+  sidebar.classList.remove('open'); document.getElementById('backdrop').classList.remove('show');
+  document.body.classList.toggle('unauth', !currentUser);
+  if(!authReady){ main.innerHTML = '<div class="page" style="text-align:center;padding:60px 20px"><img class="auth-logo" src="'+LOGO+'" alt=""><p>Loading…</p></div>'; renderSidebar(); updateHeader(); return; }
+  if(!currentUser){ renderAuth(); renderSidebar(); updateHeader(); return; }
+  const parts = location.hash.replace(/^#\/?/, '').split('/');
+  if(parts[0]==='lesson' && findItem(parts[1])) renderLesson(parts[1]);
+  else if(parts[0]==='quiz' && QUIZZES[parts[1]]) renderTest('quiz', parts[1]);
+  else if(parts[0]==='final') renderFinal();
+  else if(parts[0]==='resources') renderResources();
+  else if(parts[0]==='certificate') renderCertificate();
+  else renderOverview();
+  renderSidebar(); updateHeader();
+  window.scrollTo({ top:0, behavior:'instant' });
+}
+window.addEventListener('hashchange', route);
+
+/* ---------- header & sidebar ---------- */
+function updateHeader(){
+  const p = currentUser ? pctDone() : 0;
+  $('#hbarFill').style.width = p + '%';
+  $('#hpct').textContent = p + '%';
+  const chip = document.getElementById('userChip');
+  if(currentUser){
+    chip.hidden = false;
+    chip.innerHTML = (DEMO_MODE ? '<span class="chip" style="background:#FFF6E0;color:#92600A;border-color:#F2DCA0">Demo mode</span>' : '') +
+      '<span class="uname">' + esc(currentUser.name) + '</span><button onclick="doSignOut()">Sign out</button>';
+  } else { chip.hidden = true; chip.innerHTML = ''; }
+}
+function renderSidebar(){
+  if(!currentUser){ sidebar.innerHTML = ''; return; }
+  const cur = location.hash;
+  let html = '<div class="sb-sec">Course</div>';
+  html += `<a class="sb-item ${cur===''||cur==='#/'||cur==='#/overview'?'active':''}" href="#/">📋 Course overview</a>`;
+  COURSE.modules.forEach(m => {
+    html += `<div class="sb-mod">${m.name}</div>`;
+    m.items.forEach(it => {
+      const done = isDone(it), active = cur === itemHref(it);
+      const locked = it.type === 'final' && !finalUnlocked() && !done;
+      html += `<a class="sb-item ${it.type==='quiz'?'qz':''} ${done?'done':''} ${active?'active':''}" href="${itemHref(it)}">
+        <span class="st">${locked?'🔒':''}</span><span>${itemIcon(it)} ${it.title}</span></a>`;
+    });
+  });
+  html += '<div class="sb-sec">Toolkit</div>';
+  html += `<a class="sb-item ${cur==='#/resources'?'active':''}" href="#/resources">📥 All resources</a>`;
+  html += certificateEarned()
+    ? `<a class="sb-item ${cur==='#/certificate'?'active':''}" href="#/certificate">🎓 Certificate</a>`
+    : `<a class="sb-item ${cur==='#/certificate'?'active':''}" href="#/certificate"><span class="st">🔒</span><span>Certificate (locked)</span></a>`;
+  html += `<div class="sb-foot"><div class="sb-user">Signed in as <b>${esc(currentUser.name)}</b></div><button onclick="doSignOut()">Sign out</button></div>`;
+  sidebar.innerHTML = html;
+}
+document.getElementById('menuBtn').onclick = () => {
+  sidebar.classList.toggle('open');
+  document.getElementById('backdrop').classList.toggle('show', sidebar.classList.contains('open'));
+};
+document.getElementById('backdrop').onclick = () => {
+  sidebar.classList.remove('open'); document.getElementById('backdrop').classList.remove('show');
+};
+
+/* ---------- navigation helpers ---------- */
+function goToNext(fromItem){
+  const idx = FLAT.findIndex(i => i.id === fromItem.id);
+  const next = FLAT[idx+1];
+  if(next) go(itemHref(next)); else go('#/certificate');
+}
+function prevNextButtons(item){
+  const idx = FLAT.findIndex(i => i.id === item.id);
+  const prev = FLAT[idx-1], next = FLAT[idx+1];
+  return `<div class="page-actions">
+    ${prev ? `<a class="btn btn-ghost" href="${itemHref(prev)}">← ${prev.title}</a>` : '<span></span>'}
+    ${next ? `<a class="btn btn-ghost" href="${itemHref(next)}">${next.title} →</a>` : '<a class="btn btn-ghost" href="#/certificate">Certificate →</a>'}
+  </div>`;
+}
+
+/* ---------- sign in / create account ---------- */
+function renderAuth(){
+  const su = authMode === 'signup';
+  const note = DEMO_MODE
+    ? `<div class="demo-note"><b>Demo mode.</b> ${FB_CONFIGURED ? 'Firebase could not be loaded, so' : 'Cloud accounts are not connected yet, so'} accounts and progress are stored in this browser only.</div>` : '';
+  main.innerHTML = `<div class="auth-wrap"><div class="auth-card">
+    <img class="auth-logo" src="${LOGO}" alt="GreenMetrics">
+    <h1>${su ? 'Create your account' : 'Sign in to the course'}</h1>
+    <p class="mut">Understanding GRI &amp; IFRS S1/S2 — your progress is saved to your account.</p>
+    ${note}
+    <div class="auth-tabs"><button type="button" class="${su?'':'on'}" onclick="setAuthMode('signin')">Sign in</button><button type="button" class="${su?'on':''}" onclick="setAuthMode('signup')">Create account</button></div>
+    <form id="authForm" novalidate>
+      ${su ? '<label for="fullname">Full name (shown on your certificate)</label><input id="fullname" name="fullname" autocomplete="name" placeholder="e.g. Ayesha Khan">' : ''}
+      <label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com">
+      <label for="password">Password</label><input id="password" name="password" type="password" autocomplete="${su?'new-password':'current-password'}" placeholder="At least 6 characters">
+      <button class="btn btn-primary" type="submit">${su ? 'Create account' : 'Sign in'}</button>
+      <div id="authMsg" role="alert"></div>
+    </form>
+    ${su ? '' : '<div class="auth-links"><a onclick="forgotPassword()">Forgot your password?</a></div>'}
+  </div></div>`;
+  document.getElementById('authForm').addEventListener('submit', submitAuth);
+}
+function setAuthMode(m){ authMode = m; renderAuth(); }
+async function submitAuth(ev){
+  ev.preventDefault();
+  const f = ev.target, msg = document.getElementById('authMsg'), btn = f.querySelector('button[type=submit]');
+  msg.className = ''; msg.textContent = '';
+  const email = f.elements.email.value.trim(), pw = f.elements.password.value;
+  const name = f.elements.fullname ? f.elements.fullname.value.trim() : '';
+  if(!/^\S+@\S+\.\S+$/.test(email)){ msg.textContent = authMsg({ code:'auth/invalid-email' }); return; }
+  if(authMode === 'signup' && name.length < 2){ msg.textContent = 'Please enter your full name — it will appear on your certificate.'; return; }
+  if(pw.length < 6){ msg.textContent = authMsg({ code: authMode==='signup' ? 'auth/weak-password' : 'auth/invalid-credential' }); return; }
+  btn.disabled = true;
+  try{ if(authMode === 'signup') await Backend.signUp(name, email, pw); else await Backend.signIn(email, pw); }
+  catch(e){ msg.textContent = authMsg(e); btn.disabled = false; }
+}
+async function forgotPassword(){
+  const msg = document.getElementById('authMsg'), email = document.getElementById('email').value.trim();
+  msg.className = ''; msg.textContent = '';
+  if(!/^\S+@\S+\.\S+$/.test(email)){ msg.textContent = 'Type your email above first, then click "Forgot your password?".'; return; }
+  try{ await Backend.reset(email); msg.className = 'ok'; msg.textContent = 'If an account exists for that email, a reset link is on its way.'; }
+  catch(e){ msg.textContent = authMsg(e); }
+}
+
+/* ---------- video (plays inside the course via the YouTube player API) ---------- */
+function resolveVideoId(v){
+  if(!v) return null;
+  v = String(v).trim();
+  if(/^[a-zA-Z0-9_-]{11}$/.test(v)) return v;
+  const m = v.match(/(?:youtu\.be\/|v=|\/embed\/|\/shorts\/)([a-zA-Z0-9_-]{11})/);
+  return m ? m[1] : null;
+}
+function videoBlock(lesson, vid){
+  if(vid) return `<div class="video-wrap"><div id="ytPlayer"></div></div><div class="video-note" id="videoNote" hidden></div>`;
+  return `<div class="video-wrap vph"><div class="vph-inner">
+    <div class="vph-icon">▶</div>
+    <div><strong>${lesson.title} — video</strong><span>This lesson's video is coming soon. The full written lesson is below — nothing is blocked while you wait.</span></div>
+  </div></div>`;
+}
+let ytPromise = null;
+function loadYT(){
+  if(window.YT && window.YT.Player) return Promise.resolve();
+  if(!ytPromise){
+    ytPromise = new Promise((res, rej) => {
+      const prev = window.onYouTubeIframeAPIReady;
+      window.onYouTubeIframeAPIReady = () => { if(prev) prev(); res(); };
+      const s = document.createElement('script'); s.src = 'https://www.youtube.com/iframe_api'; s.onerror = () => rej(new Error('yt load'));
+      document.head.appendChild(s);
+      setTimeout(() => rej(new Error('yt timeout')), 12000);
+    });
+  }
+  return ytPromise;
+}
+function videoProblem(id, why){
+  if(!track || track.id !== id) return;
+  track.videoWaived = true;
+  const n = document.getElementById('videoNote');
+  if(n){ n.hidden = false; n.innerHTML = '⚠️ This video could not be played inside the course (' + why + '). It will not block your progress. ' + '<a href="https://www.youtube.com/watch?v=' + track.vid + '" target="_blank" rel="noopener">Watch it on YouTube</a>.'; }
+  refreshHint(); checkComplete();
+}
+function mountVideo(id, vid){
+  loadYT().then(() => {
+    if(!track || track.id !== id) return;
+    const vars = { rel:0, playsinline:1 };
+    if(/^https?:$/.test(location.protocol)) vars.origin = location.origin;
+    track.player = new YT.Player('ytPlayer', {
+      videoId:vid, width:'100%', height:'100%', playerVars:vars,
+      events:{
+        onStateChange: e => { if(e.data === 0 && track && track.id === id){ track.videoDone = true; refreshHint(); checkComplete(); } },
+        onError: () => videoProblem(id, 'embedding may be switched off for this video in YouTube Studio')
+      }
+    });
+  }).catch(() => videoProblem(id, 'YouTube could not be reached'));
+}
+
+/* ---------- views: overview ---------- */
+function renderOverview(){
+  const next = FLAT.find(i => !isDone(i));
+  const outcomes = [
+    "Explain what sustainability reporting is — and why companies do it",
+    "Understand the basic purpose of GRI",
+    "Understand the basic purpose of IFRS S1 and IFRS S2",
+    "Explain impact materiality vs. financial materiality",
+    "Understand how GRI reporting is structured and built",
+    "Understand the IFRS S1/S2 disclosure structure",
+    "Apply both frameworks to a real business case"
+  ];
+  const modRows = COURSE.modules.map(m => {
+    const p = moduleProgress(m), wpct = Math.round(p.done / p.total * 100);
+    return `<div class="mod-row"><span class="mn">${m.name.replace('Module ','M')}</span>
+      <div class="bar"><i style="width:${wpct}%"></i></div><span class="cnt">${p.done}/${p.total}</span></div>`;
+  }).join('');
+  main.innerHTML = `<div class="page" style="padding:0;background:none;border:none;box-shadow:none">
+    <div class="hero">
+      <h1>${COURSE.title}</h1>
+      <p class="sub">${COURSE.subtitle}</p>
+      <div class="herobadges">
+        <span class="hbadge">🎬 10 video lessons + welcome + final project</span>
+        <span class="hbadge">📝 6 module assignments (MCQ)</span>
+        <span class="hbadge">🏁 40-question Final Assessment</span>
+        <span class="hbadge">📥 11 downloadable resources</span>
+        <span class="hbadge">🎓 Certificate at 70% or above</span>
+      </div>
+      <a class="btn btn-primary" href="${next ? itemHref(next) : '#/certificate'}">${next ? (pctDone()>0 ? '▶ Continue where you left off' : '▶ Start the course') : '🎓 View your certificate'}</a>
+      <span style="margin-left:8px;font-size:13px;opacity:.85">Welcome, <b>${esc(currentUser.name)}</b> · progress <b>${pctDone()}%</b></span>
+    </div>
+    <div class="osec"><h2>🎯 What you'll be able to do</h2>
+      <div class="ogrid">${outcomes.map((o,i)=>`<div class="oc"><span class="n">${i+1}.</span><span>${o}</span></div>`).join('')}</div>
+    </div>
+    <div class="osec"><h2>👥 Who this is for</h2>
+      <p>Beginners in ESG and sustainability roles, finance and accounting professionals moving into reporting work, students, and consultants building advisory capability. <strong>No prerequisites</strong> — if you understand what a company is, you're ready.</p>
+      <p><strong>Who it's not for:</strong> anyone seeking detailed Scope 1/2/3 calculations, climate scenario analysis, ESRS/CSRD, or assurance. Those are future courses — this one builds the foundation they sit on.</p>
+    </div>
+    <div class="osec"><h2>🗺 Curriculum & your progress</h2>
+      <div class="mod-list">${modRows}</div>
+    </div>
+  </div>`;
+}
+
+/* ---------- views: lesson (progress is tracked automatically) ---------- */
+let track = null;
+function renderLesson(id){
+  const item = findItem(id), done = isDone(item);
+  const hasSlot = VIDEOS.hasOwnProperty(item.id);
+  const vid = hasSlot ? resolveVideoId(VIDEOS[item.id]) : null;
+  const res = RESOURCES[item.id];
+  main.innerHTML = `<div class="page">
+    <div class="crumbs">${item.module.name}</div>
+    <h1 class="pagetitle">${item.title}</h1>
+    <div class="metas"><span class="chip">⏱ ${item.minutes} min</span><span class="chip">${hasSlot?'🎬 Video + written lesson':'📖 Written lesson'}</span><span class="chip" id="doneChip" ${done?'':'hidden'}>✅ Completed</span></div>
+    <div class="trackhint" id="trackHint"></div>
+    ${hasSlot ? videoBlock(item, vid) : ''}
+    <article class="lesson-body">${item.html}</article>
+    <div class="takeaway"><b>🔑 Key takeaway — </b>${item.takeaway}</div>
+    ${res ? `<div class="res-card"><div class="res-ic">📥</div><div style="flex:1"><h4>${res.title}</h4><p>${res.desc}</p>
+        <div class="res-btns">
+          <button class="btn btn-primary btn-sm" onclick="dlRes('${item.id}')">⬇ Download</button>
+          <button class="btn btn-ghost btn-sm" onclick="openRes('${item.id}')">🖨 Open & print</button>
+        </div></div></div>` : ''}
+    <div id="endSentinel" style="height:1px"></div>
+    ${prevNextButtons(item)}
+  </div>`;
+  startTracking(item, vid);
+}
+function startTracking(item, vid){
+  const done = isDone(item);
+  track = { id:item.id, vid, done, seen:false, timeOk:false, needVideo:!!vid && !done, videoDone:false, videoWaived:false, player:null, observer:null, timer:null };
+  if(vid) mountVideo(item.id, vid);
+  if(!done){
+    const id = item.id;
+    track.timer = setTimeout(() => { if(track && track.id === id){ track.timeOk = true; refreshHint(); checkComplete(); } }, MIN_SECONDS_ON_LESSON * 1000);
+    const s = document.getElementById('endSentinel');
+    if('IntersectionObserver' in window && s){
+      track.observer = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting && track && track.id === id){ track.seen = true; refreshHint(); checkComplete(); } }));
+      track.observer.observe(s);
+    } else { track.seen = true; }
+  }
+  refreshHint();
+}
+function refreshHint(){
+  const el = document.getElementById('trackHint');
+  if(!el || !track) return;
+  if(track.done){ el.className = 'trackhint ok'; el.innerHTML = '✅ Lesson completed — your progress is saved automatically.'; return; }
+  const parts = [];
+  if(track.needVideo){ const y = track.videoDone || track.videoWaived; parts.push(`<span class="th ${y?'y':''}">${y?'✓':'○'} Watch the video to the end</span>`); }
+  const y2 = track.seen && track.timeOk;
+  parts.push(`<span class="th ${y2?'y':''}">${y2?'✓':'○'} Read to the end of the lesson</span>`);
+  el.className = 'trackhint';
+  el.innerHTML = '<b>This lesson completes automatically:</b> ' + parts.join(' ');
+}
+function checkComplete(){
+  if(!track || track.done) return;
+  const pageOk = track.seen && track.timeOk;
+  const videoOk = !track.needVideo || track.videoDone || track.videoWaived;
+  if(pageOk && videoOk) finishLesson(track.id);
+}
+function finishLesson(id){
+  if(!data.completed) data.completed = [];
+  if(!data.completed.includes(id)) data.completed.push(id);
+  track.done = true;
+  persist(); refreshHint();
+  const c = document.getElementById('doneChip'); if(c) c.hidden = false;
+  renderSidebar(); updateHeader();
+  toast('✓ Lesson completed');
+}
+
+/* ---------- views: assignments & final assessment (all multiple choice) ---------- */
+let tState = null;
+function renderTest(kind, id){
+  if(kind === 'final') id = 'final';
+  const def = kind === 'final' ? FINAL : QUIZZES[id];
+  let qs = def.questions.map(q => ({ q:q.q, options:q.options.slice(), answer:q.answer, why:q.why, mod:q.mod }));
+  if(def.shuffle){
+    shuffle(qs);
+    qs = qs.map(q => { const idx = shuffle(q.options.map((_, i) => i)); return { ...q, options:idx.map(i => q.options[i]), answer:idx.indexOf(q.answer) }; });
+  }
+  tState = { kind, id, def, qs };
+  const qhtml = qs.map((q, i) => `<div class="qcard" id="qc${i}"><div class="qnum">Question ${i+1} of ${qs.length}</div><div class="qtext">${q.q}</div>` +
+    q.options.map((o, j) => `<label class="opt" id="opt${i}_${j}"><input type="radio" name="q${i}" value="${j}"><span class="letter">${String.fromCharCode(65+j)}</span><span>${o}</span></label>`).join('') +
+    `<div class="qwhy" id="why${i}" hidden></div></div>`).join('');
+  const isFinal = kind === 'final';
+  const idx = FLAT.findIndex(i => i.id === id);
+  const prevBest = isFinal ? (data.final && data.final.best != null ? data.final.best + ' / ' + data.final.total : null)
+                           : (data.assignments && data.assignments[id] ? data.assignments[id].score + ' / ' + data.assignments[id].total : null);
+  main.innerHTML = `<div class="page">
+    <div class="crumbs">${isFinal ? 'Final Assessment' : 'Module ' + def.afterModule + ' assignment'}</div>
+    <h1 class="pagetitle">${def.title}</h1>
+    <div class="metas"><span class="chip">📝 ${qs.length} multiple-choice questions</span><span class="chip">🎯 Pass mark: ${def.passMark}%</span><span class="chip">🔁 Retake anytime — best score saved</span>${prevBest ? `<span class="chip">Best so far: ${prevBest}</span>` : ''}</div>
+    <p>${isFinal
+      ? 'Choose one answer for every question, then press <strong>Submit</strong>. Questions and answer options are shuffled on every attempt. You need <strong>' + def.passMark + '%</strong> (' + Math.ceil(qs.length * def.passMark / 100) + ' of ' + qs.length + ') to unlock your certificate. You can retake the assessment as many times as you need.'
+      : 'Choose one answer for every question, then press <strong>Submit</strong>. Answers are graded instantly and every question is explained afterwards.'}</p>
+    <div class="ansbar"><span id="ansCount">0 / ${qs.length} answered</span><div class="bar"><i id="ansFill"></i></div></div>
+    <div id="quizMsg" hidden>Please answer every question before submitting — unanswered questions are highlighted in red.</div>
+    <form id="quizForm" onsubmit="return false">${qhtml}</form>
+    <div style="margin-top:18px"><button class="btn btn-primary" id="submitQuiz">Submit ${isFinal ? 'assessment' : 'assignment'}</button></div>
+    <div class="results" id="quizResults" hidden></div>
+    ${prevNextButtons({ id })}
+  </div>`;
+  document.getElementById('quizForm').addEventListener('change', e => {
+    const card = e.target.closest('.qcard'); if(card) card.classList.remove('miss');
+    const n = qs.filter((_, i) => document.querySelector('input[name="q'+i+'"]:checked')).length;
+    document.getElementById('ansCount').textContent = n + ' / ' + qs.length + ' answered';
+    document.getElementById('ansFill').style.width = Math.round(n / qs.length * 100) + '%';
+  });
+  document.getElementById('submitQuiz').onclick = gradeTest;
+}
+function gradeTest(){
+  const { kind, id, def, qs } = tState;
+  const unanswered = [];
+  qs.forEach((q, i) => { if(!document.querySelector('input[name="q'+i+'"]:checked')) unanswered.push(i); });
+  if(unanswered.length){
+    document.getElementById('quizMsg').hidden = false;
+    unanswered.forEach(i => document.getElementById('qc'+i).classList.add('miss'));
+    document.getElementById('qc'+unanswered[0]).scrollIntoView({ behavior:'smooth', block:'center' });
+    return;
+  }
+  document.getElementById('quizMsg').hidden = true;
+  let score = 0; const byMod = {};
+  qs.forEach((q, i) => {
+    const chosen = parseInt(document.querySelector('input[name="q'+i+'"]:checked').value);
+    const ok = chosen === q.answer;
+    if(ok) score++;
+    document.getElementById('opt'+i+'_'+q.answer).classList.add('right');
+    if(!ok) document.getElementById('opt'+i+'_'+chosen).classList.add('wrong');
+    document.querySelectorAll('input[name="q'+i+'"]').forEach(r => r.disabled = true);
+    const why = document.getElementById('why'+i); why.hidden = false;
+    why.innerHTML = '<b>' + (ok ? '✅ Correct. ' : '❌ Not quite. ') + '</b>' + (q.why || '');
+    if(q.mod){ byMod[q.mod] = byMod[q.mod] || { s:0, t:0 }; byMod[q.mod].t++; if(ok) byMod[q.mod].s++; }
+  });
+  document.getElementById('submitQuiz').disabled = true;
+  const total = qs.length, pct = Math.round(score / total * 100), passed = pct >= def.passMark;
+  let firstPass = false;
+  if(kind === 'final'){
+    const f = data.final || { attempts:0 };
+    f.attempts = (f.attempts || 0) + 1; f.total = total; f.best = Math.max(score, f.best || 0);
+    if(passed && !f.passed){ f.passed = true; f.passedOn = new Date().toISOString(); f.passScore = score; f.certId = genCertId(); firstPass = true; }
+    data.final = f;
+  } else {
+    data.assignments = data.assignments || {};
+    const prev = data.assignments[id] || {};
+    data.assignments[id] = { score:Math.max(score, prev.score || 0), total, passed: !!prev.passed || passed };
+  }
+  persist(); renderSidebar(); updateHeader();
+  const prevPassed = kind === 'final' ? (data.final.passed && !firstPass) : false;
+  const box = document.getElementById('quizResults');
+  box.hidden = false; box.className = 'results ' + (passed ? 'pass' : 'fail');
+  const modNames = {}; COURSE.modules.forEach(m => modNames[m.id] = m.name.replace(/^Module \d+ — /, ''));
+  const breakdown = kind === 'final' ? '<div class="modbreak">' + Object.keys(byMod).map(k => `<div><span>${modNames[k]}</span><b>${byMod[k].s}/${byMod[k].t}</b></div>`).join('') + '</div>' : '';
+  let actions;
+  if(kind === 'final'){
+    actions = passed
+      ? `<a class="btn btn-primary" href="#/certificate">🎓 View your certificate</a><button class="btn btn-ghost" onclick="renderTest('final')">🔁 Retake</button>`
+      : `<button class="btn btn-primary" onclick="renderTest('final')">🔁 Retake the assessment</button><a class="btn btn-ghost" href="#/">Review the course</a>`;
+  } else {
+    actions = `<button class="btn btn-ghost" onclick="renderTest('quiz','${id}')">🔁 Retake</button><button class="btn btn-primary" onclick="goToNext({id:'${id}'})">${passed ? 'Continue →' : 'Skip for now →'}</button>`;
+  }
+  box.innerHTML = `<div class="scorebig">${pct}%</div>
+    <div style="font-weight:700;margin-top:4px">${passed ? (kind==='final' ? '🎉 You passed the Final Assessment — your certificate is unlocked.' : '🎉 Passed! Nicely done.') : 'Not quite — you need ' + def.passMark + '% to pass. You can retake it right now; your best score is saved.'}</div>
+    <div style="font-size:13.5px;color:var(--mut);margin-top:4px">Score: ${score} / ${total} · Pass mark: ${def.passMark}%${prevPassed ? ' · ✅ You have already passed this' : ''}</div>
+    ${breakdown}<div class="rbtns">${actions}</div>`;
+  box.scrollIntoView({ behavior:'smooth', block:'center' });
+}
+function renderFinal(){
+  if(!finalUnlocked() && !certificateEarned()){
+    const remaining = FLAT.filter(i => (i.type==='lesson' || i.type==='quiz') && !isDone(i));
+    const first = remaining[0];
+    main.innerHTML = `<div class="page">
+      <div class="crumbs">Final Assessment</div>
+      <h1 class="pagetitle">🔒 Final Assessment — locked</h1>
+      <div class="lockbox"><h3>Finish the course first</h3><p style="margin:0">The Final Assessment (40 multiple-choice questions, 70% to pass) unlocks once every lesson is complete and every module assignment is passed.</p></div>
+      ${remaining.map(i => `<div class="chk-row bad"><span class="box"></span><span>${i.type==='quiz' ? '📝 ' : ''}${i.title}</span></div>`).join('')}
+      <a class="btn btn-primary" style="margin-top:14px" href="${itemHref(first)}">▶ Pick up where you left off</a>
+    </div>`;
+    return;
+  }
+  renderTest('final', 'final');
+}
+
+/* ---------- resources ---------- */
+function standaloneDoc(title, body){
+  return `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${title}</title>
+<style>
+body{font-family:Arial,Helvetica,sans-serif;color:#1c2b24;margin:0;background:#fff;line-height:1.55}
+.wrap{max-width:900px;margin:0 auto;padding:34px 28px}
+h1{color:#1B4332;font-size:26px;margin:0 0 4px}h2{color:#2D6A4F;font-size:18px;margin:26px 0 8px}
+p{margin:0 0 12px}.mut{color:#5c6b62;font-size:13.5px}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13.5px}
+th{background:#1B4332;color:#fff;text-align:left;padding:9px 10px;font-size:12.5px}
+td{border:1px solid #dfe8e0;padding:8px 10px;vertical-align:top}
+tr:nth-child(even) td{background:#f6faf6}
+.brandline{letter-spacing:.25em;text-transform:uppercase;font-size:11px;color:#2D6A4F;font-weight:bold;margin-bottom:14px}
+.hint{background:#eaf7ee;border:1px solid #d8f3dc;border-radius:8px;padding:10px 14px;font-size:13.5px;margin:12px 0}
+.box{border:1.5px solid #dfe8e0;border-radius:8px;padding:10px 12px;margin:6px 0;font-size:14px}
+.check{display:flex;gap:10px;align-items:flex-start;margin:7px 0;font-size:14.5px}
+.check input{margin-top:3px;transform:scale(1.15);accent-color:#2D6A4F}
+.toolbar{margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid #dfe8e0}
+.toolbar button{background:#2D6A4F;color:#fff;border:0;border-radius:8px;padding:9px 16px;font-weight:bold;cursor:pointer;font-size:14px}
+@media print{.toolbar{display:none}.wrap{padding:0;max-width:100%}}
+</style></head><body><div class="wrap">
+<div class="toolbar"><button onclick="window.print()">🖨 Print / Save as PDF</button></div>
+<div class="brandline">🌿 GreenMetrics — Understanding GRI &amp; IFRS S1/S2</div>
+ ${body}
+<p class="mut" style="margin-top:26px;border-top:1px solid #dfe8e0;padding-top:12px">© GreenMetrics — Understanding GRI &amp; IFRS S1/S2. For personal learning use.</p>
+</div></body></html>`;
+}
+const RESOURCES = {
+  "1.1": { file:'GreenMetrics_01_Framework_Comparison_Sheet.html', title:'Framework Comparison Sheet',
+    desc:'A one-page reference comparing GRI, IFRS S1 and IFRS S2 — lens, audience, materiality and structure. Keep it open beside every lesson.',
+    build: () => standaloneDoc('Framework Comparison Sheet', `
+<h1>Framework Comparison Sheet</h1><p class="mut">GRI vs IFRS S1 vs IFRS S2 — one-page reference — companion to Lesson 1.1</p>
+<table>
+<tr><th style="width:19%"></th><th style="width:27%">GRI</th><th style="width:27%">IFRS S1</th><th style="width:27%">IFRS S2</th></tr>
+<tr><td><b>Full name</b></td><td>Global Reporting Initiative Standards</td><td>General Requirements for Disclosure of Sustainability-related Financial Information</td><td>Climate-related Disclosures</td></tr>
+<tr><td><b>Covers</b></td><td>All significant impacts on the economy, environment &amp; people</td><td>Sustainability-related risks &amp; opportunities (all topics)</td><td>Climate-related risks &amp; opportunities only</td></tr>
+<tr><td><b>Main question</b></td><td>What impact does the company have on the world?</td><td>How can sustainability issues affect the company's prospects?</td><td>How can climate affect the company's prospects?</td></tr>
+<tr><td><b>Lens direction</b></td><td>Company → World</td><td>World → Company</td><td>World → Company (climate only)</td></tr>
+<tr><td><b>Primary audience</b></td><td>Broad stakeholders — communities, employees, NGOs, regulators, investors</td><td>Investors, lenders, creditors</td><td>Investors, lenders, creditors</td></tr>
+<tr><td><b>Materiality</b></td><td>Impact materiality — severity (scale, scope, irremediability) + likelihood</td><td>Financial materiality — effect on cash flows, financing, prospects</td><td>Financial materiality (climate-specific)</td></tr>
+<tr><td><b>Structure</b></td><td>Universal → Sector → Topic Standards; deep reporting on each material topic</td><td>Four pillars: Governance, Strategy, Risk Management, Metrics &amp; Targets</td><td>Same four pillars, with climate-specific detail</td></tr>
+<tr><td><b>Relationship</b></td><td>Standalone; often used alongside ISSB standards</td><td>Applied together with IFRS S2</td><td>Applied together with IFRS S1</td></tr>
+<tr><td><b>Effective</b></td><td>—</td><td>Periods beginning on/after 1 Jan 2024</td><td>Periods beginning on/after 1 Jan 2024</td></tr>
+</table>
+<div class="hint">🧭 Remember: the goal isn't to memorize which framework is "better" — it's to understand what question each framework is designed to answer.</div>`)},
+  "1.2": { file:'GreenMetrics_02_Reporting_Purpose_Worksheet.html', title:'Sustainability Reporting Purpose Worksheet',
+    desc:'Turn a bare number into a full story using the four questions from this lesson, plus the fifth question — who needs this and why.',
+    build: () => standaloneDoc('Sustainability Reporting Purpose Worksheet', `
+<h1>Sustainability Reporting Purpose Worksheet</h1><p class="mut">Companion to Lesson 1.2 — turning raw information into a decision-useful story</p>
+<div class="hint">For any sustainability figure or issue, answer the four questions below — then ask a fifth: who needs this information, and why? That fifth question is what starts pulling the issue toward GRI, IFRS S1/S2, or both.</div>
+<table>
+<tr><th style="width:16%">Issue / figure</th><th style="width:18%">1. What's happening?</th><th style="width:18%">2. What effect is it having?</th><th style="width:18%">3. What is the company doing?</th><th style="width:15%">4. What could this mean for the future?</th><th style="width:15%">5. Who needs this, and why?</th></tr>
+<tr><td>ex. Water use</td><td>500,000 m³/yr, rising</td><td>Operating in a water-stressed region</td><td>Recycling programme piloted last year</td><td>Scarcity could disrupt production</td><td>Investors (cost/production risk) and community (access to water)</td></tr>
+ ${[1,2,3,4,5].map(()=>`<tr><td>&nbsp;</td><td></td><td></td><td></td><td></td><td></td></tr>`).join('')}
+</table>
+<p class="mut">Tip: if column 5 names investors or lenders, the issue is heading toward IFRS S1/S2. If it names communities, employees or the environment, it's heading toward GRI. Many rows will name both.</p>`)},
+  "2.1": { file:'GreenMetrics_03_Materiality_Definitions_Cheat_Sheet.html', title:'Materiality Definitions Cheat Sheet',
+    desc:'Side-by-side definitions of impact materiality (GRI) and financial materiality (IFRS S1), with the worked water example and a quick self-test.',
+    build: () => standaloneDoc('Materiality Definitions Cheat Sheet', `
+<h1>Materiality Definitions Cheat Sheet</h1><p class="mut">Companion to Lesson 2.1</p>
+<div class="box"><b>GRI — Impact materiality:</b> How significant is the company's effect on people, the environment, or the economy? Judged independently of any financial consequence.</div>
+<div class="box"><b>IFRS S1 — Financial materiality:</b> Could this issue reasonably affect the decisions of investors, lenders and creditors — i.e. could it plausibly touch cash flow, financing, or cost of capital?</div>
+<h2>Worked example — water in a water-stressed region</h2>
+<table>
+<tr><th style="width:50%">GRI test</th><th style="width:50%">IFRS S1 test</th></tr>
+<tr><td>Is the water use damaging the environment or hurting nearby people? If yes → likely material.</td><td>Could scarcity disrupt production or raise costs? If water is cheap, secure, and unregulated → may not be material, even though the impact is real.</td></tr>
+</table>
+<h2>Quick self-test</h2>
+<div class="check"><input type="checkbox"><span>Can I state the GRI question and the IFRS S1 question separately, without mixing them?</span></div>
+<div class="check"><input type="checkbox"><span>Can I give an example that's material under GRI but not IFRS S1?</span></div>
+<div class="check"><input type="checkbox"><span>Can I give an example that's material under IFRS S1 but not GRI?</span></div>
+<div class="check"><input type="checkbox"><span>Can I explain why an issue can honestly be "yes" under one test and "no" under the other, at the same time?</span></div>`)},
+  "2.2": { file:'GreenMetrics_04_Materiality_Worksheet.html', title:'Materiality Worksheet',
+    desc:'One row per issue: run the GRI impact test, then the IFRS financial test, then record your conclusions. Reused in the final assignment.',
+    build: () => standaloneDoc('Materiality Worksheet', `
+<h1>Materiality Worksheet</h1>
+<p class="mut">Companion to Lesson 2.2. Instructions: one row per issue. Run the GRI test (columns 2–5), then the IFRS test (column 6), then record conclusions (columns 7–8). An issue can be material under one, both, or neither — the tests are independent.</p>
+<div class="hint"><b>The GRI test:</b> How significant is the company's impact on people, environment &amp; economy? Judge severity by <b>scale</b> (how bad), <b>scope</b> (how widespread), <b>irremediability</b> (how hard to fix) + <b>likelihood</b>.<br>
+<b>The IFRS S1/S2 test:</b> Could this reasonably affect the company's prospects? <b>Build the chain:</b> issue → operational consequence → financial consequence. No plausible chain? Probably not material.</div>
+<table>
+<tr><th style="width:3%">#</th><th style="width:16%">Sustainability issue</th><th style="width:17%">Impact on people / environment / economy (what &amp; who)</th><th style="width:12%">Severity (scale / scope / irremediability)</th><th style="width:9%">Likelihood</th><th style="width:17%">Potential financial effect (build the chain)</th><th style="width:13%">GRI material? (Yes / No / Depends)</th><th style="width:13%">IFRS S1/S2 material? (Yes / No / Depends)</th></tr>
+<tr><td>ex.</td><td>Water consumption</td><td>Depletes local source; community access reduced</td><td>High scale, regional scope, hard to remedy</td><td>High — ongoing</td><td>Scarcity may disrupt production; costs may rise</td><td>Yes</td><td>Depends — build the chain</td></tr>
+ ${[1,2,3,4,5,6,7,8].map(n=>`<tr><td>${n}</td><td>&nbsp;</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>`).join('')}
+</table>
+<p class="mut">Tip: expect a mix. Some issues GRI-only, some IFRS-only, some both — for different reasons. If everything came out "both", look again at the two lenses.</p>`)},
+  "3.1": { file:'GreenMetrics_05_GRI_Three_Layer_Map.html', title:'GRI Three-Layer Reference Map',
+    desc:'A blank template for mapping Universal, Sector and Topic Standards onto your own company or a client — with the textile-mill example filled in as a guide.',
+    build: () => standaloneDoc('GRI Three-Layer Reference Map', `
+<h1>GRI Three-Layer Reference Map</h1><p class="mut">Companion to Lesson 3.1</p>
+<table>
+<tr><th style="width:16%">Layer</th><th style="width:34%">What it covers</th><th style="width:25%">Worked example — textile mill</th><th style="width:25%">Your company / client</th></tr>
+<tr><td><b>1. Universal Standards</b></td><td>Applies to every company: reporting foundations, general disclosures, how materiality is determined</td><td>General reporting foundation; how the company determines materiality</td><td>&nbsp;</td></tr>
+<tr><td><b>2. Sector Standards</b></td><td>Industry-specific guidance on which topics are likely material</td><td>Textile/apparel sector considerations</td><td>&nbsp;</td></tr>
+<tr><td><b>3. Topic Standards</b></td><td>The specific material topics that survived the materiality assessment</td><td>Energy, Water &amp; Effluents, Occupational Health &amp; Safety, Emissions, Human Rights in the supply chain</td><td>&nbsp;</td></tr>
+</table>
+<div class="hint">💡 Work top to bottom: start broad (Universal), narrow by industry (Sector), then get specific to what's actually material for this business (Topic). Don't try to fill in Topic Standards before you've thought through Sector.</div>`)},
+  "3.2": { file:'GreenMetrics_06_Reporting_Starter_Checklist.html', title:'Sustainability Reporting Starter Checklist',
+    desc:"A practical pre-reporting checklist covering GRI's seven-step process: understand the business, assess materiality, assign data owners, build the evidence trail.",
+    build: () => standaloneDoc('Reporting Starter Checklist', `
+<h1>Sustainability Reporting Starter Checklist</h1>
+<p class="mut">Companion to Lesson 3.2. Work through these before and while you prepare any sustainability report. Tick items off as you go — this file is interactive when opened in a browser.</p>
+<h2>Phase 1 — Understand</h2>
+<div class="check"><input type="checkbox"><span>Understand the business — products, operations, workforce, customers</span></div>
+<div class="check"><input type="checkbox"><span>Map the value chain — suppliers → operations → product end-of-life</span></div>
+<h2>Phase 2 — Assess</h2>
+<div class="check"><input type="checkbox"><span>Identify impacts (environmental, social, economic) across the value chain</span></div>
+<div class="check"><input type="checkbox"><span>Identify sustainability-related risks and opportunities (World → Company)</span></div>
+<div class="check"><input type="checkbox"><span>Assess materiality — run <b>both</b> tests independently (GRI impact / IFRS financial)</span></div>
+<div class="check"><input type="checkbox"><span>Document the reasoning behind every include / exclude decision</span></div>
+<h2>Phase 3 — Prepare</h2>
+<div class="check"><input type="checkbox"><span>Identify relevant disclosures (GRI Topic Standards / IFRS four pillars: G-S-R-M)</span></div>
+<div class="check"><input type="checkbox"><span>Identify data requirements for every disclosure</span></div>
+<div class="check"><input type="checkbox"><span>Assign a data owner for each data point</span></div>
+<div class="check"><input type="checkbox"><span>Establish an evidence trail for every reported figure</span></div>
+<div class="check"><input type="checkbox"><span>For GRI topics: capture policies, commitments, actions and performance — not just numbers</span></div>
+<div class="check"><input type="checkbox"><span>Review the draft against the four questions: what's happening, what impact, what's being done, what it means for the future</span></div>`)},
+  "4.1": { file:'GreenMetrics_07_IFRS_S1_Scope_Quick_Reference.html', title:'IFRS S1 Scope & Test Quick Reference',
+    desc:"A one-pager on what IFRS S1 covers, who it's written for, its single consistent test, and the effective date — plus a mini worked example.",
+    build: () => standaloneDoc('IFRS S1 Scope & Test Quick Reference', `
+<h1>IFRS S1 Scope &amp; Test Quick Reference</h1><p class="mut">Companion to Lesson 4.1</p>
+<table>
+<tr><th style="width:28%">Question</th><th style="width:72%">Answer</th></tr>
+<tr><td><b>Full name</b></td><td>General Requirements for Disclosure of Sustainability-related Financial Information</td></tr>
+<tr><td><b>What it covers</b></td><td>Sustainability-related risks and opportunities broadly — water, human capital, labour, supply chain, technology, reputation, regulation</td></tr>
+<tr><td><b>Who it's for</b></td><td>Investors, lenders, and other creditors — capital markets, not the general public</td></tr>
+<tr><td><b>The one test</b></td><td>Could this issue reasonably be expected to affect the company's prospects (cash flows, financing, future performance)?</td></tr>
+<tr><td><b>Effective date</b></td><td>Annual reporting periods beginning on or after 1 January 2024 (early application allowed if IFRS S2 is applied alongside it)</td></tr>
+</table>
+<h2>Mini worked example</h2>
+<p><b>Issue:</b> a key supplier is based in a region facing new labour regulation.<br><b>IFRS S1 test:</b> could this raise the company's procurement costs, delay shipments, or force a costly change of supplier? If yes to any — it's in scope.</p>
+<div class="hint">💡 If you can't trace a plausible route from the issue to cash flow, financing, or cost of capital, it's probably outside IFRS S1's scope — even if it's a serious real-world issue under GRI.</div>`)},
+  "5.1": { file:'GreenMetrics_08_Physical_vs_Transition_Risk_Worksheet.html', title:'Physical vs Transition Risk Worksheet',
+    desc:'Classify climate risk examples as physical or transition, then practice building the chain from climate issue to financial consequence.',
+    build: () => standaloneDoc('Physical vs Transition Risk Worksheet', `
+<h1>Physical vs Transition Risk Worksheet</h1><p class="mut">Companion to Lesson 5.1</p>
+<div class="box"><b>Physical risk:</b> the direct physical effects of climate change — flooding, extreme heat, drought, storms, rising sea levels.</div>
+<div class="box"><b>Transition risk:</b> risk from the shift to a lower-carbon economy — carbon pricing, tightening regulation, changing customer preferences, new low-carbon technology.</div>
+<h2>Part 1 — Classify each</h2>
+<table>
+<tr><th style="width:60%">Event</th><th style="width:40%">Physical / Transition?</th></tr>
+${["A hurricane damages a coastal warehouse","A new carbon tax raises production costs","Major customers switch to greener suppliers","A multi-year drought dries up a river the factory depends on","A competitor's low-carbon product line takes market share","Extreme heat reduces outdoor worker productivity"].map(e=>`<tr><td>${e}</td><td>&nbsp;</td></tr>`).join('')}
+</table>
+<h2>Part 2 — Build the chain</h2>
+<p class="mut">For any climate issue affecting your company or case study, complete: <b>Climate issue → Operational consequence → Financial consequence.</b></p>
+<table>
+<tr><th style="width:33%">Climate issue</th><th style="width:33%">Operational consequence</th><th style="width:34%">Financial consequence</th></tr>
+<tr><td>ex. Extreme heat</td><td>Worker productivity falls</td><td>Production falls → revenue may fall</td></tr>
+${[1,2,3].map(()=>`<tr><td>&nbsp;</td><td></td><td></td></tr>`).join('')}
+</table>`)},
+  "5.2": { file:'GreenMetrics_09_GSRM_Disclosure_Template.html', title:'Governance–Strategy–Risk–Metrics Disclosure Template',
+    desc:'A fill-in template for writing up any sustainability issue against the four pillars every IFRS S1/S2 disclosure is built from.',
+    build: () => standaloneDoc('G-S-R-M Disclosure Template', `
+<h1>Governance – Strategy – Risk Management – Metrics &amp; Targets Template</h1><p class="mut">Companion to Lesson 5.2. Pick one sustainability issue and complete all four sections.</p>
+<p><b>Issue:</b> _______________________________________________</p>
+<h2>1. Governance</h2>
+<p class="mut">Who oversees this issue? Name the board committee and the management role responsible day to day.</p>
+<div class="box">&nbsp;<br>&nbsp;</div>
+<h2>2. Strategy</h2>
+<p class="mut">How does this issue affect the business model and strategy? What is the company doing in response?</p>
+<div class="box">&nbsp;<br>&nbsp;</div>
+<h2>3. Risk Management</h2>
+<p class="mut">Describe the process: identify → assess (likelihood and impact) → respond → monitor. Is it integrated with enterprise risk management?</p>
+<div class="box">&nbsp;<br>&nbsp;</div>
+<h2>4. Metrics &amp; Targets</h2>
+<p class="mut">What is measured, and what target is the company tracking against?</p>
+<div class="box">&nbsp;<br>&nbsp;</div>
+<div class="hint">🧠 Remember G → S → R → M. Every IFRS S1/S2 disclosure — on any topic — is built from these same four sections.</div>`)},
+  "6.1": { file:'GreenMetrics_10_Case_Study_Analysis_Template.html', title:'Case Study Analysis Template',
+    desc:'A blank version of the PakManufacture worked example — company profile, GRI view, IFRS S1/S2 view, and a comparison table — ready to run on a company of your choice.',
+    build: () => standaloneDoc('Case Study Analysis Template', `
+<h1>Case Study Analysis Template</h1><p class="mut">Companion to Lesson 6.1 — and the foundation for the final assignment</p>
+<h2>Company profile</h2>
+<p>Name: _______________ &nbsp; Sector: _______________ &nbsp; Employees: _______________</p>
+<p>Key operations, locations, supply chain notes:</p>
+<div class="box">&nbsp;<br>&nbsp;<br>&nbsp;</div>
+<h2>GRI view — what impact does the company have?</h2>
+<p class="mut">List significant impacts, then narrow to the material topics that survive severity + likelihood filtering.</p>
+<table><tr><th style="width:50%">Impact identified</th><th style="width:50%">Material topic (if it survives filtering)</th></tr>
+${[1,2,3,4,5].map(()=>`<tr><td>&nbsp;</td><td></td></tr>`).join('')}
+</table>
+<h2>IFRS S1/S2 view — what could affect the company's prospects?</h2>
+<table><tr><th style="width:33%">Sustainability / climate issue</th><th style="width:33%">Operational consequence</th><th style="width:34%">Financial consequence</th></tr>
+${[1,2,3,4,5].map(()=>`<tr><td>&nbsp;</td><td></td><td></td></tr>`).join('')}
+</table>
+<h2>Compare</h2>
+<table><tr><th style="width:34%">Issue</th><th style="width:22%">GRI material?</th><th style="width:22%">IFRS S1/S2 material?</th><th style="width:22%">Why</th></tr>
+${[1,2,3,4,5].map(()=>`<tr><td>&nbsp;</td><td></td><td></td><td></td></tr>`).join('')}
+</table>`)},
+  "7.1": { file:'GreenMetrics_11_Final_Assignment_PakTextile.html', title:'Final Assignment Brief — PakTextile Ltd.',
+    desc:'The complete brief for your portfolio piece: company profile, Parts A/B/C, and guidance. Download it, complete the analysis, and keep it for interviews.',
+    build: () => standaloneDoc('Final Assignment Brief', `
+<h1>Final Assignment — PakTextile Ltd.</h1>
+<p class="mut">A portfolio piece: analyze one company through both frameworks, start to finish.</p>
+<h2>The company</h2>
+<div class="box"><b>PakTextile Ltd.</b> — a Pakistani textile exporter:<br>
+• 2 factories, 1,500 employees<br>
+• High electricity consumption (gas-powered generation plus grid)<br>
+• High water consumption, in a region with increasing water stress<br>
+• International buyers in Europe and North America<br>
+• Imported raw materials (cotton, synthetics) from a global supply chain<br>
+• Documented worker safety concerns on the factory floor<br>
+• Labour issues reported at some raw-material suppliers<br>
+• Facilities and transport routes exposed to flooding<br>
+• Increasing customer demand for low-carbon products</div>
+<h2>Part A — GRI</h2>
+<p>Identify <b>5 potentially material impacts</b>. For each, explain why it's significant using severity (scale, scope, irremediability) plus likelihood.</p>
+<h2>Part B — IFRS S1/S2</h2>
+<p>Identify <b>5 potentially material sustainability-related risks or opportunities</b>. For each, explain the potential business consequence — build the chain: issue → operational consequence → financial consequence.</p>
+<h2>Part C — Compare</h2>
+<p>For each issue you identified: GRI material? IFRS S1/S2 material? Both? Why? Use the Framework Comparison Sheet from Lesson 1.1 to justify your reasoning.</p>
+<div class="hint">💡 Deliverable: a 2–3 page analysis (or the completed Materiality Worksheet and Case Study Analysis Template from earlier lessons). If you're job-hunting in sustainability, this is an interview talking point: <i>"Let me walk you through how I'd assess a textile exporter under both frameworks."</i></div>`)}
+};
+
+function dlRes(id){
+  const r = RESOURCES[id];
+  const blob = new Blob([r.build()], { type:'text/html' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = r.file;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 4000);
+}
+function openRes(id){
+  const blob = new Blob([RESOURCES[id].build()], { type:'text/html' });
+  window.open(URL.createObjectURL(blob), '_blank');
+}
+function renderResources(){
+  main.innerHTML = `<div class="page">
+    <div class="crumbs">Toolkit</div>
+    <h1 class="pagetitle">All Resources</h1>
+    <p style="margin:8px 0 16px">Every lesson has its own downloadable resource, listed here in course order for convenience. Everything is generated right in your browser.</p>
+    ${FLAT.filter(i => RESOURCES[i.id]).map(i => {
+      const r = RESOURCES[i.id];
+      return `<div class="res-card"><div class="res-ic">📥</div><div style="flex:1">
+        <h4>${r.title}</h4><p>${r.desc}</p>
+        <div class="res-btns">
+          <button class="btn btn-primary btn-sm" onclick="dlRes('${i.id}')">⬇ Download</button>
+          <button class="btn btn-ghost btn-sm" onclick="openRes('${i.id}')">🖨 Open & print</button>
+          <a class="btn btn-ghost btn-sm" href="#/lesson/${i.id}">Go to lesson →</a>
+        </div></div></div>`;
+    }).join('')}
+  </div>`;
+}
+
+/* ---------- views: certificate ---------- */
+function certHTML(o){
+  return `<div class="cert-card ${o.sample?'sample':''}" id="certCard">
+    <img class="cert-wm" src="${LOGO}" alt="">
+    <div class="cert-inner">
+      <img class="cert-logo" src="${LOGO}" alt="GreenMetrics">
+      <div class="cbrand">GreenMetrics</div>
+      <div class="ctag">ESG · Data · Impact</div>
+      <h2>Certificate of Completion</h2>
+      <p class="cline">This certifies that</p>
+      <div class="cname">${esc(o.name)}</div>
+      <p class="cline">has successfully completed the course</p>
+      <p class="ctitle">Understanding GRI &amp; IFRS S1/S2</p>
+      <p class="cline">A Practical Introduction to Sustainability Reporting</p>
+      <p class="cline">and passed the Final Assessment with a score of <b>${o.score}%</b></p>
+      <div class="cmeta"><div>Date of completion<b>${o.date}</b></div><div>Certificate ID<b>${o.id}</b></div></div>
+    </div>
+    ${o.sample ? '<div class="cert-stamp">SAMPLE</div>' : ''}
+  </div>`;
+}
+function renderCertificate(){
+  if(!certificateEarned()){
+    const f = data.final;
+    main.innerHTML = `<div class="page">
+      <div class="crumbs">Toolkit</div>
+      <h1 class="pagetitle">🔒 Certificate — locked</h1>
+      <div class="lockbox"><h3>Pass the Final Assessment with 70% or above</h3>
+        <p style="margin:0">Your personalised certificate — with your name, the GreenMetrics logo and watermark — unlocks as soon as you pass.${f && f.best != null ? ' Your best score so far: <b>' + f.best + ' / ' + f.total + '</b>.' : ''}</p></div>
+      <a class="btn btn-primary" href="#/final/final">${finalUnlocked() ? '🏁 Go to the Final Assessment' : '🏁 See what is left before the Final Assessment'}</a>
+      <h3 style="margin:26px 0 4px;font-size:16px">Sample preview</h3>
+      <p class="mut" style="font-size:13.5px;margin-bottom:0">This is how your certificate will look.</p>
+      ${certHTML({ name:'Your Name Here', score:'85', date:'Date of completion', id:'GM-XXXXXX', sample:true })}
+    </div>`;
+    return;
+  }
+  const f = data.final;
+  const date = new Date(f.passedOn).toLocaleDateString(undefined, { year:'numeric', month:'long', day:'numeric' });
+  const score = Math.round((f.passScore != null ? f.passScore : f.best) / f.total * 100);
+  const name = data.certName || data.name || currentUser.name;
+  main.innerHTML = `<div class="page">
+    <div class="crumbs no-print">Toolkit</div>
+    <h1 class="pagetitle no-print">🎓 Your Certificate of Completion</h1>
+    <p class="no-print" style="margin:8px 0 14px">Congratulations — you passed the Final Assessment. Check that your name is spelled the way you want it on the certificate, then print or save it as a PDF.</p>
+    <div class="no-print" style="margin:0 0 6px">
+      <input class="name-input" id="certName" placeholder="Name on certificate" value="${esc(name)}">
+      <button class="btn btn-primary" style="margin-left:8px" onclick="window.print()">🖨 Print / Save as PDF</button>
+    </div>
+    ${certHTML({ name, score, date, id:f.certId || '—', sample:false })}
+  </div>`;
+  document.getElementById('certName').addEventListener('input', function(){
+    data.certName = this.value; persist();
+    document.querySelector('.cert-card .cname').textContent = this.value || 'Your Name';
+  });
+}
+
+/* ---------- boot ---------- */
+document.getElementById('hdrLogo').src = LOGO;
+(function(){ const l = document.createElement('link'); l.rel = 'icon'; l.href = LOGO; document.head.appendChild(l); })();
+route();          // shows the loading screen until the sign-in state is known
+Backend.init(onUser);
+
+</script>
+</body>
+</html>
