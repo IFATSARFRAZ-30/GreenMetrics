@@ -523,6 +523,7 @@ html body.rd .hero .stamp{top:auto !important;bottom:44px !important;right:var(-
 html body.rd td textarea{min-height:64px}
 
 </style>
+<link rel="stylesheet" href="assets/gm-fx.css">
 </head>
 <body>
 <div class="sheet">
@@ -668,12 +669,6 @@ if(document.body.classList.contains('home')&&!rm){
  links.forEach(function(l){l.addEventListener('mouseenter',function(){place(l)})});
  nav.addEventListener('mouseleave',function(){place(act)});}
 }
-var navEl=document.querySelector('nav.tabs');
-if(sheet&&navEl&&!sheet.querySelector('.tick')){
- var t=document.createElement('div');t.className='tick';
- var one='<span>New: What Sustainability Assurance Actually Looks Like</span><span>Free: CBAM / CSRD readiness checklist</span><span>Free: Materiality assessment worksheet</span><span>CSRD · IFRS S1/S2 · GRI · Carbon Accounting</span>';
- t.innerHTML='<div>'+one+one+'</div>';navEl.parentNode.insertBefore(t,navEl.nextSibling);
-}
 var wantsSidebar=document.body.classList.contains('sidebar-page');
 var lead=sheet&&!isHome&&(sheet.querySelector(':scope > header')||sheet.querySelector(':scope > .intro')||sheet.querySelector(':scope > .content'));
 if(lead&&wantsSidebar&&!sheet.querySelector('.mg')){
@@ -725,5 +720,6 @@ if(!rm&&'IntersectionObserver' in window){
 })();
 
 </script>
+<script src="assets/gm-fx.js" defer></script>
 </body>
 </html>
