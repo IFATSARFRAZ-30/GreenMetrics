@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500" role="img" aria-label="Illustration: an assurance file with ticked checks and a magnifying glass">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0c3326"/><stop offset="1" stop-color="#1f7a50"/></linearGradient>
+<radialGradient id="glow" cx=".78" cy=".15" r=".65"><stop offset="0" stop-color="#8ee8b0" stop-opacity=".5"/><stop offset="1" stop-color="#8ee8b0" stop-opacity="0"/></radialGradient>
+<radialGradient id="glow2" cx=".1" cy=".95" r=".6"><stop offset="0" stop-color="#f2c14e" stop-opacity=".22"/><stop offset="1" stop-color="#f2c14e" stop-opacity="0"/></radialGradient>
+<pattern id="dots" width="26" height="26" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.3" fill="#fff" opacity=".13"/></pattern>
+<filter id="sh" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="14" stdDeviation="14" flood-color="#021a12" flood-opacity=".45"/></filter>
+<g id="leaf"><path d="M0 0C-62 -42 -52 -124 0 -156C52 -124 62 -42 0 0Z"/><path d="M0 0V-132" fill="none" stroke="#0c3326" stroke-opacity=".35" stroke-width="3"/></g>
+</defs>
+<style>
+text{font-family:ui-monospace,Menlo,Consolas,monospace}
+.sway{animation:sway 7s ease-in-out infinite;transform-box:fill-box;transform-origin:50% 100%}
+.sway2{animation:sway 9s ease-in-out -3s infinite;transform-box:fill-box;transform-origin:50% 100%}
+@keyframes sway{0%,100%{rotate:-3deg}50%{rotate:4deg}}
+.fl{animation:fl 5s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes fl{0%,100%{translate:0 0}50%{translate:0 -10px}}
+.pulse{animation:pulse 2.4s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes pulse{0%,100%{scale:1}50%{scale:1.16}}
+.tw{animation:tw 2.8s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes tw{0%,100%{opacity:.2;scale:.6}50%{opacity:1;scale:1}}
+.ck0{stroke-dasharray:30;stroke-dashoffset:30;animation:ck 6s ease-in-out 0.0s infinite}.ck1{stroke-dasharray:30;stroke-dashoffset:30;animation:ck 6s ease-in-out 0.7s infinite}.ck2{stroke-dasharray:30;stroke-dashoffset:30;animation:ck 6s ease-in-out 1.4s infinite}.ck3{stroke-dasharray:30;stroke-dashoffset:30;animation:ck 6s ease-in-out 2.0999999999999996s infinite}@keyframes ck{0%{stroke-dashoffset:30}10%,80%{stroke-dashoffset:0}92%,100%{stroke-dashoffset:30}}.mag{animation:mag 6s ease-in-out infinite}@keyframes mag{0%,100%{translate:0 0}50%{translate:-14px -22px}}
+</style>
+<rect width="800" height="500" fill="url(#bg)"/>
+<rect width="800" height="500" fill="url(#dots)"/>
+<rect width="800" height="500" fill="url(#glow)"/>
+<rect width="800" height="500" fill="url(#glow2)"/>
+<use href="#leaf" fill="#3fa863" opacity=".16" transform="translate(40 520) rotate(-18) scale(1.7)" class="sway"/>
+<use href="#leaf" fill="#8ee8b0" opacity=".12" transform="translate(790 520) rotate(22) scale(1.4)" class="sway2"/>
+
+<g filter="url(#sh)" transform="rotate(-4 360 250)"><rect x="210" y="62" width="320" height="376" rx="16" fill="#fbfdfb"/>
+<rect x="210" y="62" width="320" height="58" rx="16" fill="#0f3d2e"/><rect x="210" y="100" width="320" height="20" fill="#0f3d2e"/>
+<text x="240" y="98" font-size="19" font-weight="700" fill="#fbfdfb">ASSURANCE FILE</text><circle cx="262" cy="148" r="15" fill="#dff1e3" stroke="#2f8a4f" stroke-width="2"/><path class="ck0" d="M254 148 l6 7 l12 -14" fill="none" stroke="#2f8a4f" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><text x="290" y="153" font-size="15" font-weight="700" fill="#0f3d2e">Completeness</text><rect x="290" y="162" width="150" height="6" rx="3" fill="#b6cdbb"/><circle cx="262" cy="208" r="15" fill="#dff1e3" stroke="#2f8a4f" stroke-width="2"/><path class="ck1" d="M254 208 l6 7 l12 -14" fill="none" stroke="#2f8a4f" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><text x="290" y="213" font-size="15" font-weight="700" fill="#0f3d2e">Accuracy</text><rect x="290" y="222" width="136" height="6" rx="3" fill="#b6cdbb"/><circle cx="262" cy="268" r="15" fill="#dff1e3" stroke="#2f8a4f" stroke-width="2"/><path class="ck2" d="M254 268 l6 7 l12 -14" fill="none" stroke="#2f8a4f" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><text x="290" y="273" font-size="15" font-weight="700" fill="#0f3d2e">Methodology</text><rect x="290" y="282" width="122" height="6" rx="3" fill="#b6cdbb"/><circle cx="262" cy="328" r="15" fill="#dff1e3" stroke="#2f8a4f" stroke-width="2"/><path class="ck3" d="M254 328 l6 7 l12 -14" fill="none" stroke="#2f8a4f" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><text x="290" y="333" font-size="15" font-weight="700" fill="#0f3d2e">Governance</text><rect x="290" y="342" width="108" height="6" rx="3" fill="#b6cdbb"/>
+<rect x="240" y="384" width="240" height="8" rx="4" fill="#dff1e3"/><rect x="240" y="402" width="170" height="8" rx="4" fill="#dff1e3"/></g>
+<g class="mag"><circle cx="540" cy="318" r="74" fill="#ffffff" fill-opacity=".14" stroke="#f2c14e" stroke-width="13"/>
+<path d="M594 372 L660 440" stroke="#f2c14e" stroke-width="20" stroke-linecap="round"/><path d="M505 290 a44 44 0 0 1 40 -26" fill="none" stroke="#fff" stroke-opacity=".7" stroke-width="6" stroke-linecap="round"/></g>
+<g class="fl"><circle cx="620" cy="128" r="58" fill="#fbfdfb" stroke="#f2c14e" stroke-width="5"/><circle cx="620" cy="128" r="47" fill="none" stroke="#2f8a4f" stroke-width="2" stroke-dasharray="4 5"/>
+<text x="620" y="125" text-anchor="middle" font-size="20" font-weight="800" fill="#0f3d2e">ISAE</text><text x="620" y="146" text-anchor="middle" font-size="12" font-weight="700" fill="#2f8a4f">3000/3410</text></g>
+<path class="tw" style="animation-delay:0s" d="M120 108.3L123.25 116.75L131.7 120L123.25 123.25L120 131.7L116.75 123.25L108.3 120L116.75 116.75Z" fill="#f2c14e"/><path class="tw" style="animation-delay:1s" d="M700 291L702.5 297.5L709 300L702.5 302.5L700 309L697.5 302.5L691 300L697.5 297.5Z" fill="#f2c14e"/><path class="tw" style="animation-delay:1.8s" d="M150 371.9L152.25 377.75L158.1 380L152.25 382.25L150 388.1L147.75 382.25L141.9 380L147.75 377.75Z" fill="#f2c14e"/>
+
+</svg>

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500" role="img" aria-label="Illustration: an open reference guide comparing GRI and IFRS S1/S2">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0c3326"/><stop offset="1" stop-color="#1f7a50"/></linearGradient>
+<radialGradient id="glow" cx=".78" cy=".15" r=".65"><stop offset="0" stop-color="#8ee8b0" stop-opacity=".5"/><stop offset="1" stop-color="#8ee8b0" stop-opacity="0"/></radialGradient>
+<radialGradient id="glow2" cx=".1" cy=".95" r=".6"><stop offset="0" stop-color="#f2c14e" stop-opacity=".22"/><stop offset="1" stop-color="#f2c14e" stop-opacity="0"/></radialGradient>
+<pattern id="dots" width="26" height="26" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.3" fill="#fff" opacity=".13"/></pattern>
+<filter id="sh" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="14" stdDeviation="14" flood-color="#021a12" flood-opacity=".45"/></filter>
+<g id="leaf"><path d="M0 0C-62 -42 -52 -124 0 -156C52 -124 62 -42 0 0Z"/><path d="M0 0V-132" fill="none" stroke="#0c3326" stroke-opacity=".35" stroke-width="3"/></g>
+</defs>
+<style>
+text{font-family:ui-monospace,Menlo,Consolas,monospace}
+.sway{animation:sway 7s ease-in-out infinite;transform-box:fill-box;transform-origin:50% 100%}
+.sway2{animation:sway 9s ease-in-out -3s infinite;transform-box:fill-box;transform-origin:50% 100%}
+@keyframes sway{0%,100%{rotate:-3deg}50%{rotate:4deg}}
+.fl{animation:fl 5s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes fl{0%,100%{translate:0 0}50%{translate:0 -10px}}
+.pulse{animation:pulse 2.4s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes pulse{0%,100%{scale:1}50%{scale:1.16}}
+.tw{animation:tw 2.8s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes tw{0%,100%{opacity:.2;scale:.6}50%{opacity:1;scale:1}}
+.pg{animation:pg 6s ease-in-out infinite;transform-origin:400px 270px}@keyframes pg{0%,100%{translate:0 0}50%{translate:0 -6px}}.bar{transform-box:fill-box;transform-origin:0 50%;animation:bar 5s ease-in-out infinite}@keyframes bar{0%{scale:.1 1}25%,85%{scale:1 1}100%{scale:.1 1}}
+</style>
+<rect width="800" height="500" fill="url(#bg)"/>
+<rect width="800" height="500" fill="url(#dots)"/>
+<rect width="800" height="500" fill="url(#glow)"/>
+<rect width="800" height="500" fill="url(#glow2)"/>
+<use href="#leaf" fill="#3fa863" opacity=".16" transform="translate(40 520) rotate(-18) scale(1.7)" class="sway"/>
+<use href="#leaf" fill="#8ee8b0" opacity=".12" transform="translate(790 520) rotate(22) scale(1.4)" class="sway2"/>
+
+<g class="pg" filter="url(#sh)"><path d="M170 140 Q290 120 400 156 V420 Q290 384 170 404 Z" fill="#fbfdfb"/><path d="M630 140 Q510 120 400 156 V420 Q510 384 630 404 Z" fill="#eaf6ee"/>
+<path d="M400 156 V420" stroke="#0f3d2e" stroke-opacity=".25" stroke-width="3"/>
+<rect x="206" y="172" width="86" height="26" rx="13" fill="#3fa863"/><text x="249" y="190" text-anchor="middle" font-size="14" font-weight="900" fill="#fff">GRI</text>
+<rect x="440" y="172" width="104" height="26" rx="13" fill="#f2c14e"/><text x="492" y="190" text-anchor="middle" font-size="14" font-weight="900" fill="#0f3d2e">IFRS S1/S2</text>
+<rect class="bar" style="animation-delay:0.0s" x="210" y="214" width="150" height="9" rx="4.5" fill="#b6cdbb"/><rect class="bar" style="animation-delay:0.25s" x="210" y="244" width="132" height="9" rx="4.5" fill="#b6cdbb"/><rect class="bar" style="animation-delay:0.5s" x="210" y="274" width="114" height="9" rx="4.5" fill="#b6cdbb"/><rect class="bar" style="animation-delay:0.75s" x="210" y="304" width="150" height="9" rx="4.5" fill="#b6cdbb"/><rect class="bar" style="animation-delay:1.0s" x="210" y="334" width="132" height="9" rx="4.5" fill="#b6cdbb"/><rect class="bar" style="animation-delay:0.12s" x="440" y="214" width="132" height="9" rx="4.5" fill="#cfe3d6"/><rect class="bar" style="animation-delay:0.37s" x="440" y="244" width="114" height="9" rx="4.5" fill="#cfe3d6"/><rect class="bar" style="animation-delay:0.62s" x="440" y="274" width="150" height="9" rx="4.5" fill="#cfe3d6"/><rect class="bar" style="animation-delay:0.87s" x="440" y="304" width="132" height="9" rx="4.5" fill="#cfe3d6"/><rect class="bar" style="animation-delay:1.12s" x="440" y="334" width="114" height="9" rx="4.5" fill="#cfe3d6"/>
+<path d="M572 140 V210 L588 196 L604 210 V132" fill="#e8553f"/></g>
+<g transform="translate(400 112)" class="pulse"><circle r="34" fill="#f2c14e" stroke="#fbfdfb" stroke-width="4"/><text y="8" text-anchor="middle" font-size="22" font-weight="900" fill="#0f3d2e">VS</text></g>
+<g class="fl" transform="translate(110 250) rotate(-14)"><rect width="70" height="90" rx="8" fill="#fbfdfb" fill-opacity=".9"/><rect x="12" y="18" width="46" height="6" rx="3" fill="#b6cdbb"/><rect x="12" y="34" width="34" height="6" rx="3" fill="#b6cdbb"/></g>
+<path class="tw" style="animation-delay:0.6s" d="M700 250.1L702.75 257.25L709.9 260L702.75 262.75L700 269.9L697.25 262.75L690.1 260L697.25 257.25Z" fill="#f2c14e"/><path class="tw" style="animation-delay:1.5s" d="M90 91L92.5 97.5L99 100L92.5 102.5L90 109L87.5 102.5L81 100L87.5 97.5Z" fill="#f2c14e"/><path class="tw" style="animation-delay:2s" d="M690 411.9L692.25 417.75L698.1 420L692.25 422.25L690 428.1L687.75 422.25L681.9 420L687.75 417.75Z" fill="#f2c14e"/>
+
+</svg>

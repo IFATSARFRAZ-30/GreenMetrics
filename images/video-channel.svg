@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500" role="img" aria-label="Illustration: a video player with a play button">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0c3326"/><stop offset="1" stop-color="#1f7a50"/></linearGradient>
+<radialGradient id="glow" cx=".78" cy=".15" r=".65"><stop offset="0" stop-color="#8ee8b0" stop-opacity=".5"/><stop offset="1" stop-color="#8ee8b0" stop-opacity="0"/></radialGradient>
+<radialGradient id="glow2" cx=".1" cy=".95" r=".6"><stop offset="0" stop-color="#f2c14e" stop-opacity=".22"/><stop offset="1" stop-color="#f2c14e" stop-opacity="0"/></radialGradient>
+<pattern id="dots" width="26" height="26" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.3" fill="#fff" opacity=".13"/></pattern>
+<filter id="sh" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="14" stdDeviation="14" flood-color="#021a12" flood-opacity=".45"/></filter>
+<g id="leaf"><path d="M0 0C-62 -42 -52 -124 0 -156C52 -124 62 -42 0 0Z"/><path d="M0 0V-132" fill="none" stroke="#0c3326" stroke-opacity=".35" stroke-width="3"/></g>
+</defs>
+<style>
+text{font-family:ui-monospace,Menlo,Consolas,monospace}
+.sway{animation:sway 7s ease-in-out infinite;transform-box:fill-box;transform-origin:50% 100%}
+.sway2{animation:sway 9s ease-in-out -3s infinite;transform-box:fill-box;transform-origin:50% 100%}
+@keyframes sway{0%,100%{rotate:-3deg}50%{rotate:4deg}}
+.fl{animation:fl 5s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes fl{0%,100%{translate:0 0}50%{translate:0 -10px}}
+.pulse{animation:pulse 2.4s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes pulse{0%,100%{scale:1}50%{scale:1.16}}
+.tw{animation:tw 2.8s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes tw{0%,100%{opacity:.2;scale:.6}50%{opacity:1;scale:1}}
+.eq{transform-box:fill-box;transform-origin:50% 100%;animation:eq 1.3s ease-in-out infinite}@keyframes eq{0%,100%{scale:1 .3}50%{scale:1 1}}.rip{animation:rp 2.6s ease-out infinite;transform-box:fill-box;transform-origin:center}@keyframes rp{0%{scale:.8;opacity:.7}100%{scale:1.7;opacity:0}}
+</style>
+<rect width="800" height="500" fill="url(#bg)"/>
+<rect width="800" height="500" fill="url(#dots)"/>
+<rect width="800" height="500" fill="url(#glow)"/>
+<rect width="800" height="500" fill="url(#glow2)"/>
+<use href="#leaf" fill="#3fa863" opacity=".16" transform="translate(40 520) rotate(-18) scale(1.7)" class="sway"/>
+<use href="#leaf" fill="#8ee8b0" opacity=".12" transform="translate(790 520) rotate(22) scale(1.4)" class="sway2"/>
+
+<g filter="url(#sh)"><rect x="150" y="70" width="500" height="300" rx="20" fill="#08241a" stroke="#a8dcc0" stroke-width="3"/>
+<rect x="166" y="86" width="468" height="268" rx="12" fill="#12503a"/>
+<path d="M166 290 Q300 220 420 270 T634 240 V354 H166Z" fill="#1f7a50" opacity=".6"/></g>
+<circle class="rip" cx="400" cy="220" r="52" fill="none" stroke="#f2c14e" stroke-width="3"/><circle cx="400" cy="220" r="52" fill="#f2c14e"/><path d="M386 196 L386 244 L428 220Z" fill="#0f3d2e"/>
+<rect class="eq" style="animation-delay:0.0s" x="300" y="396" width="10" height="34" rx="3" fill="#a8dcc0"/><rect class="eq" style="animation-delay:0.13s" x="320" y="396" width="10" height="41" rx="3" fill="#a8dcc0"/><rect class="eq" style="animation-delay:0.26s" x="340" y="396" width="10" height="48" rx="3" fill="#a8dcc0"/><rect class="eq" style="animation-delay:0.39s" x="360" y="396" width="10" height="55" rx="3" fill="#a8dcc0"/><rect class="eq" style="animation-delay:0.52s" x="380" y="396" width="10" height="62" rx="3" fill="#a8dcc0"/><rect class="eq" style="animation-delay:0.65s" x="400" y="396" width="10" height="39" rx="3" fill="#a8dcc0"/><rect class="eq" style="animation-delay:0.78s" x="420" y="396" width="10" height="46" rx="3" fill="#a8dcc0"/><rect class="eq" style="animation-delay:0.91s" x="440" y="396" width="10" height="53" rx="3" fill="#a8dcc0"/><rect class="eq" style="animation-delay:1.04s" x="460" y="396" width="10" height="60" rx="3" fill="#a8dcc0"/><rect class="eq" style="animation-delay:1.17s" x="480" y="396" width="10" height="37" rx="3" fill="#a8dcc0"/><rect class="eq" style="animation-delay:1.3s" x="500" y="396" width="10" height="44" rx="3" fill="#a8dcc0"/>
+<rect x="372" y="370" width="56" height="10" fill="#a8dcc0"/>
+<g transform="translate(600 120)" class="fl"><rect x="-44" y="-18" width="88" height="36" rx="18" fill="#e8553f"/><text y="6" text-anchor="middle" font-size="14" font-weight="900" fill="#fff">VIDEO</text></g>
+<path class="tw" style="animation-delay:0s" d="M120 139.2L123.0 147.0L130.8 150L123.0 153.0L120 160.8L117.0 153.0L109.2 150L117.0 147.0Z" fill="#f2c14e"/><path class="tw" style="animation-delay:1s" d="M690 321L692.5 327.5L699 330L692.5 332.5L690 339L687.5 332.5L681 330L687.5 327.5Z" fill="#f2c14e"/><path class="tw" style="animation-delay:1.7s" d="M130 391.9L132.25 397.75L138.1 400L132.25 402.25L130 408.1L127.75 402.25L121.9 400L127.75 397.75Z" fill="#f2c14e"/>
+
+</svg>
