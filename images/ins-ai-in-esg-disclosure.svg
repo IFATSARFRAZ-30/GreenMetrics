@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="AI · Disclosure">
-<rect width="800" height="500" fill="#285c45"/>
-<circle cx="500" cy="120" r="170" fill="#3fa863" opacity=".18"/>
-<circle cx="240" cy="430" r="130" fill="#a8dcc0" opacity=".12"/>
-<g transform="translate(330 140) scale(1.6)" fill="none" stroke="#a8dcc0" stroke-width="3" stroke-linecap="round">
-<path d="M70 150V60"/><path d="M70 100C20 100 10 50 30 20c40 0 50 40 40 80z" fill="#3fa863" fill-opacity=".55"/>
-<path d="M70 80C110 80 125 40 110 10c-35 5-50 30-40 70z" fill="#3fa863" fill-opacity=".35"/></g>
-<text x="400" y="400" text-anchor="middle" fill="#a8dcc0" font-family="monospace" font-size="26" letter-spacing="3">AI · DISCLOSURE</text>
-</svg>
