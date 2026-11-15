@@ -333,13 +333,6 @@
       d.body.appendChild(l);
       l.addEventListener('animationend', function () { l.remove(); live--; });
     }
-    addEventListener('mousemove', function (e) {
-      var dx = e.clientX - lastX, dy = e.clientY - lastY;
-      if (dx * dx + dy * dy < 2600) return;
-      lastX = e.clientX; lastY = e.clientY;
-      if (e.target.closest && e.target.closest('iframe,.vid,input,textarea,.hh-bar')) return;
-      spawn(e.clientX, e.clientY, false);
-    }, { passive: true });
     d.addEventListener('click', function (e) {
       if (e.target.closest && e.target.closest('.gbtn,.hb,.btn,.dl-btn,.hh-btn,.hs-chips button')) {
         for (var k = 0; k < 7; k++) spawn(e.clientX, e.clientY, true);

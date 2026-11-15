@@ -64,10 +64,10 @@ html body.rd .list>a.row.has-thumb:hover{padding:0 0 26px !important}
 /* ==========================================================================
    HOME HERO: narrow carousel (left)  +  fixed key-content panel (right)
    ========================================================================== */
-.hh{display:grid;grid-template-columns:minmax(0,1.75fr) minmax(0,1fr);min-height:370px;border-bottom:2px solid var(--ink,#0f3d2e);background:var(--white,#fbfdfb)}
+.hh{display:grid;grid-template-columns:minmax(0,1.75fr) minmax(0,1fr);min-height:430px;border-bottom:2px solid var(--ink,#0f3d2e);background:var(--white,#fbfdfb)}
 
 /* ---- carousel ---- */
-.hh-car{position:relative;overflow:hidden;background:#0c3326;color:#fff;min-height:370px;isolation:isolate;touch-action:pan-y}
+.hh-car{position:relative;overflow:hidden;background:#0c3326;color:#fff;min-height:430px;isolation:isolate;touch-action:pan-y}
 .hh-slide{position:absolute;inset:0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.02fr);color:#fff;text-decoration:none;opacity:0;visibility:hidden;transition:opacity .65s ease,visibility 0s .65s;background:linear-gradient(120deg,#0c3326 0%,#14543b 100%)}
 .hh-slide.is-active{opacity:1;visibility:visible;transition:opacity .65s ease,visibility 0s}
 .hh-copy{position:relative;z-index:2;display:flex;flex-direction:column;justify-content:center;gap:12px;padding:30px clamp(22px,3vw,44px) 74px clamp(24px,3.4vw,52px)}
@@ -299,3 +299,74 @@ html body.rd.tools-list .list>a.row.row-wide{grid-column:1/-1;display:grid !impo
 .hh-img img{object-position:60% 50%}
 .hh-stats{grid-template-columns:.9fr .9fr 1.2fr 1fr}
 .hh-stats span{font-size:10px;letter-spacing:.05em}
+
+
+/* ---------- page frame: normal centred layout with side margins ---------- */
+html body{background:var(--paper-deep,#d9e6db) !important}
+html body .sheet{max-width:1320px !important;width:100% !important;margin:0 auto !important;background:var(--paper,#f2f7f1);border-left:1px solid var(--line,#b6cdbb) !important;border-right:1px solid var(--line,#b6cdbb) !important}
+
+/* ---------- homepage insights feed (right side of the banner, no heading) ---------- */
+.hh-ins{position:relative;overflow:hidden;background:var(--white,#fbfdfb);border-left:1px solid var(--line,#b6cdbb);min-height:300px}
+.hh-ins-list{position:absolute;left:0;right:0;top:0;animation:insUp 46s linear infinite}
+.hh-ins:hover .hh-ins-list,.hh-ins:focus-within .hh-ins-list{animation-play-state:paused}
+@keyframes insUp{from{transform:translateY(0)}to{transform:translateY(-50%)}}
+.ins-row{display:grid;grid-template-columns:78px 1fr;gap:14px;align-items:center;padding:16px clamp(16px,2vw,26px);border-bottom:1px solid var(--line,#b6cdbb);text-decoration:none;color:var(--ink,#0f3d2e);transition:background .2s}
+.ins-row:hover,.ins-row:focus-visible{background:var(--mint,#dff1e3)}
+.ins-row img{width:78px;height:54px;object-fit:cover;display:block}
+.ins-row small{display:block;font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--stamp,#2f8a4f);margin-bottom:3px}
+.ins-row b{display:block;font:600 15px/1.3 'Fraunces',Georgia,serif}
+@media (max-width:900px){.hh-ins{min-height:340px;border-left:0;border-top:2px solid var(--ink,#0f3d2e)}}
+@media (prefers-reduced-motion:reduce){.hh-ins{overflow:auto}.hh-ins-list{position:static;animation:none}}
+
+/* ---------- page intro + jump cards (articles, tools, insights) ---------- */
+.pg-intro{padding:40px var(--px,48px) 26px;background:var(--white,#fbfdfb);border-bottom:1px solid var(--line,#b6cdbb)}
+.pg-kicker{font:600 11.5px 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--stamp,#2f8a4f);margin-bottom:8px}
+.pg-intro h1{font:600 clamp(32px,4.4vw,50px)/1.08 'Fraunces',Georgia,serif;margin:0 0 12px;color:var(--ink,#0f3d2e);max-width:none}
+.pg-intro p{font-size:clamp(16px,1.4vw,19px);line-height:1.65;color:var(--ink-soft,#3f5f50);max-width:70ch;margin:0}
+.pg-jump{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:22px}
+.pg-jump a{display:block;padding:14px 16px;border:1px solid var(--line,#b6cdbb);border-top:3px solid var(--leaf,#3fa863);background:var(--paper,#f2f7f1);text-decoration:none;color:var(--ink,#0f3d2e);transition:transform .2s,background .2s}
+.pg-jump a:hover{background:var(--mint,#dff1e3);transform:translateY(-2px)}
+.pg-jump b{display:block;font:600 17px 'Fraunces',Georgia,serif}
+.pg-jump span{display:block;font-size:14px;color:var(--ink-soft,#3f5f50);margin-top:2px}
+.sec-head{padding:34px var(--px,48px) 4px;scroll-margin-top:12px}
+.sec-head h2{font:600 clamp(26px,3vw,36px)/1.1 'Fraunces',Georgia,serif;margin:0;color:var(--ink,#0f3d2e)}
+.sec-head p{margin:6px 0 0;color:var(--ink-soft,#3f5f50);font-size:16px}
+.grp-sub{margin:4px 0 16px;padding:0 var(--px,48px);color:var(--ink-soft,#3f5f50);font-size:16px}
+html body.tools-list h2.grp{scroll-margin-top:12px}
+
+/* smaller "what to expect" carousel on articles and tools */
+.hh-mini .hh-car{min-height:260px}
+.hh-mini .hh-copy{gap:8px;padding-top:22px;padding-bottom:62px}
+.hh-mini .hh-copy b{font-size:clamp(20px,2.1vw,27px)}
+.hh-mini .hh-copy small{font-size:14.5px}
+
+/* ---------- insights page: centre line, a card on either side ---------- */
+.ins-tl{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:72px;row-gap:26px;padding:40px var(--px,48px) 64px}
+.ins-tl::before{content:"";position:absolute;left:50%;top:40px;bottom:64px;width:3px;background:var(--line,#b6cdbb);transform:translateX(-50%)}
+.ins-card{position:relative;display:flex;flex-direction:column;background:var(--white,#fbfdfb);border:1px solid var(--line,#b6cdbb);border-top:3px solid var(--leaf,#3fa863);text-decoration:none;color:var(--ink,#0f3d2e);transition:transform .25s,box-shadow .25s}
+.ins-card:hover{transform:translateY(-4px);box-shadow:0 12px 28px rgba(15,61,46,.14)}
+.ins-card:nth-child(odd){grid-column:1}
+.ins-card:nth-child(even){grid-column:2;margin-top:64px}
+.ins-card::after{content:"";position:absolute;top:26px;width:15px;height:15px;border-radius:50%;background:var(--leaf,#3fa863);border:3px solid var(--paper,#f2f7f1)}
+.ins-card:nth-child(odd)::after{right:-44px}
+.ins-card:nth-child(even)::after{left:-44px}
+.ins-img{display:block;aspect-ratio:16/7;overflow:hidden}
+.ins-img img{display:block;width:100%;height:100%;object-fit:cover}
+.ins-card{align-self:start}
+.ins-body{display:flex;flex-direction:column;gap:6px;padding:16px 18px 18px}
+.ins-meta{font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--stamp,#2f8a4f)}
+.ins-body h2{font:600 clamp(20px,1.9vw,25px)/1.2 'Fraunces',Georgia,serif;margin:0}
+.ins-body p{margin:0;color:var(--ink-soft,#3f5f50);font-size:15.5px;line-height:1.6}
+.ins-body .go{font:600 12.5px 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--stamp,#2f8a4f);margin-top:4px}
+@media (max-width:800px){
+  .ins-tl{grid-template-columns:1fr;padding-left:calc(var(--px,24px) + 28px)}
+  .ins-tl::before{left:calc(var(--px,24px) + 6px);transform:none}
+  .ins-card:nth-child(n){grid-column:1;margin-top:0}
+  .ins-card:nth-child(n)::after{left:-30px;right:auto}
+}
+
+/* ---------- single insight page ---------- */
+.ins-fig{margin:0 0 26px}
+.ins-fig img{display:block;width:100%;max-height:420px;object-fit:cover}
+.ins-nav{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin:34px 0 0;padding-top:18px;border-top:1px solid var(--line,#b6cdbb);font:600 13px 'IBM Plex Mono',monospace}
+.ins-nav a{color:var(--stamp,#2f8a4f);text-decoration:none}
