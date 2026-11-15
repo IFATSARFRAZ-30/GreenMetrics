@@ -1,0 +1,75 @@
+[
+  {
+    "slug": "secp-phase-ii-reporting",
+    "date": "2026-11-12",
+    "tag": "Pakistan · SECP",
+    "title": "SECP Phase II reporting window opens",
+    "summary": "Phase II PSX-listed companies report from July 2026; Phase III and other public interest companies from July 2027.",
+    "paras": [
+      "Phase II PSX-listed companies report from July 2026. Phase III and other public interest companies follow from July 2027. Assurance follows from the second year of reporting.",
+      "For most teams the first filing is a data problem before it is a writing problem. Start by listing which disclosures you can already support with evidence, and which depend on data you do not yet collect.",
+      "A free QuickScan is a short diagnostic that shows where you stand against IFRS S1/S2 before you commit to a full assessment."
+    ],
+    "link": ["../contact.html", "Request the free QuickScan"]
+  },
+  {
+    "slug": "cbam-csrd-buyer-questions",
+    "date": "2026-11-05",
+    "tag": "Exporters · EU",
+    "title": "Ready for your EU buyers' CBAM and CSRD questions?",
+    "summary": "Seven boxes to work through before your EU buyers come asking: scope, buyers, the value-chain cap, and your response protocol.",
+    "paras": [
+      "Pakistani exporters selling into the EU are increasingly asked for sustainability data by their buyers. The questions arrive through procurement, often with short deadlines.",
+      "The CBAM / CSRD readiness checklist is an interactive, tickable list covering scope, your buyers, the value-chain cap, and how you will respond when a request lands."
+    ],
+    "link": ["../tools/cbam-csrd-checklist.html", "Open the checklist"]
+  },
+  {
+    "slug": "gri-and-ifrs-different-questions",
+    "date": "2026-10-28",
+    "tag": "Frameworks",
+    "title": "GRI and IFRS S1/S2 answer different questions",
+    "summary": "GRI asks what effect a company has on the world. IFRS S1/S2 ask what effect sustainability has on the company.",
+    "paras": [
+      "GRI and IFRS S1/S2 are not competing versions of the same standard. GRI is built around impact materiality. IFRS S1 and S2 are built around financial materiality.",
+      "Many companies need both, so the useful question is where the two overlap and where each asks for something the other does not."
+    ],
+    "link": ["../articles/gri-vs-ifrs-s1-s2.html", "Read the article"]
+  },
+  {
+    "slug": "first-assurance-engagement",
+    "date": "2026-10-20",
+    "tag": "Assurance",
+    "title": "What a first sustainability assurance engagement looks like",
+    "summary": "ISAE 3000 and ISAE 3410 explained for teams about to go through their first engagement.",
+    "paras": [
+      "Assurance on sustainability information follows from the second year of reporting for many Pakistani companies. Teams that prepare early find the first engagement far less disruptive.",
+      "The article walks through what ISAE 3000 and ISAE 3410 ask for, and the evidence, controls and traceability an auditor will expect to see."
+    ],
+    "link": ["../articles/sustainability-assurance-isae-3000-3410.html", "Read the article"]
+  },
+  {
+    "slug": "ai-in-esg-disclosure",
+    "date": "2026-10-12",
+    "tag": "AI · Disclosure",
+    "title": "AI in ESG disclosure: what CSRD, ISSB and California now require",
+    "summary": "How AI is used across the disclosure lifecycle, and what assurance-ready reporting needs.",
+    "paras": [
+      "AI is now used at several stages of the disclosure lifecycle, from data collection to drafting. Each use raises its own questions about evidence and review.",
+      "The guide sets out how to keep AI-assisted disclosure audit-ready, and what CSRD, ISSB and California now require."
+    ],
+    "link": ["../articles/ai-esg-disclosure-assurance.html", "Read the article"]
+  },
+  {
+    "slug": "free-course-gri-ifrs",
+    "date": "2026-10-05",
+    "tag": "Free course",
+    "title": "Free course: Understanding GRI & IFRS S1/S2",
+    "summary": "Ten lessons with worksheets, assignments and a final assessment that unlocks a certificate.",
+    "paras": [
+      "The course covers how GRI and IFRS S1/S2 differ, how materiality works under each, how a GRI report is built, and how each IFRS S1/S2 disclosure is structured.",
+      "It includes a worksheet for every lesson, six multiple-choice assignments, and a 40-question final assessment that unlocks a certificate at 70%. It is free with sign-up."
+    ],
+    "link": ["../courses/gri-ifrs-s1-s2.html", "Open the course"]
+  }
+]
