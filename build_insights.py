@@ -29,7 +29,7 @@ def svg(i, tag):
 <g transform="translate(330 140) scale(1.6)" fill="none" stroke="#a8dcc0" stroke-width="3" stroke-linecap="round">
 <path d="M70 150V60"/><path d="M70 100C20 100 10 50 30 20c40 0 50 40 40 80z" fill="#3fa863" fill-opacity=".55"/>
 <path d="M70 80C110 80 125 40 110 10c-35 5-50 30-40 70z" fill="#3fa863" fill-opacity=".35"/></g>
-<text x="400" y="400" text-anchor="middle" fill="#a8dcc0" font-family="monospace" font-size="26" letter-spacing="3">{E(tag.upper())}</text>
+<text x="400" y="372" text-anchor="middle" fill="#a8dcc0" font-family="monospace" font-size="26" letter-spacing="3">{E(tag.upper())}</text>
 </svg>'''
 
 
@@ -105,6 +105,28 @@ def page(title, desc, p, body, js):
     return h + '\n<body class="rd insights-page">\n<div class="sheet">\n\n' + nav(p) + "\n\n" + body + foot(js)
 
 
+
+
+def carousel(items_, label):
+    out = f'''  <div class="hh hh-solo hh-mini" aria-label="{label}">
+    <div class="hh-car" role="region" aria-roledescription="carousel" aria-label="{label}" tabindex="0">
+'''
+    for it in items_:
+        kind = E(it["tag"].split(" · ")[0])
+        out += (f'      <a class="hh-slide" href="insights/{it["slug"]}.html" aria-hidden="true" tabindex="-1">\n'
+                f'        <span class="hh-copy"><span class="hh-kind">{kind}</span><b>{E(it["title"])}</b><small>{E(it["summary"])}</small>'
+                f'<span class="hh-go">Read the full news <i>&rarr;</i></span></span>\n'
+                f'        <span class="hh-img"><img src="images/ins-{it["slug"]}.svg" alt="" width="800" height="500"></span>\n      </a>\n')
+    out += f'''      <div class="hh-bar">
+        <div class="hh-dots" role="group" aria-label="Choose a slide"></div>
+        <span class="hh-count" aria-hidden="true">01 / {len(items_):02d}</span>
+        <div class="hh-ctl"><button type="button" class="hh-prev" aria-label="Previous slide">&lsaquo;</button><button type="button" class="hh-pp" aria-label="Pause slideshow" aria-pressed="false">&#10074;&#10074;</button><button type="button" class="hh-next" aria-label="Next slide">&rsaquo;</button></div>
+      </div>
+    </div>
+  </div>
+'''
+    return out
+
 # ---------- insights.html (grid: centre line, cards on either side) ----------
 cards = ""
 for it in items:
@@ -114,12 +136,7 @@ for it in items:
       <span class="ins-body"><span class="ins-meta">{nice(it["date"])} &middot; {E(it["tag"])}</span>
       <h2>{E(it["title"])}</h2><p>{E(it["summary"])}</p><span class="go">Read the full news &rarr;</span></span>
     </a>'''
-listing = f'''  <header class="pg-intro">
-    <div class="pg-kicker">News &amp; updates</div>
-    <h1>Insights</h1>
-    <p>Short news and updates on sustainability reporting and assurance, newest first. Select any item to read the full story.</p>
-  </header>
-
+listing = f'''{carousel(items[:5], "Latest insights")}
   <section class="ins-tl" aria-label="Insights timeline">{cards}
   </section>
 

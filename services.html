@@ -490,22 +490,32 @@ html body.rd td textarea{min-height:64px}
     <a href="contact.html">Contact</a>
   </nav>
 
-  <header class="hero">
-    <div class="svc-hero">
-      <div class="copy">
-        <h1>Services</h1>
-        <p>Sustainability reporting is an accounting problem before it's anything else — a question of standards, data, evidence, and disclosure. Here's how I can help you work through it, starting with exactly where you stand today.</p>
-        <div class="btn-row"><a class="gbtn" href="contact.html">Request a QuickScan</a><a class="gbtn o" href="#services">Browse all services</a></div>
-      </div>
-      <div class="path-card">
-        <h2>Where do you fit?</h2>
-        <p class="sub">Pick the closest match and jump straight to it.</p>
-        <a class="path" href="#quickscan" data-goto="quickscan"><span class="pn">01</span><span class="pt"><b>PSX-listed or public interest company</b><small>Start with the free QuickScan</small></span><span class="arr">&rarr;</span></a>
-        <a class="path" href="#svc-05" data-goto="svc-05"><span class="pn">02</span><span class="pt"><b>Audit or advisory firm</b><small>Specialist support for your team</small></span><span class="arr">&rarr;</span></a>
-        <a class="path" href="#svc-06" data-goto="svc-06"><span class="pn">03</span><span class="pt"><b>Buyer or firm outside Pakistan</b><small>Supplier data, research, project work</small></span><span class="arr">&rarr;</span></a>
+  <div class="hh hh-solo hh-mini" aria-label="What to expect">
+    <div class="hh-car" role="region" aria-roledescription="carousel" aria-label="What to expect" tabindex="0">
+      <a class="hh-slide" href="#quickscan" aria-hidden="true" tabindex="-1">
+        <span class="hh-copy"><span class="hh-kind">Start here</span><b>Free IFRS S1/S2 QuickScan</b><small>A short diagnostic that shows where you stand before you commit to a full assessment.</small><span class="hh-go">See the QuickScan <i>&rarr;</i></span></span>
+        <span class="hh-img"><img src="images/art-gri-ifrs.svg" alt="" width="800" height="500"></span>
+      </a>
+      <a class="hh-slide" href="#services" aria-hidden="true" tabindex="-1">
+        <span class="hh-copy"><span class="hh-kind">Pakistan</span><b>Reporting under SECP's IFRS S1/S2 requirements</b><small>Phase II PSX-listed companies report from July 2026; Phase III and other public interest companies from July 2027.</small><span class="hh-go">Browse all services <i>&rarr;</i></span></span>
+        <span class="hh-img"><img src="images/art-assurance.svg" alt="" width="800" height="500"></span>
+      </a>
+      <a class="hh-slide" href="#svc-06" aria-hidden="true" tabindex="-1">
+        <span class="hh-copy"><span class="hh-kind">International</span><b>Support for firms outside Pakistan</b><small>Supplier ESG data, South Asia research, and project-based work.</small><span class="hh-go">See international services <i>&rarr;</i></span></span>
+        <span class="hh-img"><img src="images/tool-materiality.svg" alt="" width="800" height="500"></span>
+      </a>
+      <div class="hh-bar">
+        <div class="hh-dots" role="group" aria-label="Choose a slide"></div>
+        <span class="hh-count" aria-hidden="true">01 / 03</span>
+        <div class="hh-ctl"><button type="button" class="hh-prev" aria-label="Previous slide">&lsaquo;</button><button type="button" class="hh-pp" aria-label="Pause slideshow" aria-pressed="false">&#10074;&#10074;</button><button type="button" class="hh-next" aria-label="Next slide">&rsaquo;</button></div>
       </div>
     </div>
-  </header>
+  </div>
+  <nav class="pg-jump pg-jump-bar" aria-label="Where do you fit?"><span class="pg-jump-lbl">Where do you fit?</span>
+    <a href="#quickscan" data-goto="quickscan">PSX-listed or public interest company <i>&darr;</i></a>
+    <a href="#svc-05" data-goto="svc-05">Audit or advisory firm <i>&darr;</i></a>
+    <a href="#svc-06" data-goto="svc-06">Buyer or firm outside Pakistan <i>&darr;</i></a>
+  </nav>
 
   <section class="svc-sec" id="services">
     <div class="svc-bar">
@@ -516,6 +526,7 @@ html body.rd td textarea{min-height:64px}
         <button type="button" data-filter="intl" aria-pressed="false">International</button>
       </div>
     </div>
+    <p class="svc-lead">Sustainability reporting is an accounting problem before it's anything else — a question of standards, data, evidence, and disclosure. Here's how I can help you work through it, starting with exactly where you stand today.</p>
     <div class="price-strip">PRICES ARE INDICATIVE STARTING POINTS FOR A TYPICAL ENGAGEMENT. FINAL SCOPE AND FEE ARE CONFIRMED AFTER AN INITIAL CALL.</div>
 
     <div class="svc-grid">
