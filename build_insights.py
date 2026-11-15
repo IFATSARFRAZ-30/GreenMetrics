@@ -15,6 +15,8 @@ PAL = ["#0f3d2e", "#1d5a3f", "#2f6b4a", "#0c3326", "#285c45", "#17493a"]
 
 
 def nice(d):
+    if len(d) == 7:
+        return datetime.date.fromisoformat(d + "-01").strftime("%b %Y")
     return datetime.date.fromisoformat(d).strftime("%d %b %Y").lstrip("0")
 
 
@@ -82,6 +84,14 @@ def foot(js):
     <p>GreenMetrics is Ifat Sarfraz's sustainability reporting and assurance practice. Tools on this site are readiness aids, not legal or regulatory advice.</p>
   </footer>
 </div>
+<script>
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {{
+    const io = new IntersectionObserver((entries) => {{
+      entries.forEach(entry => {{ if (entry.isIntersecting) {{ entry.target.classList.add('in-view'); io.unobserve(entry.target); }} }});
+    }}, {{ threshold: 0.12 }});
+    document.querySelectorAll('section.a-block').forEach(s => io.observe(s));
+  }}
+</script>
 <script src="{js}assets/gm-fx.js" defer></script>
 </body>
 </html>
@@ -123,7 +133,10 @@ for i, it in enumerate(items):
     paras = "\n".join(f"      <p>{E(t)}</p>" for t in it["paras"])
     link = ""
     if it.get("link"):
-        link = f'\n      <p><a class="btn" href="{it["link"][0]}">{E(it["link"][1])} &rarr;</a></p>'
+        link = f'\n      <p><a class="ins-btn" href="{it["link"][0]}">{E(it["link"][1])} &rarr;</a></p>'
+    src = ""
+    if it.get("source"):
+        src = f'\n      <p class="ins-src">Source: <a href="{it["source"][1]}" target="_blank" rel="noopener">{E(it["source"][0])}</a>. Summary written by GreenMetrics.</p>'
     nxt = items[(i + 1) % len(items)]
     body = f'''  <header class="article-head">
     <div class="doc-ref">Insight &middot; {E(it["tag"])} &middot; {nice(it["date"])}</div>
@@ -134,7 +147,7 @@ for i, it in enumerate(items):
   <main>
     <figure class="ins-fig"><img src="../images/ins-{it["slug"]}.svg" alt="" width="800" height="500"></figure>
     <section class="a-block">
-{paras}{link}
+{paras}{link}{src}
     </section>
     <p class="ins-nav"><a href="../insights.html">&larr; All insights</a><a href="{nxt["slug"]}.html">Next: {E(nxt["title"])} &rarr;</a></p>
   </main>

@@ -1,75 +1,102 @@
 [
   {
-    "slug": "secp-phase-ii-reporting",
-    "date": "2026-11-12",
-    "tag": "Pakistan · SECP",
-    "title": "SECP Phase II reporting window opens",
-    "summary": "Phase II PSX-listed companies report from July 2026; Phase III and other public interest companies from July 2027.",
+    "slug": "uk-fca-esg-ratings-rules",
+    "date": "2026-11-03",
+    "tag": "World · UK",
+    "title": "UK finalises rules to regulate ESG ratings providers",
+    "summary": "The FCA has published final rules bringing ESG ratings providers inside its regulatory perimeter.",
     "paras": [
-      "Phase II PSX-listed companies report from July 2026. Phase III and other public interest companies follow from July 2027. Assurance follows from the second year of reporting.",
-      "For most teams the first filing is a data problem before it is a writing problem. Start by listing which disclosures you can already support with evidence, and which depend on data you do not yet collect.",
-      "A free QuickScan is a short diagnostic that shows where you stand against IFRS S1/S2 before you commit to a full assessment."
+      "On 3 November 2026 the UK Financial Conduct Authority published its final rules (PS26/22) for ESG ratings providers. Firms that sell ESG ratings in the UK will need to be authorised.",
+      "The authorisation gateway opens on 24 June 2027, and the regime takes effect on 29 June 2028. Companies that are rated will want to check how their ratings are produced and how to correct errors."
     ],
-    "link": ["../contact.html", "Request the free QuickScan"]
+    "source": ["Legal 500 ESG Insights, November 2026", "https://legal500.com/intelligence/global/environment/esg-insights-november-2026"]
   },
   {
-    "slug": "cbam-csrd-buyer-questions",
-    "date": "2026-11-05",
-    "tag": "Exporters · EU",
-    "title": "Ready for your EU buyers' CBAM and CSRD questions?",
-    "summary": "Seven boxes to work through before your EU buyers come asking: scope, buyers, the value-chain cap, and your response protocol.",
+    "slug": "uk-cbam-default-values",
+    "date": "2026-10-16",
+    "tag": "World · UK",
+    "title": "UK publishes default values and rates for its carbon border tax",
+    "summary": "HMRC and HM Treasury have published default emissions values and rates to support the UK CBAM.",
     "paras": [
-      "Pakistani exporters selling into the EU are increasingly asked for sustainability data by their buyers. The questions arrive through procurement, often with short deadlines.",
-      "The CBAM / CSRD readiness checklist is an interactive, tickable list covering scope, your buyers, the value-chain cap, and how you will respond when a request lands."
+      "On 16 October 2026 HMRC and HM Treasury published default values and rates to support implementation of the UK Carbon Border Adjustment Mechanism. The default values cover all in-scope products from January 2027, and sector rates are adjusted quarterly.",
+      "Exporters selling into the UK or EU should expect buyers to ask for actual emissions data, since default values are designed to be less favourable than measured ones. Our CBAM / CSRD readiness checklist covers the first steps."
     ],
-    "link": ["../tools/cbam-csrd-checklist.html", "Open the checklist"]
+    "link": ["../tools/cbam-csrd-checklist.html", "Open the readiness checklist"],
+    "source": ["Legal 500 ESG Insights, November 2026", "https://legal500.com/intelligence/global/environment/esg-insights-november-2026"]
   },
   {
-    "slug": "gri-and-ifrs-different-questions",
-    "date": "2026-10-28",
-    "tag": "Frameworks",
-    "title": "GRI and IFRS S1/S2 answer different questions",
-    "summary": "GRI asks what effect a company has on the world. IFRS S1/S2 ask what effect sustainability has on the company.",
-    "paras": [
-      "GRI and IFRS S1/S2 are not competing versions of the same standard. GRI is built around impact materiality. IFRS S1 and S2 are built around financial materiality.",
-      "Many companies need both, so the useful question is where the two overlap and where each asks for something the other does not."
-    ],
-    "link": ["../articles/gri-vs-ifrs-s1-s2.html", "Read the article"]
-  },
-  {
-    "slug": "first-assurance-engagement",
-    "date": "2026-10-20",
-    "tag": "Assurance",
-    "title": "What a first sustainability assurance engagement looks like",
-    "summary": "ISAE 3000 and ISAE 3410 explained for teams about to go through their first engagement.",
-    "paras": [
-      "Assurance on sustainability information follows from the second year of reporting for many Pakistani companies. Teams that prepare early find the first engagement far less disruptive.",
-      "The article walks through what ISAE 3000 and ISAE 3410 ask for, and the evidence, controls and traceability an auditor will expect to see."
-    ],
-    "link": ["../articles/sustainability-assurance-isae-3000-3410.html", "Read the article"]
-  },
-  {
-    "slug": "ai-in-esg-disclosure",
+    "slug": "california-sb-253-first-reports",
     "date": "2026-10-12",
-    "tag": "AI · Disclosure",
-    "title": "AI in ESG disclosure: what CSRD, ISSB and California now require",
-    "summary": "How AI is used across the disclosure lifecycle, and what assurance-ready reporting needs.",
+    "tag": "World · US",
+    "title": "California approves first-year rules for corporate emissions reporting",
+    "summary": "The first SB 253 regulation was approved, with first Scope 1 and 2 reports due 10 November 2026.",
     "paras": [
-      "AI is now used at several stages of the disclosure lifecycle, from data collection to drafting. Each use raises its own questions about evidence and review.",
-      "The guide sets out how to keep AI-assisted disclosure audit-ready, and what CSRD, ISSB and California now require."
+      "California's Office of Administrative Law approved the first-year regulation under SB 253 on 12 October 2026. It covers corporate greenhouse gas reporting.",
+      "Companies covered by the law, those with more than $1bn in annual revenue, were due to report Scope 1 and Scope 2 emissions by 10 November 2026, or file a statement explaining why they could not."
     ],
-    "link": ["../articles/ai-esg-disclosure-assurance.html", "Read the article"]
+    "source": ["Legal 500 ESG Insights, November 2026", "https://legal500.com/intelligence/global/environment/esg-insights-november-2026"]
   },
   {
-    "slug": "free-course-gri-ifrs",
-    "date": "2026-10-05",
-    "tag": "Free course",
-    "title": "Free course: Understanding GRI & IFRS S1/S2",
-    "summary": "Ten lessons with worksheets, assignments and a final assessment that unlocks a certificate.",
+    "slug": "issb-nature-related-disclosures",
+    "date": "2026-10",
+    "tag": "World · ISSB",
+    "title": "ISSB consults on nature-related disclosure proposals",
+    "summary": "The ISSB has opened a consultation on proposals for nature-related disclosures.",
     "paras": [
-      "The course covers how GRI and IFRS S1/S2 differ, how materiality works under each, how a GRI report is built, and how each IFRS S1/S2 disclosure is structured.",
-      "It includes a worksheet for every lesson, six multiple-choice assignments, and a 40-question final assessment that unlocks a certificate at 70%. It is free with sign-up."
+      "The International Sustainability Standards Board published proposals for nature-related disclosures in October 2026 and invited comments.",
+      "The proposals and the consultation details, including how to respond, are on the IFRS Foundation website."
     ],
-    "link": ["../courses/gri-ifrs-s1-s2.html", "Open the course"]
+    "source": ["IFRS Foundation news, October 2026", "https://www.ifrs.org/news-and-events/news/2026/10/issb-consults-on-proposals-nature-related-disclosures/"]
+  },
+  {
+    "slug": "eu-csrd-omnibus-final",
+    "date": "2026-09-22",
+    "tag": "World · EU",
+    "title": "EU finalises a much smaller CSRD after the Omnibus I package",
+    "summary": "CSRD now applies to companies with over 1,000 employees and €450m turnover, with far fewer ESRS datapoints.",
+    "paras": [
+      "The final Omnibus I outcome limits CSRD to companies with more than 1,000 employees and more than €450m in turnover. The CSDDD thresholds rise to more than 5,000 employees and €1.5bn in turnover.",
+      "Revised ESRS and a new Voluntary Standard for companies with up to 1,000 employees were published on 21 September 2026, and apply to financial years starting on or after 1 January 2027. The number of ESRS datapoints was cut by about 70%.",
+      "For suppliers outside the EU, the practical question is whether your buyers are still in scope, and what they will ask you for."
+    ],
+    "link": ["../articles/gri-vs-ifrs-s1-s2.html", "Read: GRI vs IFRS S1/S2"],
+    "source": ["CoreFiling, 22 September 2026", "https://www.corefiling.com/2026/09/22/csrd-omnibus-simplification-project/"]
+  },
+  {
+    "slug": "secp-esg-fund-rules",
+    "date": "2026-08-19",
+    "tag": "Pakistan · SECP",
+    "title": "SECP rules for ESG-labelled mutual funds take effect",
+    "summary": "Funds that use the ESG label must now hold at least half of net assets in ESG-aligned investments.",
+    "paras": [
+      "SECP's rules for ESG mutual funds took effect in July 2026. A fund that uses the \"ESG\" label must hold at least 50% of its net assets in ESG-aligned investments.",
+      "The PSX Sustainability Index that such funds are expected to reference was still in public consultation as of August 2026. For listed companies, this adds investor pressure to disclose ESG information in a consistent way."
+    ],
+    "link": ["../contact.html", "Request the free QuickScan"],
+    "source": ["Digital Pakistan, 19 August 2026", "https://digitalpakistan.pk/pakistan-esg/"]
+  },
+  {
+    "slug": "psx-sustainability-index",
+    "date": "2026-07-06",
+    "tag": "Pakistan · PSX",
+    "title": "PSX proposes a Sustainability Index for listed companies",
+    "summary": "A concept paper sets out an ESG benchmark with sector-specific weights.",
+    "paras": [
+      "On 6 July 2026 the Pakistan Stock Exchange released a concept paper for the PSX Sustainability Index (PSI). It is a proposed total-return benchmark that scores listed companies on environmental, social and governance pillars.",
+      "Weights are tailored to each sector so the assessment focuses on what matters financially to that business. The index is aimed at companies seeking recognition and responsible capital, and at asset managers building ESG products. Written comments were invited until 17 July 2026."
+    ],
+    "source": ["APP, July 2026", "https://www.app.com.pk/business/psx-opens-public-consultation-on-psi-index-aimed-at-gauging-esg-risks-opportunities/"]
+  },
+  {
+    "slug": "asia-mandatory-reporting",
+    "date": "2026-04-12",
+    "tag": "Asia",
+    "title": "Where sustainability reporting is already mandatory in Asia",
+    "summary": "Hong Kong, Singapore, Malaysia, India and Japan each have their own timeline.",
+    "paras": [
+      "Hong Kong made climate disclosure mandatory for Main Board issuers from January 2025. Singapore requires ISSB-aligned climate reporting from fiscal 2025 for large listed issuers, reaching all listed issuers by fiscal 2027. Malaysia's Main Market companies have faced ISSB-aligned climate disclosure since fiscal 2025.",
+      "In India, BRSR has applied to the top 1,000 listed companies since FY2022-23. The BRSR Core assurance subset covers the top 150 and expands to the top 500 from FY2026-27. Japan's SSBJ rules start with the largest Prime Market firms for fiscal years beginning April 2026."
+    ],
+    "source": ["Socious, April 2026", "https://socious.io/blog/esg-reporting-asia-pacific-2026/"]
   }
 ]
